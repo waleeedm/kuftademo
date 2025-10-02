@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kofta Wireframes</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f9f9f9; }
+    header, footer { background: #222; color: #fff; padding: 20px; text-align: center; }
+    nav a { margin: 0 10px; color: #fff; text-decoration: none; }
+    section { padding: 40px; max-width: 1000px; margin: auto; }
+    .hero { background: #ddd; padding: 60px; text-align: center; border-radius: 12px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px; }
+    .card { background: #fff; border: 1px solid #ccc; padding: 20px; border-radius: 10px; text-align: center; }
+    .map, .form { background: #eee; padding: 40px; border-radius: 12px; text-align: center; }
+    button { padding: 10px 20px; margin-top: 10px; border: none; border-radius: 8px; background: #e63946; color: white; cursor: pointer; }
+    button:hover { background: #d62828; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    table td, table th { border: 1px solid #ccc; padding: 10px; text-align: center; }
+    input[type='number'] { width: 60px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Kofta – Hotline: 15544</h1>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#menu">Menu</a>
+      <a href="#branches">Branches</a>
+      <a href="#order">Order</a>
+      <a href="#feedback">Feedback</a>
+      <a href="#promotions">Promotions</a>
+      <a href="#franchise">Franchise</a>
+      <a href="#careers">Careers</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section id="home">
+    <div class="hero">
+      <h2>Clean Street Food for Gen Z</h2>
+      <button onclick="window.location.href='#order'">Order Now</button>
+      <button onclick="window.location.href='#branches'">Find a Branch</button>
+    </div>
+    <div class="grid">
+      <div class="card">🍔 Kofta Sandwich <br> 45 EGP <br><button onclick="window.location.href='#order'">Order</button></div>
+      <div class="card">🥙 Hawawshi <br> 60 EGP <br><button onclick="window.location.href='#order'">Order</button></div>
+      <div class="card">🍟 Meal Combo <br> 85 EGP <br><button onclick="window.location.href='#order'">Order</button></div>
+    </div>
+  </section>
+
+  <section id="menu">
+    <h2>Our Menu</h2>
+    <div class="grid">
+      <div class="card">🍔 Kofta Sandwich</div>
+      <div class="card">🥙 Hawawshi</div>
+      <div class="card">🍟 Fries</div>
+      <div class="card">🥤 Drinks</div>
+    </div>
+  </section>
+
+  <section id="branches">
+    <h2>Our Branches</h2>
+    <div class="map">[ Google Map Placeholder ]</div>
+    <div class="grid">
+      <div class="card">
+        <h3>Cairo – Zamalek</h3>
+        📍 Street 123 <br>
+        🕒 10am - 2am <br>
+        📞 19999 <br>
+        <button>View on Google Maps</button>
+      </div>
+      <div class="card">
+        <h3>North Coast</h3>
+        📍 Marina Gate 5 <br>
+        🕒 12pm - 3am <br>
+        📞 19999 <br>
+        <button>View on Google Maps</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="order">
+    <h2>Order Now</h2>
+    <div class="form">
+      <p>Place a demo order with us!</p>
+      <form>
+        <label>Name: <input type="text"></label><br><br>
+        <label>Phone: <input type="tel"></label><br><br>
+        <table>
+          <tr>
+            <th>Item</th>
+            <th>Price</th>
+            <th>Quantity</th>
+          </tr>
+          <tr>
+            <td>🍔 Kofta Sandwich</td>
+            <td>45 EGP</td>
+            <td><input type="number" min="0" value="0" class="qty" data-price="45"></td>
+          </tr>
+          <tr>
+            <td>🥙 Hawawshi</td>
+            <td>60 EGP</td>
+            <td><input type="number" min="0" value="0" class="qty" data-price="60"></td>
+          </tr>
+          <tr>
+            <td>🍟 Meal Combo</td>
+            <td>85 EGP</td>
+            <td><input type="number" min="0" value="0" class="qty" data-price="85"></td>
+          </tr>
+        </table>
+        <br>
+        <label>Delivery Address:<br><textarea placeholder="Your address..." id="address"></textarea></label><br><br>
+        <div>Total: <span id="total">0</span> EGP</div><br>
+        <button type="submit">Submit Order</button>
+      </form>
+    </div>
+  </section>
+
+  <section id="promotions">
+    <h2>Latest Promotions</h2>
+    <div class="grid">
+      <div class="card">🔥 Buy 1 Kofta Sandwich, Get 1 Free</div>
+      <div class="card">🥤 Free Drink with Meal Combo</div>
+      <div class="card">🍟 20% Off Fries Every Friday</div>
+    </div>
+  </section>
+
+  <!-- Careers, Franchise and Contact all use same form -->
+  <section id="franchise">
+    <h2>Franchise Opportunities</h2>
+    <div class="form">
+      <p>Interested in joining the Kufta family? Use our unified contact form to reach out!</p>
+      <button onclick="window.location.href='#contact'">Go to Contact Form</button>
+    </div>
+  </section>
+
+  <section id="careers">
+    <h2>Careers</h2>
+    <div class="form">
+      <p>Join our team! Use our unified contact form to apply.</p>
+      <button onclick="window.location.href='#contact'">Go to Contact Form</button>
+    </div>
+  </section>
+
+  <section id="feedback">
+    <h2>Your Feedback Matters</h2>
+    <div class="form">
+      <label>Name: <input type="text"></label><br><br>
+      <label>Branch: <select><option>Zamalek</option><option>North Coast</option></select></label><br><br>
+      <label>Rating: ⭐⭐⭐⭐⭐</label><br><br>
+      <textarea placeholder="Your comments..." id="feedbackText"></textarea><br>
+      <button onclick="alert('Thank you for your feedback!')">Submit</button>
+      <br><br>
+      <button onclick="window.location.href='https://wa.me/201234567890'">Send via WhatsApp</button>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <div class="form">
+      <p>We’d love to hear from you! Fill in your details below:</p>
+      <label>Name: <input type="text" id="contactName"></label><br><br>
+      <label>Email: <input type="email" id="contactEmail"></label><br><br>
+      <label>Reason: <select id="contactReason"><option>General</option><option>Careers</option><option>Franchise</option><option>Promotions</option></select></label><br><br>
+      <textarea placeholder="Your message..." id="contactMessage"></textarea><br>
+      <button onclick="submitContact()">Send Message</button>
+    </div>
+  </section>
+
+  <footer>
+    <p>Kofta – Hotline: 19999 | WhatsApp | Instagram | Facebook</p>
+  </footer>
+
+  <script>
+    // dynamic total for order demo
+    function calcTotal() {
+      const qtys = document.querySelectorAll('.qty');
+      let total = 0;
+      qtys.forEach(q => {
+        const price = Number(q.dataset.price || 0);
+        const val = Number(q.value || 0);
+        total += price * val;
+      });
+      document.getElementById('total').innerText = total;
+    }
+    document.addEventListener('input', function(e) {
+      if (e.target.classList.contains('qty')) calcTotal();
+    });
+
+    // simple contact submit demo (no backend)
+    function submitContact() {
+      const name = document.getElementById('contactName').value;
+      const email = document.getElementById('contactEmail').value;
+      const reason = document.getElementById('contactReason').value;
+      const message = document.getElementById('contactMessage').value;
+      if (!name || !email || !message) {
+        alert('Please fill name, email and message.');
+        return;
+      }
+      alert('Message sent (demo).\nName: ' + name + '\nReason: ' + reason);
+      // in real site this would POST to backend
+      document.getElementById('contactName').value = '';
+  document.getElementById('contactEmail').value = '';
+  document.getElementById('contactMessage').value = '';
+    }
+
+    // feedback submit demo
+    document.querySelector('#feedback button').addEventListener('click', function(){
+      const fb = document.getElementById('feedbackText').value;
+      if(!fb) return alert('Please write feedback');
+      alert('Thanks for your feedback!');
+      document.getElementById('feedbackText').value = '';
+    });
+  </script>
+</body>
+</html>
