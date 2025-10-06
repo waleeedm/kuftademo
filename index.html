@@ -1,157 +1,276 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kofta Wireframes</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kufta | Clean Street Food</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f9f9f9; }
-    header, footer { background: #222; color: #fff; padding: 20px; text-align: center; }
-    nav a { margin: 0 10px; color: #fff; text-decoration: none; font-weight: bold; }
-    nav a:hover { text-decoration: underline; }
-    section { padding: 40px 20px; max-width: 1000px; margin: auto; }
-    .hero { background: #ddd; padding: 60px 20px; text-align: center; border-radius: 12px; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px; }
-    .card { background: #fff; border: 1px solid #ccc; padding: 20px; border-radius: 10px; text-align: center; }
-    .map, .form { background: #eee; padding: 40px 20px; border-radius: 12px; text-align: center; }
-    button { padding: 10px 20px; margin-top: 10px; border: none; border-radius: 8px; background: #e63946; color: white; cursor: pointer; }
-    button:hover { background: #d62828; }
-    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-    table td, table th { border: 1px solid #ccc; padding: 10px; text-align: center; }
-    input[type='number'] { width: 60px; }
-    textarea { width: 90%; height: 80px; border-radius: 6px; padding: 8px; border: 1px solid #ccc; }
+    /* ---------- GLOBAL STYLES ---------- */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Poppins", sans-serif;
+      background: #0d0d0d;
+      color: #eee;
+      scroll-behavior: smooth;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { width: 100%; border-radius: 12px; }
+
+    /* ---------- HEADER ---------- */
+    header {
+      background: rgba(0,0,0,0.9);
+      color: #fff;
+      padding: 15px 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(5px);
+    }
+    header h1 {
+      font-size: 1.6rem;
+      color: #ffb300;
+      letter-spacing: 2px;
+    }
+    header span {
+      font-size: 0.9rem;
+      color: #fff;
+      font-weight: 500;
+    }
+    nav a {
+      margin-left: 20px;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+    nav a:hover { color: #ffb300; }
+
+    /* ---------- HERO SECTION ---------- */
+    .hero {
+      background: url('https://images.unsplash.com/photo-1604908177522-d9f9cf7d0a3d?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+      height: 90vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: #fff;
+      padding: 20px;
+    }
+    .hero h2 {
+      font-size: 3rem;
+      text-shadow: 0 0 15px rgba(255, 179, 0, 0.7);
+    }
+    .hero p {
+      font-size: 1.3rem;
+      margin: 10px 0 20px;
+    }
+    .hero button {
+      background: #ffb300;
+      color: #111;
+      border: none;
+      padding: 14px 28px;
+      border-radius: 30px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .hero button:hover {
+      background: #fff;
+      color: #000;
+      transform: scale(1.05);
+    }
+
+    /* ---------- MENU SECTION ---------- */
+    section {
+      padding: 70px 20px;
+      text-align: center;
+    }
+    .menu {
+      background: #111;
+    }
+    .menu h2 {
+      font-size: 2rem;
+      margin-bottom: 30px;
+      color: #ffb300;
+    }
+    .menu-items {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 25px;
+      max-width: 1100px;
+      margin: auto;
+    }
+    .menu-item {
+      background: #1a1a1a;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(255, 179, 0, 0.1);
+      padding: 15px;
+      transition: 0.3s;
+    }
+    .menu-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 15px rgba(255, 179, 0, 0.3);
+    }
+    .menu-item h3 {
+      margin-top: 12px;
+      color: #ffb300;
+    }
+
+    /* ---------- ORDER FORM ---------- */
+    .order-now {
+      background: #0b0b0b;
+    }
+    form {
+      max-width: 600px;
+      margin: 30px auto;
+      text-align: left;
+    }
+    label {
+      display: block;
+      margin: 10px 0 6px;
+      font-weight: 500;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #333;
+      background: #1a1a1a;
+      color: #fff;
+      font-size: 1rem;
+    }
+    button {
+      margin-top: 15px;
+      width: 100%;
+      padding: 14px;
+      background: #ffb300;
+      color: #111;
+      border: none;
+      border-radius: 30px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: #fff;
+      color: #111;
+    }
+
+    /* ---------- CONTACT SECTION ---------- */
+    .contact-form {
+      background: #111;
+    }
+    .contact-form h2 {
+      color: #ffb300;
+      margin-bottom: 15px;
+    }
+
+    /* ---------- FOOTER ---------- */
+    footer {
+      background: #000;
+      padding: 20px;
+      color: #aaa;
+      text-align: center;
+      font-size: 0.9rem;
+      border-top: 1px solid #222;
+    }
+    footer span { color: #ffb300; }
+
+    /* ---------- MOBILE ---------- */
+    @media (max-width: 700px) {
+      .hero h2 { font-size: 2.2rem; }
+      nav a { margin-left: 10px; font-size: 0.9rem; }
+    }
   </style>
 </head>
 <body>
   <header>
-    <h1>Kofta – Hotline: 15544</h1>
+    <h1>Kufta</h1>
+    <span>Hotline 19592</span>
     <nav>
       <a href="#home">Home</a>
       <a href="#menu">Menu</a>
-      <a href="#branches">Branches</a>
       <a href="#order">Order</a>
-      <a href="#promotions">Promotions</a>
-      <a href="#franchise">Franchise</a>
-      <a href="#careers">Careers</a>
-      <a href="#feedback">Feedback</a>
       <a href="#contact">Contact</a>
+      <a href="#contact">Franchise</a>
+      <a href="#contact">Careers</a>
     </nav>
   </header>
 
-  <section id="home">
-    <div class="hero">
-      <h2>Clean Street Food for Gen Z</h2>
-      <button onclick="location.href='#order'">Order Now</button>
-      <button onclick="location.href='#branches'">Find a Branch</button>
-    </div>
-    <div class="grid">
-      <div class="card">🍔 Kofta Sandwich <br> 45 EGP <br><button onclick="location.href='#order'">Order</button></div>
-      <div class="card">🥙 Hawawshi <br> 60 EGP <br><button onclick="location.href='#order'">Order</button></div>
-      <div class="card">🍟 Meal Combo <br> 85 EGP <br><button onclick="location.href='#order'">Order</button></div>
-    </div>
+  <section id="home" class="hero">
+    <h2>Welcome to Kufta</h2>
+    <p>Clean Street Food — Taste the Egyptian Way</p>
+    <a href="#order"><button>Order Now</button></a>
   </section>
 
-  <section id="menu">
-    <h2>Our Menu</h2>
-    <div class="grid">
-      <div class="card">🍔 Kofta Sandwich</div>
-      <div class="card">🥙 Hawawshi</div>
-      <div class="card">🍟 Fries</div>
-      <div class="card">🥤 Drinks</div>
-    </div>
-  </section>
-
-  <section id="branches">
-    <h2>Our Branches</h2>
-    <div class="map">[ Google Map Placeholder ]</div>
-    <div class="grid">
-      <div class="card">
-        <h3>Cairo – Zamalek</h3>
-        📍 Street 123 <br>
-        🕒 10am - 2am <br>
-        📞 19999 <br>
-        <button>View on Google Maps</button>
+  <section id="menu" class="menu">
+    <h2>Our Signature Menu</h2>
+    <div class="menu-items">
+      <div class="menu-item">
+        <img src="https://images.unsplash.com/photo-1601050690597-1f38f1f83a07?auto=format&fit=crop&w=600&q=80" alt="Kofta Sandwich">
+        <h3>Kufta Sandwich</h3>
+        <p>Grilled beef kofta with tahini, pickles, and salad.</p>
       </div>
-      <div class="card">
-        <h3>North Coast</h3>
-        📍 Marina Gate 5 <br>
-        🕒 12pm - 3am <br>
-        📞 19999 <br>
-        <button>View on Google Maps</button>
+      <div class="menu-item">
+        <img src="https://images.unsplash.com/photo-1604908553958-593b3d8894d4?auto=format&fit=crop&w=600&q=80" alt="Hawawshi">
+        <h3>Hawawshi</h3>
+        <p>Classic Egyptian bread stuffed with spiced minced beef.</p>
+      </div>
+      <div class="menu-item">
+        <img src="https://images.unsplash.com/photo-1606732803863-24b3f2d4ef7c?auto=format&fit=crop&w=600&q=80" alt="Kufta Combo">
+        <h3>Kufta Combo</h3>
+        <p>Includes fries, salad, and a soft drink — the perfect meal!</p>
       </div>
     </div>
   </section>
 
-  <section id="order">
+  <section id="order" class="order-now">
     <h2>Order Now</h2>
-    <div class="form">
-      <p>Place a demo order with us!</p>
-      <form onsubmit="event.preventDefault(); alert('Demo order submitted!');">
-        <label>Name: <input type="text" required></label><br><br>
-        <label>Phone: <input type="tel" required></label><br><br>
-        <table>
-          <tr><th>Item</th><th>Price</th><th>Quantity</th></tr>
-          <tr><td>🍔 Kofta Sandwich</td><td>45 EGP</td><td><input type="number" min="0" value="0"></td></tr>
-          <tr><td>🥙 Hawawshi</td><td>60 EGP</td><td><input type="number" min="0" value="0"></td></tr>
-          <tr><td>🍟 Meal Combo</td><td>85 EGP</td><td><input type="number" min="0" value="0"></td></tr>
-        </table><br>
-        <label>Delivery Address:<br><textarea placeholder="Your address..."></textarea></label><br><br>
-        <button type="submit">Submit Order</button>
-      </form>
-    </div>
+    <form>
+      <label for="item">Select Item</label>
+      <select id="item" required>
+        <option value="">Choose an item</option>
+        <option>Kufta Sandwich</option>
+        <option>Hawawshi</option>
+        <option>Kufta Combo</option>
+      </select>
+      <label for="quantity">Quantity</label>
+      <input type="number" id="quantity" min="1" placeholder="1" required>
+      <label for="name">Full Name</label>
+      <input type="text" id="name" placeholder="Your Name" required>
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" placeholder="01XXXXXXXXX" required>
+      <label for="address">Delivery Address</label>
+      <textarea id="address" rows="3" placeholder="Your full address" required></textarea>
+      <button type="submit">Place Order</button>
+    </form>
   </section>
 
-  <section id="promotions">
-    <h2>Latest Promotions</h2>
-    <div class="grid">
-      <div class="card">🔥 Buy 1 Kofta Sandwich, Get 1 Free</div>
-      <div class="card">🥤 Free Drink with Meal Combo</div>
-      <div class="card">🍟 20% Off Fries Every Friday</div>
-    </div>
-  </section>
-
-  <section id="franchise">
-    <h2>Franchise Opportunities</h2>
-    <div class="form">
-      <p>Interested in joining the Kufta family? Use our unified contact form to reach out!</p>
-      <button onclick="location.href='#contact'">Go to Contact Form</button>
-    </div>
-  </section>
-
-  <section id="careers">
-    <h2>Careers</h2>
-    <div class="form">
-      <p>Join our team! Use our unified contact form to apply.</p>
-      <button onclick="location.href='#contact'">Go to Contact Form</button>
-    </div>
-  </section>
-
-  <section id="feedback">
-    <h2>Your Feedback Matters</h2>
-    <div class="form">
-      <label>Name: <input type="text"></label><br><br>
-      <label>Branch: <select><option>Zamalek</option><option>North Coast</option></select></label><br><br>
-      <label>Rating: ⭐⭐⭐⭐⭐</label><br><br>
-      <textarea placeholder="Your comments..."></textarea><br>
-      <button>Submit</button>
-      <br><br>
-      <button>Send via WhatsApp</button>
-    </div>
-  </section>
-
-  <section id="contact">
-    <h2>Contact Us</h2>
-    <div class="form">
-      <p>We’d love to hear from you! Fill in your details below:</p>
-      <label>Name: <input type="text"></label><br><br>
-      <label>Email: <input type="email"></label><br><br>
-      <textarea placeholder="Your message..."></textarea><br>
-      <button>Send Message</button>
-    </div>
+  <section id="contact" class="contact-form">
+    <h2>Contact / Franchise / Careers</h2>
+    <form>
+      <label for="topic">Inquiry Type</label>
+      <select id="topic" required>
+        <option value="">Select</option>
+        <option>General Inquiry</option>
+        <option>Franchise Request</option>
+        <option>Career Opportunity</option>
+      </select>
+      <label for="fullName">Full Name</label>
+      <input type="text" id="fullName" placeholder="Your Name" required>
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="example@email.com" required>
+      <label for="message">Message</label>
+      <textarea id="message" rows="4" placeholder="Type your message here..." required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
   </section>
 
   <footer>
-    <p>Kofta – Hotline: 19999 | WhatsApp | Instagram | Facebook</p>
+    © 2025 <span>Kufta</span> | Clean Street Food | Hotline 19592
   </footer>
 </body>
 </html>
