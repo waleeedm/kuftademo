@@ -1,50 +1,327 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kfuta</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Kufta — Clean Street Food (Demo)</title>
+<style>
+  :root{--bg:#0f0f10;--card:#151515;--muted:#bfbfbf;--white:#ffffff;--red:#c8102e;--glass:rgba(255,255,255,0.04);}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial; background:var(--bg); color:var(--white); -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;}
+  header{padding:22px 16px 8px;text-align:center;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);position:sticky;top:0;z-index:40;border-bottom:1px solid rgba(255,255,255,0.03);}
+  .logo-wrap{display:flex;flex-direction:column;align-items:center;gap:8px;max-width:980px;margin:0 auto;}
+  .logo-img{width:140px;height:auto;background:transparent;border-radius:8px;}
+  .hotline{font-size:0.95rem;color:var(--muted);}
+
+  nav{margin-top:6px;display:flex;gap:18px;justify-content:center;flex-wrap:wrap;}
+  nav a{color:var(--muted);text-decoration:none;padding:8px 10px;border-radius:8px;font-weight:600}
+  nav a:hover{color:var(--white);background:var(--glass)}
+
+  .hero{max-width:1100px;margin:28px auto;padding:36px 18px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;}
+  .hero-left h1{font-size:clamp(28px,4.5vw,44px);margin:0 0 8px;color:var(--white);letter-spacing:1px;}
+  .hero-left p{color:var(--muted);margin:0 0 16px;line-height:1.5;}
+  .cta-row{display:flex;gap:12px;flex-wrap:wrap;}
+  .btn{background:var(--red);color:var(--white);border:none;padding:12px 18px;border-radius:10px;font-weight:700;cursor:pointer}
+  .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
+  .panel{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);padding:16px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);}
+
+  .menu-section{max-width:1100px;margin:28px auto;padding:0 18px;}
+  .menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;}
+  .menu-card{background:var(--card);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);}
+  .menu-card img{width:100%;height:140px;object-fit:cover;border-radius:8px;}
+  .menu-card h3{margin:10px 0 6px;color:var(--white);}
+  .menu-card p{margin:0;color:var(--muted);font-size:0.95rem;}
+  .menu-footer{display:flex;justify-content:space-between;align-items:center;margin-top:10px;gap:10px;}
+  .price{font-weight:800;color:var(--red);}
+
+  .branches{max-width:1100px;margin:28px auto;padding:0 18px;}
+  .branches-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;}
+  .branch-card{background:var(--card);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);}
+  .branch-card h4{margin:0 0 6px;color:var(--white);} .branch-card p{margin:0;color:var(--muted);font-size:0.95rem}
+
+  .order-wrap{max-width:1100px;margin:28px auto;padding:0 18px;display:grid;grid-template-columns:1fr 380px;gap:20px;}
+  .cart{position:sticky;top:18px;align-self:start;}
+  .cart .panel{padding:12px;}
+  .cart h3{margin:0 0 10px;}
+  .cart-items{max-height:300px;overflow:auto;margin-bottom:10px;}
+  .cart-row{display:flex;justify-content:space-between;gap:12px;padding:8px;border-bottom:1px dashed rgba(255,255,255,0.02);align-items:center}
+  .cart-row .qty{background:#222;border-radius:6px;padding:6px 8px;font-weight:700;color:var(--muted)}
+
+  form .form-row{margin-bottom:10px} .form-row label{display:block;margin-bottom:6px;color:var(--muted);font-size:0.95rem}
+  input[type="text"], input[type="tel"], input[type="email"], textarea, select, input[type="number"]{width:100%;padding:10px;border-radius:8px;background:#0b0b0b;border:1px solid rgba(255,255,255,0.03);color:var(--white)}
+
+  .contact-panel{max-width:1100px;margin:28px auto;padding:18px;}
+  .contact-panel .panel{padding:18px;border-radius:10px;}
+
+  footer{padding:18px;text-align:center;color:var(--muted);border-top:1px solid rgba(255,255,255,0.02);margin-top:28px}
+
+  @media (max-width:980px){ .hero{grid-template-columns:1fr; padding:22px} .order-wrap{grid-template-columns:1fr} .cart{position:relative;top:auto} .logo-img{width:120px}}
+</style>
 </head>
-<body class="bg-[#0f0f0f] text-gray-100 font-sans">
+<body>
 
-  <!-- HEADER -->
-  <header class="flex flex-col items-center justify-center pt-6 pb-4 border-b border-gray-800">
-    <!-- Centered Logo -->
-    <div class="mb-4">
-      <img src="your-logo.png" alt="Kfuta Logo" class="w-28 h-auto">
+<header>
+  <div class="logo-wrap">
+    <img class="logo-img" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCACWAJUDASIAAhEBAxEB/8QAHQABAAICAwEBAAAAAAAAAAAAAAcIBAYBAwUJAv/EAD4QAAAFAwICBgYJAQkAAAAAAAABAgMEBQYRBxIhMQgTMkFRYRQVFyJW0wkWGHGRk5XD0nQjJDVCVYGUstH/xAAWAQEBAQAAAAAAAAAAAAAAAAAAAQL/xAAYEQEBAQEBAAAAAAAAAAAAAAAAEQEhMf/aAAwDAQACEQMRAD8AuWAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAxKjUqdTkoVUJ8WIThmSDfeS3uxzxuMsjsgTYc9j0iDKYlNZNO9lwlpyXMskeBVP6RkkqpVkkpKVf3mZzLP+Robh0G5cOFoIyqVJjxkqq0skm4tKCM9yeBZBL1YMBhnVaYUYpJ1GJ1Bq2E516du7wznGfIPWtM9G9J9YROo37Os69O3dzxnOM+QKzB0TpkSDHORNlMRmSMiNx5wkJIz5Fk+AQ5kSY2bkSSzIQk8GppwlkR+HARF0q6PIvjSWZbluyKbKqapkdwmHZzTXBDmVcVqIiwQCWadU6dUSWdPnxZZNmRLNh5Lm3PLO0zwMsV06Eun9yWHTrqbuGLBjqmvxlMlGmsyMkhCyPPVmeO0XMWJcWhtBrcWlCUlkzUeCIB+gHnevaLnHren5/qUf+iM+k3qv7ONNkVGiuR36vVXTi01R4WhB4M1u45KJBFy5Go054ZASlUKnTqcSTnz4sQldk33kt5+7cZDE+s1uf69Sv+Y3/IfNOg2tfmq1Wn1JjfWpTaiVLmVGe22RKVyLe6oiyeDwlPIu4iHu/Z71I7qVQf1uH/MWJX0Wg1ujznjZhVWDJdJJqNDMlC1ERczwR8hlRZMeU110V9p9vJlvbWSiyXmQph0aNIbntW+alLuj1RS6fMokmD6QzVYzqkrcNGMJQvPJJ+X4i0NhxaXb7D7blcozr0hSPch7GWi2p2ke3ceVn3q7+HgIrcwAuIAAAAAAAAqb9Iv/AIXZP9TM/wCjQjmgae3XqD0YLah2pSkVF6Jck919KpDbW1BoJJHlaiI+PgJr6b1h3ffFMtVu06FIqy4ciSqQllSCNslIQSTPcouZkfIRTWtINTnejvbVvMWlPOrRbgmyn4qXWyWhpaMJUfv4wZ+YrO+u6ZobqW50eabaiLcYOrsXQ/Pci+nR+DCo5ISvdv29osYzkeJfdj3FYXRQOjXVTWoE1+9G5LbJPtu5bOKpJKygzLmky8Rp/sG1m+Bqt+e18wFaC6yqLCrEqpl5vMn+4A9Szq1U6L0UrtTSZjsI5t0RYj6mVGhSmlR9yk5LiRHsIjxzLJd4jGLbVVmWtULoYgocpVPktRpT5rQRodd7BbTPceccyIyLvE90zRvUxvo6Vq3nLRmpqz9zxZjUU3Gt62UMGlS+3jBGeOeRHvsD1jxj6hVPHh1rPzAEvdBuv060dPtSrlqZ7IVO9GkO7SLKiS26ZJLzM8EXmYh28Ly1H1uvdMMvTp70pxXoVGiOGTDCC44JOSSeC7S1ffki4CT7H0l1Pp2gWolvv2nPYqdWl004sY3Gtz6G3DNzGF4wRY5mQjQtA9ZCPJWHUyPyeZL9wBrGoOnl02BMhxLso7dPemtKdYSTzTu5KVbTPKDPHHuMTHVNNr51A0A0p+qVJTPjwYlQ68jlNMkhS5R7eC1FnJJPl4CGb5sq7bKlxY120aTS3pSFOMIfWhRrSk8GZbVHyMyEvV7T69720H0odtKgzKqiJCqCZBsOIT1ZqlGac7lFzwf4ANYV0bNY1dq0GVffUop/uDj7NWsPwdH/AFGL/MYnsG1n+Bat+ez8wPYNrN8C1b89r5gIy/s16w/B7H6jF/mNZ1C0nviwKdFqN10FqnxpT5sMrTJZd3LJJqxhCjMuBHxMe37BtZvgWrfntfMHCtBNZVdqw6qf3vMn+4Atb0Fa7VKzow6xU5j0v1bVHYkZTqjUpDOxtaUZPiZEazx4Fgu4T4IN6GFn3LZemlSpt00h+lzHqu4+hl1STM2zaaIle6ZlzSf4CchG8AAAAAAADBeAAAYLwIMF4EAAGC8AwXgQAAYLwDBeBAACDukloXM1arNHqMW449J9XRnGTQ5EU7v3rJWckosYwNFuKk6h6VvacWVYy/X1YjUaqNqJBbGlJVIaWb3VLcSlSkJWZESlcz/2Fqx0OQ4jk1qa5FYXKZQpDbymyNaEqxuIlcyI8Fki54IEiB7a1F1KteOpWpFqV6RFmzY8RicUaFHTFU6rq07ktvrUvK1J5FwGvVHUCS/ozp+1T7yW9cXUyVVVLM/dK/sadLNw3iI93uOJQZ7uSiLvFmZkOJMaJqXFZkNpWlwkutkoiUk8pVg+8jIjI+4yGE3blvty5Uxuh0xEmWlSJLyYjZLeSrtEtWMqI+/PMBDuj1rXJWaKh25FXjTo86ksKTN+ursk3VK6tZqQgiI2lHjOSPgRmnvGpNXHU6BoBT5MW6rgk3ReMhcFmTJkyJ6oaG3nSdkNtJJSiJDZFnYXEzTkWgZabZZQyy2httCSShCSwSSLgRERciGLHpNLjLYXHpsNlUZK0MG2wlJtJWeVEnBe6RmRGZFz7wGu6OXem+NPKZXltmxNUg2ahHNJpUxKbPY6g0nxT7xGeD44Mht46YsSLEN44sZlg33DddNtBJ6xZkRGpWOajwXE+PAdwKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/2Q==" alt="Kufta Logo">
+    <div class="hotline">Hotline: <strong>19592</strong></div>
+  </div>
+
+  <nav aria-label="Main navigation">
+    <a href="#home">Home</a>
+    <a href="#menu">Menu</a>
+    <a href="#branches">Branches</a>
+    <a href="#order">Order Now</a>
+    <a href="#contact">Contact</a>
+    <a href="#contact">Franchise</a>
+    <a href="#contact">Careers</a>
+  </nav>
+</header>
+
+<section class="hero" id="home" aria-labelledby="hero-heading">
+  <div class="hero-left">
+    <h1 id="hero-heading">Clean Street Food for Gen Z</h1>
+    <p>KUFTA brings simple, bold flavors — kofta, hawawshi, and clean fast food made for today.</p>
+    <div class="cta-row">
+      <button class="btn" onclick="scrollToSection('order')">Order Now</button>
+      <button class="btn ghost" onclick="scrollToSection('menu')">View Menu</button>
     </div>
+  </div>
 
-    <!-- Navigation -->
-    <nav class="flex space-x-8 text-lg font-medium">
-      <a href="#" class="hover:text-amber-400 transition">Home</a>
-      <a href="#menu" class="hover:text-amber-400 transition">Menu</a>
-      <a href="#about" class="hover:text-amber-400 transition">About</a>
-      <a href="#branches" class="hover:text-amber-400 transition">Branches</a>
-      <a href="#contact" class="hover:text-amber-400 transition">Contact</a>
-    </nav>
-  </header>
+  <div class="panel">
+    <h3>Quick Order (demo)</h3>
+    <p class="muted" style="color:var(--muted)">Try a quick sample order from the menu below.</p>
+    <div style="margin-top:8px">
+      <label for="quick-item" style="color:var(--muted);font-weight:600">Item</label>
+      <select id="quick-item">
+        <option value="Kufta Sandwich|45">Kufta Sandwich — 45 EGP</option>
+        <option value="Hawawshi|60">Hawawshi — 60 EGP</option>
+        <option value="Kufta Combo|85">Kufta Combo — 85 EGP</option>
+        <option value="Fries|25">Fries — 25 EGP</option>
+      </select>
+      <div style="display:flex;gap:8px;margin-top:8px">
+        <input id="quick-qty" type="number" value="1" min="1" style="flex:1">
+        <button class="btn" onclick="addQuick()">Add</button>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <!-- HERO SECTION -->
-  <section class="relative flex flex-col items-center justify-center text-center py-32 px-6">
-    <h1 class="text-5xl md:text-6xl font-extrabold tracking-tight text-amber-400 mb-6">
-      Clean Street Food, Crafted for Gen Z
-    </h1>
-    <p class="text-lg md:text-xl text-gray-400 max-w-2xl mb-8">
-      Kofta. Hawawshi. Fries. Authentic flavors, bold presentation — this is the Kfuta experience.
-    </p>
-    <a href="#menu" class="bg-amber-400 text-black px-8 py-3 rounded-full font-semibold hover:bg-amber-300 transition">
-      Explore Menu
-    </a>
+<section id="menu" class="menu-section">
+  <h2 style="text-align:left;max-width:1100px;margin:0 auto 12px;color:var(--white)">Menu</h2>
+  <div class="menu-section" style="padding:0 18px 20px">
+    <div class="menu-grid">
+      <article class="menu-card">
+        <img src="https://images.unsplash.com/photo-1601050690597-1f38f1f83a07?auto=format&fit=crop&w=800&q=60" alt="Kufta Sandwich">
+        <h3>Kufta Sandwich</h3>
+        <p>Grilled kofta with tahini & pickles.</p>
+        <div class="menu-footer">
+          <div class="price">45 EGP</div>
+          <div><button class="btn" onclick="addToCart('Kufta Sandwich',45)">Add</button></div>
+        </div>
+      </article>
+      <article class="menu-card">
+        <img src="https://images.unsplash.com/photo-1604908553958-593b3d8894d4?auto=format&fit=crop&w=800&q=60" alt="Hawawshi">
+        <h3>Hawawshi</h3>
+        <p>Traditional hawawshi made fresh.</p>
+        <div class="menu-footer">
+          <div class="price">60 EGP</div>
+          <div><button class="btn" onclick="addToCart('Hawawshi',60)">Add</button></div>
+        </div>
+      </article>
+      <article class="menu-card">
+        <img src="https://images.unsplash.com/photo-1606732803863-24b3f2d4ef7c?auto=format&fit=crop&w=800&q=60" alt="Kufta Combo">
+        <h3>Kufta Combo</h3>
+        <p>Sandwich + fries + drink.</p>
+        <div class="menu-footer">
+          <div class="price">85 EGP</div>
+          <div><button class="btn" onclick="addToCart('Kufta Combo',85)">Add</button></div>
+        </div>
+      </article>
+      <article class="menu-card">
+        <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=60" alt="Fries">
+        <h3>Fries</h3>
+        <p>Crispy seasoned fries.</p>
+        <div class="menu-footer">
+          <div class="price">25 EGP</div>
+          <div><button class="btn" onclick="addToCart('Fries',25)">Add</button></div>
+        </div>
+      </article>
+      <article class="menu-card">
+        <img src="https://images.unsplash.com/photo-1547592166-3b7e7f5b6fd0?auto=format&fit=crop&w=800&q=60" alt="Drink">
+        <h3>Soft Drink</h3>
+        <p>Cold soda.</p>
+        <div class="menu-footer">
+          <div class="price">15 EGP</div>
+          <div><button class="btn" onclick="addToCart('Soft Drink',15)">Add</button></div>
+        </div>
+      </article>
+      <article class="menu-card">
+        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=60" alt="Dessert">
+        <h3>Dessert</h3>
+        <p>Sweet seasonal dessert.</p>
+        <div class="menu-footer">
+          <div class="price">30 EGP</div>
+          <div><button class="btn" onclick="addToCart('Dessert',30)">Add</button></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
 
-    <!-- Subtle background image overlay (optional) -->
-    <div class="absolute inset-0 bg-[url('background-image.jpg')] bg-cover bg-center opacity-10 -z-10"></div>
-  </section>
+<section id="branches" class="branches">
+  <h2 style="text-align:left;max-width:1100px;margin:0 auto 12px;color:var(--white)">Branches</h2>
+  <div style="padding:0 18px 20px">
+    <div class="branches-grid">
+      <div class="branch-card">
+        <h4>Zamalek</h4>
+        <p>123 Zamalek St, Cairo<br>Hours: 10:00 - 02:00<br>Hotline: 19592</p>
+      </div>
+      <div class="branch-card">
+        <h4>Dokki</h4>
+        <p>45 Dokki Rd, Giza<br>Hours: 10:00 - 01:00<br>Hotline: 19592</p>
+      </div>
+      <div class="branch-card">
+        <h4>North Coast</h4>
+        <p>Marina Gate 5, North Coast<br>Seasonal hours<br>Hotline: 19592</p>
+      </div>
+      <div class="branch-card">
+        <h4>Nasr City</h4>
+        <p>Central Plaza, Nasr City<br>Hours: 11:00 - 00:00<br>Hotline: 19592</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <!-- FOOTER -->
-  <footer class="text-center py-8 border-t border-gray-800 text-gray-500 text-sm">
-    © 2025 Kfuta. All rights reserved.
-  </footer>
+<section id="order" class="order-wrap">
+  <div>
+    <h2 style="text-align:left;color:var(--white)">Order — your cart</h2>
+    <div class="panel">
+      <p style="color:var(--muted);margin-top:0">Add items from the menu on the right, then complete the checkout form below.</p>
+      <div class="form-section">
+        <form id="checkout-form" onsubmit="return placeOrder(event)">
+          <div class="form-row"><label>Choose Branch</label><select id="checkout-branch"><option>Zamalek</option><option>Dokki</option><option>North Coast</option><option>Nasr City</option></select></div>
+          <div class="form-row"><label>Full name</label><input id="checkout-name" type="text" required></div>
+          <div class="form-row"><label>Phone</label><input id="checkout-phone" type="tel" required></div>
+          <div class="form-row"><label>Delivery address</label><textarea id="checkout-address" rows="3" required></textarea></div>
+          <div class="form-row"><label>Payment (demo)</label><select id="checkout-payment"><option>Cash on delivery</option><option>Card on delivery</option></select></div>
+          <div style="margin-top:10px"><strong>Total: <span id="checkout-total">0</span> EGP</strong></div>
+          <div style="margin-top:12px"><button type="submit" class="btn">Place Demo Order</button></div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <aside class="cart">
+    <div class="panel">
+      <h3>Your Cart</h3>
+      <div class="cart-items" id="cart-items">
+        <div style="color:var(--muted)">Cart is empty.</div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px">
+        <div style="color:var(--muted)">Subtotal</div><div id="cart-sub" style="font-weight:800">0 EGP</div>
+      </div>
+      <div style="margin-top:10px"><button class="btn" onclick="scrollToSection('order')">Checkout</button></div>
+    </div>
+  </aside>
+</section>
+
+<section id="contact" class="contact-panel">
+  <div class="panel">
+    <h2 style="margin-top:0;color:var(--white)">Contact / Franchise / Careers</h2>
+    <p style="color:var(--muted)">Use this single form for general contact, franchise inquiries, or job applications.</p>
+    <form id="contact-form" onsubmit="return submitContact(event)">
+      <div class="form-row"><label>Reason</label><select id="contact-reason"><option>General Inquiry</option><option>Franchise Request</option><option>Career Opportunity</option></select></div>
+      <div class="form-row"><label>Full name</label><input id="contact-name" type="text" required></div>
+      <div class="form-row"><label>Email</label><input id="contact-email" type="email" required></div>
+      <div class="form-row"><label>Phone</label><input id="contact-phone" type="tel"></div>
+      <div class="form-row"><label>Message</label><textarea id="contact-message" rows="4" required></textarea></div>
+      <div style="margin-top:10px"><button class="btn">Send Message</button></div>
+    </form>
+  </div>
+</section>
+
+<footer>
+  Kufta • Hotline <strong>19592</strong> • © 2025 — Demo site (static)
+</footer>
+
+<script>
+let cart = [];
+
+function addToCart(name, price){
+  const found = cart.find(i=>i.name===name);
+  if(found){ found.qty++; } else { cart.push({name,price,qty:1}); }
+  renderCart();
+}
+
+function addQuick(){
+  const sel = document.getElementById('quick-item').value.split('|');
+  const name = sel[0]; const price = Number(sel[1]||0);
+  const qty = Number(document.getElementById('quick-qty').value||1);
+  const found = cart.find(i=>i.name===name);
+  if(found) found.qty += qty; else cart.push({name,price,qty});
+  renderCart();
+}
+
+function renderCart(){
+  const container = document.getElementById('cart-items');
+  container.innerHTML='';
+  if(cart.length===0){ container.innerHTML='<div style="color:var(--muted)">Cart is empty.</div>'; document.getElementById('cart-sub').innerText='0 EGP'; document.getElementById('checkout-total').innerText='0'; return; }
+  let sub=0;
+  cart.forEach((it,idx)=>{
+    sub += it.price*it.qty;
+    const row = document.createElement('div'); row.className='cart-row';
+    row.innerHTML = `<div style="flex:1;text-align:left"><strong>${it.name}</strong><div style="color:var(--muted);font-size:0.9rem">${it.qty} × ${it.price} EGP</div></div>
+                     <div style="display:flex;flex-direction:column;align-items:flex-end">
+                       <div class="qty">${it.qty}</div>
+                       <div style="margin-top:6px"><button style="background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted);padding:6px;border-radius:6px" onclick="removeOne(${idx})">-</button></div>
+                     </div>`;
+    container.appendChild(row);
+  });
+  document.getElementById('cart-sub').innerText = sub + ' EGP';
+  document.getElementById('checkout-total').innerText = sub;
+}
+
+function removeOne(idx){
+  if(cart[idx].qty>1) cart[idx].qty--; else cart.splice(idx,1);
+  renderCart();
+}
+
+function scrollToSection(id){
+  document.getElementById(id).scrollIntoView({behavior:'smooth'});
+}
+
+function placeOrder(e){
+  e.preventDefault();
+  if(cart.length===0){ alert('Your cart is empty. Add items first.'); return false; }
+  const name = document.getElementById('checkout-name').value;
+  const phone = document.getElementById('checkout-phone').value;
+  const address = document.getElementById('checkout-address').value;
+  const branch = document.getElementById('checkout-branch').value;
+  const total = document.getElementById('checkout-total').innerText;
+  alert('Demo Order Placed:\n' + name + '\n' + phone + '\nBranch: ' + branch + '\nTotal: ' + total + ' EGP\n(Details printed to console)');
+  console.log('ORDER', {name,phone,address,branch,cart});
+  cart=[]; renderCart();
+  document.getElementById('checkout-form').reset();
+  return false;
+}
+
+function submitContact(e){
+  e.preventDefault();
+  const data = {
+    reason: document.getElementById('contact-reason').value,
+    name: document.getElementById('contact-name').value,
+    email: document.getElementById('contact-email').value,
+    phone: document.getElementById('contact-phone').value,
+    message: document.getElementById('contact-message').value
+  };
+  alert('Message sent (demo) — thank you!');
+  console.log('CONTACT', data);
+  document.getElementById('contact-form').reset();
+  return false;
+}
+
+renderCart();
+</script>
 
 </body>
 </html>
