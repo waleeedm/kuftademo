@@ -33,7 +33,7 @@
     line-height:1.35;
   }
 
-  /* ---------- Header ---------- */
+  /* Header */
   .top {
     background:var(--white);
     border-bottom:1px solid #eee;
@@ -45,15 +45,15 @@
   .logo-wrap{max-width:var(--container);margin:8px auto;padding:12px var(--gutter);display:flex;align-items:center;gap:12px;justify-content:space-between}
   .logo-wrap img{width:140px;height:auto;display:block}
   .hotline{font-size:14px;color:var(--muted)}
-  .nav{display:flex;justify-content:center;gap:18px;padding:10px var(--gutter) 14px;background:transparent;overflow:auto}
+  .nav{display:flex;justify-content:center;gap:18px;padding:8px var(--gutter) 12px;background:transparent;overflow:auto}
   .nav a{color:var(--black);text-decoration:none;font-weight:600;padding:8px 10px;border-radius:8px;white-space:nowrap}
   .nav a:hover{color:var(--red)}
 
-  /* ---------- Layout container ---------- */
-  main{max-width:var(--container);margin:18px auto;padding:0 var(--gutter)}
+  /* Layout */
+  main{max-width:var(--container);margin:16px auto;padding:0 var(--gutter)}
   section{margin-bottom:28px}
 
-  /* ---------- Hero ---------- */
+  /* Hero */
   .hero{display:grid;grid-template-columns:1fr 360px;gap:20px;align-items:center}
   .hero h1{margin:0 0 8px;font-size:clamp(26px,4vw,40px)}
   .hero p{color:var(--muted);margin:0 0 14px}
@@ -61,7 +61,7 @@
   .btn{background:var(--red);color:var(--white);border:none;padding:10px 14px;border-radius:12px;font-weight:700;cursor:pointer}
   .btn.ghost{background:transparent;color:var(--black);border:1px solid #eee}
 
-  /* ---------- Menu ---------- */
+  /* Menu */
   .menu-controls{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}
   .picker{display:flex;gap:8px;align-items:center}
   .picker select,.picker input{padding:10px;border-radius:10px;border:1px solid #ddd;font-size:14px}
@@ -71,13 +71,28 @@
   .item-body{padding:12px;flex:1;display:flex;flex-direction:column;justify-content:space-between}
   .price{font-weight:800;color:var(--red)}
 
-  /* ---------- Floating cart (always visible) ---------- */
+  /* Branch list */
+  .branch-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-top:12px}
+  .branch{background:#fff;border-radius:10px;border:1px solid #eee;padding:10px}
+
+  /* Tabs for desktop forms */
+  .tabs{display:flex;gap:8px;align-items:center;border-bottom:1px solid #eee;padding-bottom:8px;flex-wrap:wrap}
+  .tab{padding:10px 12px;border-radius:10px;background:transparent;border:1px solid transparent;cursor:pointer;font-weight:700}
+  .tab.active{background:#fff;border:1px solid #eee;box-shadow:0 8px 24px rgba(0,0,0,0.04)}
+  .tab-panel{margin-top:12px;background:var(--white);border:1px solid #eee;border-radius:12px;padding:16px;box-shadow:0 6px 18px rgba(0,0,0,0.04)}
+
+  .form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
+  label{display:block;margin:8px 0 6px;font-weight:600}
+  input,select,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #ddd;font-size:14px}
+  textarea{min-height:100px}
+
+  /* Floating cart */
   .floating-cart{
     position:fixed;
-    right:22px;
-    bottom:22px;
-    width:68px;
-    height:68px;
+    right:18px;
+    bottom:18px;
+    width:66px;
+    height:66px;
     border-radius:50%;
     background:var(--red);
     color:#fff;
@@ -90,53 +105,47 @@
     transition:transform 160ms ease;
   }
   .floating-cart:hover{transform:translateY(-4px)}
-  .floating-cart .count{position:absolute;top:-8px;right:-8px;background:#fff;color:var(--red);width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;box-shadow:0 6px 18px rgba(0,0,0,0.12)}
+  .floating-cart .count{position:absolute;top:-6px;right:-6px;background:#fff;color:var(--red);width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;box-shadow:0 6px 18px rgba(0,0,0,0.12)}
 
-  /* Slide-in cart panel */
-  .cart-panel{
-    position:fixed;right:22px;bottom:100px;width:360px;max-width:92vw;background:#fff;border-radius:12px;padding:12px;box-shadow:0 30px 80px rgba(0,0,0,0.18);z-index:1590;transform:translateY(8px);transition:opacity var(--transition) ease,transform var(--transition) ease;opacity:0;pointer-events:none}
-  .cart-panel.show{opacity:1;pointer-events:auto;transform:translateY(0)}
-  .cart-panel h4{margin:0 0 8px}
+  /* WhatsApp floating (placeholder) */
+  .floating-whatsapp{
+    position:fixed;
+    right:18px;
+    bottom:96px; /* above cart */
+    width:56px;
+    height:56px;
+    border-radius:50%;
+    background:#25D366;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 12px 40px rgba(0,0,0,0.18);
+    z-index:1600;
+    text-decoration:none;
+    font-weight:800;
+  }
 
-  /* ---------- Tabs for desktop forms ---------- */
-  .tabs{display:flex;gap:8px;align-items:center;border-bottom:1px solid #eee;padding-bottom:8px;flex-wrap:wrap}
-  .tab{padding:10px 12px;border-radius:10px;background:transparent;border:1px solid transparent;cursor:pointer;font-weight:700}
-  .tab.active{background:#fff;border:1px solid #eee;box-shadow:0 8px 24px rgba(0,0,0,0.04)}
-  .tab-panel{margin-top:12px;background:var(--white);border:1px solid #eee;border-radius:12px;padding:16px;box-shadow:0 6px 18px rgba(0,0,0,0.04)}
+  /* Checkout modal */
+  .modal-backdrop{position:fixed;left:0;top:0;right:0;bottom:0;background:rgba(0,0,0,0.4);display:none;align-items:center;justify-content:center;z-index:1700;padding:12px}
+  .modal-backdrop.show{display:flex}
+  .modal-card{background:#fff;border-radius:12px;padding:16px;max-width:920px;width:100%;box-shadow:0 30px 80px rgba(0,0,0,0.3);max-height:90vh;overflow:auto}
 
-  /* ---------- Forms layout ---------- */
-  .form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
-  label{display:block;margin:8px 0 6px;font-weight:600}
-  input,select,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #ddd;font-size:14px}
-  textarea{min-height:100px}
-
-  /* ---------- Branch list styling ---------- */
-  .branch-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:12px}
-  .branch{background:#fff;border-radius:10px;border:1px solid #eee;padding:10px}
-
-  /* ---------- Promo code ---------- */
-  .promo{display:flex;gap:8px;align-items:center;margin-top:10px}
-  .promo input{flex:1}
-
-  /* ---------- Map ---------- */
-  .map-wrap iframe{width:100%;height:300px;border:0;border-radius:8px}
-
-  /* ---------- Responsive & mobile accordions ---------- */
+  /* Mobile accordions */
   @media (max-width:980px){
     .hero{grid-template-columns:1fr;gap:12px}
     .menu-grid{grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}
-    .tabs{display:none} /* hide desktop tabs on mobile */
+    .tabs{display:none}
     .accordion{display:block}
     .accordion-btn{display:flex;width:100%;justify-content:space-between;padding:12px;border-radius:10px;border:1px solid #eee;background:#fff;margin-bottom:8px;font-weight:700;cursor:pointer}
     .accordion-content{overflow:hidden;transition:max-height var(--transition) ease,opacity var(--transition) ease;max-height:0;opacity:0}
-    .accordion-content.open{max-height:1200px;opacity:1}
+    .accordion-content.open{max-height:1600px;opacity:1}
     .floating-cart{right:12px;bottom:12px;width:60px;height:60px}
-    .cart-panel{right:12px;bottom:88px;width:92vw;max-width:420px}
+    .floating-whatsapp{right:12px;bottom:80px}
   }
 
-  /* ---------- other small styles ---------- */
   @media (min-width:981px){ .accordion { display:none } }
-  footer{padding:22px; text-align:center; color:var(--muted); border-top:1px solid #f2f2f2; margin-top:40px}
+  footer{padding:22px;text-align:center;color:var(--muted);border-top:1px solid #f2f2f2;margin-top:20px}
   .muted{color:var(--muted)}
   button:focus, a:focus, select:focus, input:focus, textarea:focus{outline:3px solid rgba(230,57,70,0.12);outline-offset:2px}
 </style>
@@ -152,11 +161,11 @@
         <div class="muted" style="font-size:12px;margin-top:6px">Open: 10:00 - 02:00 (varies by branch)</div>
       </div>
     </div>
+
     <nav class="nav" aria-label="Main navigation">
       <a href="#home">Home</a>
       <a href="#menu">Menu</a>
       <a href="#branches">Branches</a>
-      <a href="#order">Order</a>
       <a href="#forms">Forms</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -191,7 +200,7 @@
               <input id="quick-qty" type="number" value="1" min="1" style="flex:1;padding:10px;border-radius:8px;border:1px solid #ddd">
               <button class="btn" onclick="addQuick()">Add</button>
             </div>
-            <div style="margin-top:12px" class="muted">Promo codes available at checkout</div>
+            <div style="margin-top:12px" class="muted">Promo codes available in checkout</div>
           </div>
         </aside>
       </div>
@@ -224,7 +233,7 @@
       </div>
 
       <div id="menu-grid" class="menu-grid">
-        <!-- keep all original menu items -->
+        <!-- Items with product images (unsplash placeholders) -->
         <article class="item" data-category="sandwich">
           <img src="https://images.unsplash.com/photo-1601050690597-1f38f1f83a07?auto=format&fit=crop&w=1000&q=60" alt="Kufta Sandwich">
           <div class="item-body">
@@ -329,58 +338,59 @@
       </div>
     </section>
 
-    <!-- BRANCHES (shared list) -->
+    <!-- Branches (show first 3 + show more) -->
     <section id="branches">
       <div style="display:flex;justify-content:space-between;align-items:center">
         <h2 style="margin:0">Branches & Map</h2>
-        <div class="muted">All branches included (shared with survey & order)</div>
+        <div class="muted">Showing first 3 — click "Show More" to expand</div>
       </div>
 
-      <div class="branch-list" style="margin-top:12px">
-        <!-- Original branch set (kept + can be extended) -->
+      <!-- First 3 visible -->
+      <div id="branch-short" class="branch-list" style="margin-top:12px">
         <div class="branch"><strong>Zamalek</strong><div class="muted">123 Zamalek St, Cairo — 10:00–02:00</div></div>
         <div class="branch"><strong>Dokki</strong><div class="muted">45 Dokki Rd, Giza — 11:00–01:00</div></div>
         <div class="branch"><strong>North Coast</strong><div class="muted">Marina Gate 5, North Coast — Seasonal hours</div></div>
-        <div class="branch"><strong>Nasr City</strong><div class="muted">Central Plaza, Nasr City — 11:00–00:00</div></div>
-
-        <!-- Add any other branches you have from the original surveying app here -->
-        <!-- Example placeholders: -->
-        <div class="branch"><strong>Mohandessin</strong><div class="muted">Talaat Harb St — 10:00–23:00</div></div>
-        <div class="branch"><strong>Heliopolis</strong><div class="muted">El Merghany St — 10:00–23:00</div></div>
-        <!-- You can replace/expand these with the full branch list you have -->
       </div>
 
-      <div style="margin-top:12px" class="map-wrap">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d13431.6178270223!2d31.235712!3d30.044420!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2seg!4v1696599999999" allowfullscreen loading="lazy" title="Map"></iframe>
+      <!-- Hidden extra branches + map — toggled by Show More -->
+      <div id="branch-full" class="branch-list" style="margin-top:12px;display:none">
+        <!-- keep all branches intact here -->
+        <div class="branch"><strong>Nasr City</strong><div class="muted">Central Plaza, Nasr City — 11:00–00:00</div></div>
+        <div class="branch"><strong>Mohandessin</strong><div class="muted">Talaat Harb St — 10:00–23:00</div></div>
+        <div class="branch"><strong>Heliopolis</strong><div class="muted">El Merghany St — 10:00–23:00</div></div>
+        <!-- Add more branches here if you have them -->
+      </div>
+
+      <div style="margin-top:12px">
+        <button class="btn ghost" id="show-more-branches" onclick="toggleBranches()">Show More</button>
+      </div>
+
+      <div id="branch-map" style="margin-top:12px;display:none" class="map-wrap">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d13431.6178270223!2d31.235712!3d30.044420!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2seg!4v1696599999999" allowfullscreen loading="lazy" style="width:100%;height:300px;border:0;border-radius:8px"></iframe>
       </div>
     </section>
 
-    <!-- FORMS: DESKTOP TABS / MOBILE ACCORDIONS -->
+    <!-- Forms area: Desktop tabs / Mobile accordions -->
     <section id="forms">
-      <h2 style="margin:0 0 12px">Survey / Franchise / Jobs / Checkout / Contact</h2>
+      <h2 style="margin:0 0 12px">Survey • Franchise • Jobs • Contact</h2>
 
       <!-- Desktop tabs -->
       <div class="tabs" role="tablist" aria-label="Forms tabs">
         <button class="tab active" role="tab" data-tab="tab-survey" aria-selected="true">Survey</button>
         <button class="tab" role="tab" data-tab="tab-franchise">Franchise</button>
         <button class="tab" role="tab" data-tab="tab-jobs">Jobs</button>
-        <button class="tab" role="tab" data-tab="tab-checkout">Checkout</button>
         <button class="tab" role="tab" data-tab="tab-contact">Contact</button>
       </div>
 
-      <!-- Tab panels (visible on desktop) -->
+      <!-- Tab panels -->
       <div id="tab-survey" class="tab-panel" data-tabpanel>
         <h3>Survey</h3>
-        <p class="muted">Shared branch list used here.</p>
+        <p class="muted">Share your experience — branch dropdown uses the shared branch list.</p>
         <form id="survey-form" onsubmit="return submitSurvey(event)">
           <div class="form-grid">
             <div>
               <label for="sv-visit">Branch</label>
-              <select id="sv-visit" required>
-                <!-- shared branch options -->
-                <option>Zamalek</option><option>Dokki</option><option>North Coast</option><option>Nasr City</option>
-                <option>Mohandessin</option><option>Heliopolis</option>
-              </select>
+              <select id="sv-visit" required></select>
 
               <label>Overall experience</label>
               <div style="display:flex;gap:8px;margin-top:6px">
@@ -465,40 +475,6 @@
         </form>
       </div>
 
-      <div id="tab-checkout" class="tab-panel" data-tabpanel hidden>
-        <h3>Checkout</h3>
-        <p class="muted">Demo checkout — static (alerts + console). Promo codes supported.</p>
-        <form id="checkout-form" onsubmit="return placeOrder(event)">
-          <div class="form-grid">
-            <div>
-              <label for="branch">Choose Branch</label>
-              <select id="branch" required>
-                <option>Zamalek</option><option>Dokki</option><option>North Coast</option><option>Nasr City</option>
-                <option>Mohandessin</option><option>Heliopolis</option>
-              </select>
-
-              <label for="cust-name">Full Name</label>
-              <input id="cust-name" required>
-
-              <label for="cust-phone">Phone</label>
-              <input id="cust-phone" type="tel" required>
-            </div>
-
-            <div>
-              <label for="cust-address">Delivery Address</label>
-              <textarea id="cust-address" required></textarea>
-
-              <label for="promo-code">Promo code</label>
-              <div class="promo"><input id="promo-code" placeholder="Enter promo code"><button class="btn ghost" type="button" onclick="applyPromo()">Apply</button></div>
-
-              <div style="margin-top:10px"><strong>Total: <span id="total-amount">0</span> EGP</strong></div>
-            </div>
-          </div>
-
-          <div style="margin-top:12px"><button class="btn" type="submit">Place Demo Order</button></div>
-        </form>
-      </div>
-
       <div id="tab-contact" class="tab-panel" data-tabpanel hidden>
         <h3>Contact</h3>
         <p class="muted">General inquiries, partnerships, media.</p>
@@ -527,14 +503,13 @@
         </form>
       </div>
 
-      <!-- Mobile: accordions replicate the same content (keeps single-page identical on mobile) -->
-      <div class="accordion" aria-hidden="true" style="margin-top:12px">
+      <!-- Mobile accordions (same forms, mobile-specific IDs) -->
+      <div class="accordion" style="margin-top:12px">
         <button class="accordion-btn" data-acc="survey-acc">Survey ▾</button>
         <div id="survey-acc" class="accordion-content">
-          <!-- survey form (mobile copy reuses same IDs safely because mobile accordions are hidden on desktop; to avoid duplicate IDs, mobile uses different IDs with suffix -mobile) -->
-          <form id="survey-form-mobile" onsubmit="return submitSurveyMobile(event)">
+          <form id="survey-form-mobile" onsubmit="return submitSurveyMobile(event)" style="padding:12px 0">
             <label>Branch</label>
-            <select id="sv-visit-mobile" required><option>Zamalek</option><option>Dokki</option><option>North Coast</option><option>Nasr City</option><option>Mohandessin</option><option>Heliopolis</option></select>
+            <select id="sv-visit-mobile" required></select>
             <label>Overall experience</label>
             <div style="display:flex;gap:8px;margin-top:6px">
               <label><input type="radio" name="exp-mobile" value="5" required> 5</label>
@@ -553,7 +528,7 @@
 
         <button class="accordion-btn" data-acc="fr-acc">Franchise ▾</button>
         <div id="fr-acc" class="accordion-content">
-          <form id="franchise-form-mobile" onsubmit="return submitFranchiseMobile(event)">
+          <form id="franchise-form-mobile" onsubmit="return submitFranchiseMobile(event)" style="padding:12px 0">
             <label>Full name</label><input id="fr-name-mobile" required>
             <label>Email</label><input id="fr-email-mobile" type="email" required>
             <label>Phone</label><input id="fr-phone-mobile" type="tel">
@@ -565,7 +540,7 @@
 
         <button class="accordion-btn" data-acc="jobs-acc">Jobs ▾</button>
         <div id="jobs-acc" class="accordion-content">
-          <form id="jobs-form-mobile" onsubmit="return submitJobsMobile(event)">
+          <form id="jobs-form-mobile" onsubmit="return submitJobsMobile(event)" style="padding:12px 0">
             <label>Full name</label><input id="job-name-mobile" required>
             <label>Role</label><input id="job-role-mobile" required>
             <label>Email</label><input id="job-email-mobile" type="email">
@@ -574,22 +549,9 @@
           </form>
         </div>
 
-        <button class="accordion-btn" data-acc="checkout-acc">Checkout ▾</button>
-        <div id="checkout-acc" class="accordion-content">
-          <form id="checkout-form-mobile" onsubmit="return placeOrderMobile(event)">
-            <label>Branch</label>
-            <select id="branch-mobile" required><option>Zamalek</option><option>Dokki</option><option>North Coast</option><option>Nasr City</option></select>
-            <label>Full name</label><input id="cust-name-mobile" required>
-            <label>Phone</label><input id="cust-phone-mobile" type="tel">
-            <label>Address</label><textarea id="cust-address-mobile"></textarea>
-            <label>Promo code</label><input id="promo-mobile" placeholder="Promo code">
-            <div style="margin-top:8px"><button class="btn" type="submit">Place Order</button></div>
-          </form>
-        </div>
-
         <button class="accordion-btn" data-acc="contact-acc">Contact ▾</button>
         <div id="contact-acc" class="accordion-content">
-          <form id="contact-form-mobile" onsubmit="return submitContactMobile(event)">
+          <form id="contact-form-mobile" onsubmit="return submitContactMobile(event)" style="padding:12px 0">
             <label>Reason</label><select id="contact-reason-mobile" required><option>General Inquiry</option><option>Franchise Request</option><option>Career Opportunity</option></select>
             <label>Full name</label><input id="contact-name-mobile" required>
             <label>Email</label><input id="contact-email-mobile" type="email">
@@ -600,7 +562,7 @@
       </div>
     </section>
 
-    <!-- FOOTER / PROMOS -->
+    <!-- Footer / promos -->
     <section id="contact" style="margin-bottom:40px">
       <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
         <div>
@@ -612,7 +574,7 @@
         </div>
       </div>
 
-      <div style="margin-top:12px" class="muted">© 2025 Kufta — All content kept as requested.</div>
+      <div style="margin-top:12px" class="muted">© 2025 Kufta — All content preserved.</div>
     </section>
   </main>
 
@@ -620,25 +582,78 @@
     Kufta • Hotline <strong>15544</strong> • © 2025
   </footer>
 
-  <!-- Floating Cart + Panel -->
-  <div class="floating-cart" id="floating-cart" aria-label="Open cart" title="Open cart" onclick="toggleCartPanel()">
+  <!-- Floating WhatsApp (placeholder) -->
+  <a class="floating-whatsapp" href="#" title="WhatsApp (placeholder)" aria-label="Open WhatsApp chat">💬</a>
+
+  <!-- Floating Cart -->
+  <div class="floating-cart" id="floating-cart" title="Open cart" aria-label="Open cart" onclick="openCheckoutModal()">
     <div style="font-size:22px">🛒</div>
     <div class="count" id="cart-count">0</div>
   </div>
 
-  <div class="cart-panel" id="cart-panel" aria-hidden="true">
-    <h4>Your Cart</h4>
-    <div id="cart-items" style="max-height:260px;overflow:auto;padding-right:6px">
-      <div class="muted">Your cart is empty.</div>
-    </div>
-    <div style="display:flex;justify-content:space-between;margin-top:10px"><div class="muted">Subtotal</div><div id="cart-sub">0 EGP</div></div>
-    <div style="margin-top:10px;display:flex;gap:8px">
-      <button class="btn" onclick="scrollTo('#forms'); openTab('tab-checkout')">Go to Checkout</button>
-      <button class="btn ghost" onclick="clearCart()">Clear</button>
+  <!-- Checkout Modal (cart + checkout form) -->
+  <div id="checkout-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-card">
+      <button style="float:right;border:none;background:transparent;font-size:20px;cursor:pointer" onclick="closeCheckoutModal()">✕</button>
+      <h3 style="margin-top:0">Checkout</h3>
+      <div style="display:grid;grid-template-columns:1fr 360px;gap:12px">
+        <div>
+          <div id="checkout-items" style="max-height:320px;overflow:auto;border:1px solid #eee;padding:10px;border-radius:8px">
+            <div class="muted">Your cart is empty.</div>
+          </div>
+
+          <div style="margin-top:12px">
+            <label for="checkout-branch">Choose Branch</label>
+            <select id="checkout-branch" required></select>
+          </div>
+
+          <div style="margin-top:12px">
+            <label for="checkout-name">Full Name</label>
+            <input id="checkout-name" required>
+          </div>
+
+          <div style="margin-top:12px">
+            <label for="checkout-phone">Phone</label>
+            <input id="checkout-phone" type="tel" required>
+          </div>
+
+          <div style="margin-top:12px">
+            <label for="checkout-address">Delivery Address</label>
+            <textarea id="checkout-address" required></textarea>
+          </div>
+        </div>
+
+        <aside style="border:1px solid #eee;padding:12px;border-radius:8px;height:100%">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <strong>Order summary</strong>
+            <div class="muted" id="checkout-count">0 items</div>
+          </div>
+
+          <div style="margin-top:12px;display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;justify-content:space-between"><div class="muted">Subtotal</div><div id="checkout-sub">0 EGP</div></div>
+            <div style="display:flex;justify-content:space-between"><div class="muted">Discount</div><div id="checkout-discount">0 EGP</div></div>
+            <div style="display:flex;justify-content:space-between;font-weight:800"><div>Total</div><div id="checkout-total">0 EGP</div></div>
+          </div>
+
+          <div style="margin-top:12px">
+            <label for="checkout-promo">Promo code</label>
+            <div style="display:flex;gap:8px">
+              <input id="checkout-promo" placeholder="Enter promo code">
+              <button class="btn ghost" type="button" onclick="applyPromoModal()">Apply</button>
+            </div>
+            <div class="muted" style="font-size:13px;margin-top:6px">Demo promo: <strong>SAVE10</strong> = 10% off</div>
+          </div>
+
+          <div style="margin-top:12px">
+            <button class="btn" onclick="placeOrderFromModal()">Place Demo Order</button>
+            <button class="btn ghost" style="margin-left:8px" onclick="clearCart(); updateCheckoutModal()">Clear</button>
+          </div>
+        </aside>
+      </div>
     </div>
   </div>
 
-  <!-- Item Modal -->
+  <!-- Item modal (details) -->
   <div id="item-modal" style="display:none;position:fixed;left:0;right:0;top:0;bottom:0;align-items:center;justify-content:center;z-index:1700;background:rgba(0,0,0,0.35)">
     <div style="background:#fff;padding:16px;border-radius:12px;max-width:820px;width:92%;box-shadow:0 30px 80px rgba(0,0,0,0.25);position:relative">
       <button style="position:absolute;right:12px;top:12px;border:none;background:transparent;font-size:18px;cursor:pointer" onclick="closeItemModal()">✕</button>
@@ -647,27 +662,64 @@
   </div>
 
 <script>
-/* ---------- Basic utils ---------- */
-function scrollTo(sel){ const el=document.querySelector(sel); if(!el) return; const header=document.querySelector('.top'); const offset= header? header.offsetHeight+8 : 80; const y=el.getBoundingClientRect().top+window.pageYOffset-offset; window.scrollTo({top:y, behavior:'smooth'}); }
+/* ========= Shared branch list (single source) ========= */
+/* Add or edit branches here — all selects will be populated from this array */
+const BRANCHES = [
+  'Zamalek',
+  'Dokki',
+  'North Coast',
+  'Nasr City',
+  'Mohandessin',
+  'Heliopolis'
+  // Add more branches here if needed
+];
 
-/* ---------- Menu filtering ---------- */
+/* populate branch selects (order checkout, survey desktop/mobile) */
+function populateBranchSelects(){
+  const selects = ['sv-visit','sv-visit-mobile','checkout-branch','checkout-branch-mobile'];
+  // some selects may not exist (mobile ones), handle gracefully
+  selects.forEach(id => {
+    const el = document.getElementById(id);
+    if(!el) return;
+    el.innerHTML = '';
+    BRANCHES.forEach(b => {
+      const opt = document.createElement('option');
+      opt.value = b;
+      opt.textContent = b;
+      el.appendChild(opt);
+    });
+  });
+}
+populateBranchSelects();
+
+/* ========= Smooth scroll util ========= */
+function scrollTo(sel){
+  const el = document.querySelector(sel);
+  if(!el) return;
+  const header = document.querySelector('.top');
+  const offset = header ? header.offsetHeight + 8 : 80;
+  const y = el.getBoundingClientRect().top + window.pageYOffset - offset;
+  window.scrollTo({top:y, behavior:'smooth'});
+}
+
+/* ========= Menu filtering ========= */
 const menuGrid = document.getElementById('menu-grid');
 const categorySelect = document.getElementById('menu-category');
 const searchInput = document.getElementById('menu-search');
 const menuCountEl = document.getElementById('menu-count');
 
-function updateMenuCount(){ const items=[...menuGrid.querySelectorAll('.item')]; const visible = items.filter(i=>i.style.display!=='none').length; menuCountEl.innerText = visible+' item'+(visible!==1?'s':''); }
-function filterMenu(){ const cat=categorySelect.value; const q=(searchInput.value||'').trim().toLowerCase(); const items=[...menuGrid.querySelectorAll('.item')]; items.forEach(it=>{ const title=it.querySelector('h3').innerText.toLowerCase(); const desc=it.querySelector('p').innerText.toLowerCase(); const catMatch = (cat==='all' || it.dataset.category===cat); const searchMatch = (!q) || title.includes(q) || desc.includes(q); it.style.display = (catMatch && searchMatch)?'':'none'; }); updateMenuCount(); }
+function updateMenuCount(){ const items=[...menuGrid.querySelectorAll('.item')]; const visible = items.filter(i=>i.style.display!=='none').length; menuCountEl.innerText = visible + ' item' + (visible!==1?'s':''); }
+function filterMenu(){ const cat = categorySelect.value; const q = (searchInput.value||'').trim().toLowerCase(); const items = [...menuGrid.querySelectorAll('.item')]; items.forEach(it=>{ const title = it.querySelector('h3').innerText.toLowerCase(); const desc = it.querySelector('p').innerText.toLowerCase(); const catMatch = (cat==='all' || it.dataset.category === cat); const searchMatch = (!q) || title.includes(q) || desc.includes(q); it.style.display = (catMatch && searchMatch)?'':'none'; }); updateMenuCount(); }
 categorySelect.addEventListener('change', filterMenu);
-searchInput.addEventListener('input', ()=>{ clearTimeout(window._menuSearchTimer); window._menuSearchTimer = setTimeout(filterMenu,180); });
+searchInput.addEventListener('input', ()=>{ clearTimeout(window._menuSearchTimer); window._menuSearchTimer = setTimeout(filterMenu, 160); });
 filterMenu();
 function resetFilters(){ categorySelect.value='all'; searchInput.value=''; filterMenu(); }
 
-/* ---------- Item modal ---------- */
+/* ========= Item details modal ========= */
 function openItemModal(name, price, desc, img){
   const content = document.getElementById('item-modal-content');
   content.innerHTML = `
-    <div><img src="${img}" alt="${name}" style="width:100%;height:320px;object-fit:cover;border-radius:8px"></div>
+    <div><img src="${img}" alt="${name}" style="width:100%;height:360px;object-fit:cover;border-radius:8px"></div>
     <div>
       <h2 style="margin-top:0">${name}</h2>
       <p class="muted">${desc}</p>
@@ -683,79 +735,144 @@ function openItemModal(name, price, desc, img){
 function closeItemModal(){ document.getElementById('item-modal').style.display='none'; }
 function escapeJs(s){ return s.replace(/'/g,"\\'").replace(/"/g,'\\"'); }
 
-/* ---------- Cart logic (shared across desktop + mobile) ---------- */
-let cart = [];
+/* ========= Cart logic (shared) ========= */
+let cart = []; // array of {name,price,qty}
+
 function addToCart(name, price){
   const idx = cart.findIndex(i=>i.name===name);
-  if(idx>=0) cart[idx].qty++;
+  if(idx >= 0) cart[idx].qty++;
   else cart.push({name,price,qty:1});
   renderCart();
 }
-function addQuick(){ const val=document.getElementById('quick-item').value.split('|'); const name=val[0], price=Number(val[1]||0); const qty=Number(document.getElementById('quick-qty').value||1); const idx = cart.findIndex(i=>i.name===name); if(idx>=0) cart[idx].qty += qty; else cart.push({name,price,qty}); renderCart(); }
+function addQuick(){
+  const val = document.getElementById('quick-item').value.split('|');
+  const name = val[0], price = Number(val[1]||0);
+  const qty = Number(document.getElementById('quick-qty').value||1);
+  const idx = cart.findIndex(i=>i.name===name);
+  if(idx >= 0) cart[idx].qty += qty; else cart.push({name,price,qty});
+  renderCart();
+}
 function renderCart(){
-  const el = document.getElementById('cart-items');
-  el.innerHTML=''; if(cart.length===0){ el.innerHTML='<div class="muted">Your cart is empty.</div>'; document.getElementById('cart-sub').innerText='0 EGP'; document.getElementById('cart-count').innerText='0'; document.getElementById('cart-count').innerText='0'; return; }
-  let sub=0;
-  cart.forEach((it,i)=>{ sub += it.price*it.qty; const row = document.createElement('div'); row.style.display='flex'; row.style.justifyContent='space-between'; row.style.padding='8px 0'; row.innerHTML = `<div><strong>${it.name}</strong><div class="muted">${it.qty} × ${it.price} EGP</div></div>
-    <div style="text-align:right"><div style="font-weight:700">${it.price * it.qty} EGP</div>
-    <div style="margin-top:6px"><button onclick="decrease(${i})" style="padding:6px;border-radius:6px;border:1px solid #eee;margin-right:6px">-</button><button onclick="increase(${i})" style="padding:6px;border-radius:6px;background:var(--red);color:#fff;border:0">+</button></div></div>`; el.appendChild(row); });
-  document.getElementById('cart-sub').innerText = sub + ' EGP';
-  const total = document.getElementById('total-amount'); if(total) total.innerText = sub;
-  document.getElementById('cart-count').innerText = cart.reduce((s,i)=>s+i.qty,0);
+  const countEl = document.getElementById('cart-count');
+  if(!countEl) return;
+  const totalQty = cart.reduce((s,i)=>s+i.qty,0);
+  countEl.innerText = totalQty;
+  updateCheckoutModal(); // keep modal in sync in case open
 }
 function increase(i){ cart[i].qty++; renderCart(); }
 function decrease(i){ if(cart[i].qty>1) cart[i].qty--; else cart.splice(i,1); renderCart(); }
-function clearCart(){ cart=[]; renderCart(); }
+function clearCart(){ cart=[]; renderCart(); updateCheckoutModal(); }
 
-/* Cart panel toggle */
-function toggleCartPanel(){ const panel=document.getElementById('cart-panel'); const visible = panel.classList.contains('show'); if(visible){ panel.classList.remove('show'); panel.setAttribute('aria-hidden','true'); } else { panel.classList.add('show'); panel.setAttribute('aria-hidden','false'); } }
+/* ========= Checkout modal functions ========= */
+function openCheckoutModal(){
+  updateCheckoutModal();
+  const modal = document.getElementById('checkout-modal');
+  modal.classList.add('show');
+  modal.classList.add('visible');
+  modal.classList.add('open');
+  modal.style.display = 'flex';
+  modal.setAttribute('aria-hidden','false');
+  document.body.style.overflow = 'hidden';
+}
+function closeCheckoutModal(){
+  const modal = document.getElementById('checkout-modal');
+  modal.style.display = 'none';
+  modal.setAttribute('aria-hidden','true');
+  document.body.style.overflow = '';
+}
 
-/* ---------- Tabs behavior (desktop) ---------- */
+/* update checkout modal contents (items, totals, counts) */
+function updateCheckoutModal(){
+  const ci = document.getElementById('checkout-items');
+  const cb = document.getElementById('checkout-branch');
+  const count = document.getElementById('checkout-count');
+  const subEl = document.getElementById('checkout-sub');
+  const discountEl = document.getElementById('checkout-discount');
+  const totalEl = document.getElementById('checkout-total');
+  if(cb){ cb.innerHTML = ''; BRANCHES.forEach(b=>{ const o=document.createElement('option'); o.value=b; o.textContent=b; cb.appendChild(o); }); }
+  if(!ci) return;
+  ci.innerHTML = '';
+  if(cart.length===0){ ci.innerHTML = '<div class="muted">Your cart is empty.</div>'; if(count) count.innerText = '0 items'; if(subEl) subEl.innerText='0 EGP'; if(discountEl) discountEl.innerText='0 EGP'; if(totalEl) totalEl.innerText='0 EGP'; return; }
+  let sub=0;
+  cart.forEach((it,i)=>{
+    sub += it.price * it.qty;
+    const row = document.createElement('div');
+    row.style.display='flex';
+    row.style.justifyContent='space-between';
+    row.style.alignItems='center';
+    row.style.padding='8px 0';
+    row.innerHTML = `<div><strong>${it.name}</strong><div class="muted">${it.qty} × ${it.price} EGP</div></div>
+                     <div style="text-align:right">
+                       <div style="font-weight:700">${it.price * it.qty} EGP</div>
+                       <div style="margin-top:6px">
+                         <button style="padding:6px;border-radius:6px;border:1px solid #eee;margin-right:6px" onclick="decrease(${i}); updateCheckoutModal()">-</button>
+                         <button style="padding:6px;border-radius:6px;border:0;background:var(--red);color:#fff" onclick="increase(${i}); updateCheckoutModal()">+</button>
+                       </div>
+                     </div>`;
+    ci.appendChild(row);
+  });
+  const promoVal = (document.getElementById('checkout-promo')||{}).value || '';
+  let discount = 0;
+  if(promoVal.trim().toUpperCase()==='SAVE10'){ discount = Math.round(sub * 0.10); }
+  const total = sub - discount;
+  if(count) count.innerText = cart.reduce((s,i)=>s+i.qty,0) + ' items';
+  if(subEl) subEl.innerText = sub + ' EGP';
+  if(discountEl) discountEl.innerText = discount + ' EGP';
+  if(totalEl) totalEl.innerText = total + ' EGP';
+}
+
+/* apply promo inside modal */
+function applyPromoModal(){
+  updateCheckoutModal();
+  alert('Promo (demo) applied if valid — check totals');
+}
+
+/* place order from modal (demo) */
+function placeOrderFromModal(){
+  if(cart.length===0){ alert('Cart is empty — add items first.'); return; }
+  const payload = {
+    branch: document.getElementById('checkout-branch').value,
+    name: document.getElementById('checkout-name').value,
+    phone: document.getElementById('checkout-phone').value,
+    address: document.getElementById('checkout-address').value,
+    items: cart.slice(),
+    promo: document.getElementById('checkout-promo').value || null
+  };
+  alert('Demo order placed — check console for details.');
+  console.log('ORDER DEMO', payload);
+  clearCart();
+  closeCheckoutModal();
+  // reset checkout fields
+  const nameEl = document.getElementById('checkout-name'); if(nameEl) nameEl.value = '';
+  const phoneEl = document.getElementById('checkout-phone'); if(phoneEl) phoneEl.value = '';
+  const addrEl = document.getElementById('checkout-address'); if(addrEl) addrEl.value = '';
+  const promo = document.getElementById('checkout-promo'); if(promo) promo.value = '';
+  updateCheckoutModal();
+}
+
+/* ========= Promo code generic (for quick apply elsewhere) ========= */
+function applyPromo(){
+  const code = (document.getElementById('promo-code')||{}).value || '';
+  if(!code) return alert('Enter a promo code');
+  let sub = cart.reduce((s,i)=>s+i.price*i.qty,0);
+  if(!sub) return alert('Cart is empty');
+  if(code.trim().toUpperCase()==='SAVE10'){ const newTotal = Math.round(sub*0.9); alert('Promo applied: SAVE10 (10% off) — demo'); }
+  else alert('Promo not recognized (demo)');
+}
+
+/* ========= Tabs (desktop) ========= */
 const tabs = document.querySelectorAll('.tab');
 const panels = document.querySelectorAll('[data-tabpanel]');
 function openTab(tabId){
   tabs.forEach(t=>{ t.classList.toggle('active', t.dataset.tab===tabId); t.setAttribute('aria-selected', t.dataset.tab===tabId); });
-  panels.forEach(p=>{ if(p.id===tabId) { p.hidden=false; p.style.display='block'; } else { p.hidden=true; p.style.display='none'; } });
-  // scroll to panels area
-  setTimeout(()=>{ const el=document.getElementById('forms'); if(el) scrollTo('#forms'); }, 80);
+  panels.forEach(p=>{ if(p.id===tabId){ p.hidden=false; p.style.display='block'; } else { p.hidden=true; p.style.display='none'; } });
+  // scroll to forms area
+  setTimeout(()=> scrollTo('#forms'), 50);
 }
 tabs.forEach(t=> t.addEventListener('click', ()=> openTab(t.dataset.tab)) );
-// ensure initial active panel visible
-openTab('tab-survey');
+openTab('tab-survey'); // default
 
-/* ---------- Promo code (demo behavior) ---------- */
-function applyPromo(){
-  const code = (document.getElementById('promo-code')||{}).value || (document.getElementById('promo-mobile')||{}).value;
-  if(!code) return alert('Enter a promo code');
-  // demo promo logic: code 'SAVE10' gives 10% off
-  let sub = 0; cart.forEach(i=> sub += i.price * i.qty);
-  if(!sub) return alert('Cart is empty');
-  if(code.trim().toUpperCase()==='SAVE10'){ const newTotal = Math.round(sub*0.9); document.getElementById('total-amount').innerText = newTotal; alert('Promo applied: SAVE10 (10% off)'); }
-  else { alert('Promo not recognized (demo)'); }
-}
-
-/* ---------- Checkout / Forms (demo) ---------- */
-function placeOrder(e){
-  e.preventDefault();
-  if(cart.length===0){ alert('Cart is empty — add items first.'); return false; }
-  const data = {
-    branch: document.getElementById('branch').value,
-    name: document.getElementById('cust-name').value,
-    phone: document.getElementById('cust-phone').value,
-    address: document.getElementById('cust-address').value,
-    total: document.getElementById('total-amount').innerText,
-    items: cart
-  };
-  alert('Demo order placed — check console for details.');
-  console.log('ORDER DEMO', data);
-  cart=[]; renderCart(); document.getElementById('checkout-form').reset();
-  return false;
-}
-
-/* Mobile checkout uses same cart (demo) */
-function placeOrderMobile(e){ e.preventDefault(); return placeOrder(e); }
-
-/* ---------- Survey ---------- */
+/* ========= Survey forms ========= */
 function submitSurvey(e){
   e.preventDefault();
   const payload = {
@@ -769,43 +886,67 @@ function submitSurvey(e){
   document.getElementById('survey-form').reset();
   return false;
 }
-function submitSurveyMobile(e){ e.preventDefault(); // map mobile fields to desktop payload
+function submitSurveyMobile(e){
+  e.preventDefault();
   const payload = {
     branch: document.getElementById('sv-visit-mobile').value,
     rating: (document.querySelector('input[name="exp-mobile"]:checked')||{}).value || null,
     speed: document.getElementById('sv-speed-mobile').value,
     comments: document.getElementById('sv-comments-mobile').value
   };
-  alert('Survey submitted — thank you!');
-  console.log('SURVEY DEMO (mobile)', payload);
+  alert('Survey submitted (mobile) — thank you!');
+  console.log('SURVEY DEMO mobile', payload);
   document.getElementById('survey-form-mobile').reset();
   return false;
 }
 
-/* ---------- Franchise / Jobs / Contact demos ---------- */
-function submitFranchise(e){ e.preventDefault(); alert('Franchise request sent (demo).'); console.log('FRANCHISE', { name:document.getElementById('fr-name').value, email:document.getElementById('fr-email').value }); document.getElementById('franchise-form').reset(); return false; }
-function submitFranchiseMobile(e){ e.preventDefault(); alert('Franchise request sent (mobile demo).'); console.log('FRANCHISE mobile'); document.getElementById('franchise-form-mobile').reset(); return false; }
-function submitJobs(e){ e.preventDefault(); alert('Job application received (demo).'); document.getElementById('jobs-form').reset(); return false; }
+/* ========= Franchise / Jobs / Contact handlers (demo) ========= */
+function submitFranchise(e){ e.preventDefault(); alert('Franchise request sent (demo).'); console.log('FRANCHISE', { name: document.getElementById('fr-name').value, email: document.getElementById('fr-email').value }); document.getElementById('franchise-form').reset(); return false; }
+function submitFranchiseMobile(e){ e.preventDefault(); alert('Franchise request (mobile) sent (demo).'); document.getElementById('franchise-form-mobile').reset(); return false; }
+function submitJobs(e){ e.preventDefault(); alert('Job application received (demo).'); console.log('JOB', { name: document.getElementById('job-name').value, role: document.getElementById('job-role').value }); document.getElementById('jobs-form').reset(); return false; }
 function submitJobsMobile(e){ e.preventDefault(); alert('Job application received (mobile demo).'); document.getElementById('jobs-form-mobile').reset(); return false; }
-function submitContact(e){ e.preventDefault(); alert('Message sent (demo).'); document.getElementById('contact-form').reset(); return false; }
+function submitContact(e){ e.preventDefault(); alert('Message sent (demo).'); console.log('CONTACT', { name: document.getElementById('contact-name').value, reason: document.getElementById('contact-reason').value }); document.getElementById('contact-form').reset(); return false; }
 function submitContactMobile(e){ e.preventDefault(); alert('Message sent (mobile demo).'); document.getElementById('contact-form-mobile').reset(); return false; }
 
-/* ---------- Mobile accordions ---------- */
+/* ========= Mobile accordions functionality ========= */
 document.querySelectorAll('.accordion-btn').forEach(btn=>{
   btn.addEventListener('click', ()=>{
     const id = btn.dataset.acc;
     const content = document.getElementById(id);
     if(!content) return;
-    content.classList.toggle('open');
+    const open = content.classList.toggle('open');
     btn.textContent = btn.textContent.includes('▾') ? btn.textContent.replace('▾','▸') : btn.textContent.replace('▸','▾');
   });
 });
 
-/* ---------- Accessibility & misc ---------- */
-document.addEventListener('keydown', e=>{ if(e.key==='Escape'){ document.getElementById('cart-panel').classList.remove('show'); closeItemModal(); } });
+/* ========= Branches "show more" ========= */
+function toggleBranches(){
+  const full = document.getElementById('branch-full');
+  const map = document.getElementById('branch-map');
+  const btn = document.getElementById('show-more-branches');
+  const showing = full.style.display !== 'none';
+  if(showing){
+    full.style.display = 'none';
+    map.style.display = 'none';
+    btn.textContent = 'Show More';
+  } else {
+    full.style.display = 'grid';
+    map.style.display = 'block';
+    btn.textContent = 'Show Less';
+  }
+}
 
-/* init */
+/* ========= Item modal helpers ========= */
+function closeItemModal(){ document.getElementById('item-modal').style.display='none'; }
+
+/* ========= misc init ========= */
 renderCart();
+updateCheckoutModal();
+populateBranchSelects();
+
+/* Close modals on escape */
+document.addEventListener('keydown', e=>{ if(e.key==='Escape'){ closeCheckoutModal(); closeItemModal(); } });
+
 </script>
 </body>
 </html>
