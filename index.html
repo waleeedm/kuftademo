@@ -16,6 +16,8 @@
     --red:#e63946;
     --red-dark:#b22a34;
     --container:1100px;
+    --gutter:18px;
+    --radius:10px;
   }
   *{box-sizing:border-box}
   html,body{height:100%}
@@ -27,9 +29,11 @@
     -webkit-font-smoothing:antialiased;
     -moz-osx-font-smoothing:grayscale;
     scroll-behavior:smooth;
+    line-height:1.35;
+    -webkit-tap-highlight-color: transparent;
   }
 
-  /* HEADER */
+  /* TOP */
   .top {
     background:var(--white);
     border-bottom:1px solid #eee;
@@ -38,17 +42,16 @@
     z-index:1200;
     backdrop-filter: blur(6px);
   }
-  .logo-wrap{max-width:var(--container);margin:10px auto 0;padding:12px 18px;text-align:center;}
-  .logo-wrap img{width:140px;height:auto;display:block;margin:0 auto;}
-  .hotline{font-size:14px;color:var(--muted);margin-top:6px}
-
-  /* NAV */
+  .logo-wrap{max-width:var(--container);margin:8px auto;padding:12px var(--gutter);display:flex;align-items:center;gap:12px;justify-content:space-between}
+  .logo-wrap img{width:140px;height:auto;display:block}
+  .hotline{font-size:14px;color:var(--muted);margin-left:auto}
   .nav{
     display:flex;
     justify-content:center;
-    gap:20px;
-    padding:12px 18px 18px;
+    gap:18px;
+    padding:10px var(--gutter) 14px;
     background:transparent;
+    overflow:auto;
   }
   .nav a{
     color:var(--black);
@@ -56,28 +59,32 @@
     font-weight:600;
     padding:8px 10px;
     border-radius:8px;
+    white-space:nowrap;
   }
   .nav a:hover{color:var(--red)}
+  .skip-link{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+  .skip-link:focus{left:8px;top:8px;width:auto;height:auto;padding:8px;background:#fff;border-radius:6px;box-shadow:0 6px 18px rgba(0,0,0,0.12)}
 
   /* HERO */
   .hero{
     max-width:var(--container);
-    margin:28px auto;
-    padding:40px 18px;
+    margin:18px auto;
+    padding:20px var(--gutter);
     display:grid;
-    grid-template-columns:1fr 380px;
-    gap:28px;
+    grid-template-columns:1fr 360px;
+    gap:20px;
     align-items:center;
   }
   .hero-left h1{
-    margin:0 0 12px;
-    font-size:clamp(28px,3.6vw,44px);
+    margin:0 0 8px;
+    font-size:clamp(26px,4vw,40px);
     letter-spacing:1px;
   }
-  .hero-left p{color:var(--muted);margin:0 0 18px}
-  .cta{display:flex;gap:12px;flex-wrap:wrap}
-  .btn{background:var(--red);color:var(--white);border:none;padding:12px 18px;border-radius:9px;font-weight:700;cursor:pointer}
+  .hero-left p{color:var(--muted);margin:0 0 14px}
+  .cta{display:flex;gap:10px;flex-wrap:wrap}
+  .btn{background:var(--red);color:var(--white);border:none;padding:10px 14px;border-radius:12px;font-weight:700;cursor:pointer}
   .btn:hover{background:var(--red-dark)}
+  .btn.ghost{background:transparent;color:var(--black);border:1px solid #eee}
 
   .promo-panel{
     background:var(--dark);
@@ -88,13 +95,28 @@
   }
   .promo-panel small{color:#ddd}
 
-  /* SECTION LAYOUTS */
-  section{padding:56px 18px}
+  /* LAYOUT */
+  section{padding:36px var(--gutter)}
   .section-inner{max-width:var(--container);margin:0 auto}
-  h2{margin:0 0 18px;text-align:center}
+  h2{margin:0 0 14px;text-align:center}
 
   /* MENU */
-  .menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+  .menu-controls{
+    display:flex;
+    gap:10px;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:12px;
+    flex-wrap:wrap;
+    position:sticky;
+    top:68px;
+    background:linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.85));
+    padding:8px 0;
+    z-index:900;
+  }
+  .picker{display:flex;gap:8px;align-items:center}
+  .picker select,.picker input{padding:10px;border-radius:10px;border:1px solid #ddd;font-size:14px}
+  .menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
   .item{
     background:var(--white);
     border:1px solid #eee;
@@ -103,21 +125,22 @@
     box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     display:flex;
     flex-direction:column;
+    min-height:220px;
   }
-  .item img{width:100%;height:170px;object-fit:cover}
-  .item-body{padding:14px;flex:1;display:flex;flex-direction:column;justify-content:space-between}
+  .item img{width:100%;height:160px;object-fit:cover}
+  .item-body{padding:12px;flex:1;display:flex;flex-direction:column;justify-content:space-between}
   .item h3{margin:0 0 6px;font-size:18px}
   .item p{margin:0;color:var(--muted);font-size:14px}
   .item-footer{display:flex;justify-content:space-between;align-items:center;margin-top:12px}
   .price{font-weight:800;color:var(--red)}
 
-  /* BRANCHES (white) */
+  /* BRANCHES */
   .branches-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
   .branch{background:var(--white);border-radius:10px;padding:14px;border:1px solid #eee}
 
-  /* ORDER (white) */
+  /* ORDER */
   .order-wrap{display:grid;grid-template-columns:1fr 360px;gap:20px;align-items:start}
-  .panel{background:var(--white);padding:16px;border-radius:10px;border:1px solid #eee}
+  .panel{background:var(--white);padding:14px;border-radius:10px;border:1px solid #eee}
   .panel-dark{background:var(--dark);color:var(--white);border:1px solid #222}
   label{display:block;margin:10px 0 6px;font-weight:600}
   input,select,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #ddd;font-size:14px}
@@ -128,31 +151,61 @@
 
   /* CONTACT (dark) */
   .contact-panel{max-width:var(--container);margin:0 auto;border-radius:10px;padding:18px}
-  .contact-panel .form{background:var(--dark);padding:18px;border-radius:8px;color:var(--white)}
 
   /* MAP */
-  .map-wrap iframe{width:100%;height:300px;border:0;border-radius:8px}
+  .map-wrap iframe{width:100%;height:260px;border:0;border-radius:8px}
 
   /* FOOTER */
-  footer{padding:22px 18px;background:var(--black);color:var(--white);text-align:center;font-size:14px}
+  footer{padding:22px var(--gutter);background:var(--black);color:var(--white);text-align:center;font-size:14px}
 
-  /* RESPONSIVE */
+  /* MODAL / BOTTOM SHEETS */
+  .modal, .bottom-sheet{position:fixed;left:0;right:0;top:0;bottom:0;display:none;align-items:center;justify-content:center;z-index:2000}
+  .modal .sheet, .bottom-sheet .sheet{background:#fff;border-radius:12px;padding:16px;max-width:720px;max-height:90vh;overflow:auto;box-shadow:0 30px 80px rgba(0,0,0,0.35)}
+  .modal.show{display:flex}
+  .bottom-sheet{align-items:flex-end;justify-content:center;background:linear-gradient(rgba(0,0,0,0.15),rgba(0,0,0,0.35))}
+  .bottom-sheet .sheet{width:100%;border-bottom-left-radius:0;border-bottom-right-radius:0;max-width:none;max-height:80vh}
+  .sheet .close{float:right;background:transparent;border:none;font-size:18px;cursor:pointer}
+
+  /* small bottom nav for mobile */
+  .mobile-bottom-bar{display:none;position:fixed;left:12px;right:12px;bottom:12px;background:#fff;border-radius:12px;padding:8px;box-shadow:0 8px 28px rgba(0,0,0,0.15);z-index:1400;gap:8px;align-items:center;justify-content:space-between}
+  .mobile-bottom-bar .action{flex:1;text-align:center;padding:10px;border-radius:10px;font-weight:700;cursor:pointer;border:1px solid #eee;background:#fff}
+  .mobile-bottom-bar .action.primary{background:var(--red);color:#fff;border:none}
+
+  /* small UI */
+  .muted{color:var(--muted);font-size:13px}
+  .promo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-top:12px}
+
+  /* Responsive */
   @media (max-width:980px){
-    .hero{grid-template-columns:1fr; padding:22px}
+    .hero{grid-template-columns:1fr; padding:14px}
     .order-wrap{grid-template-columns:1fr}
     .cart{position:relative;top:auto}
     .nav{gap:12px;padding-left:12px;padding-right:12px;overflow:auto}
+    .menu-controls{position:sticky;top:56px;padding:8px var(--gutter);border-top:1px solid #f3f3f3}
+    .mobile-bottom-bar{display:flex}
+    .modal .sheet{max-width:95%;height:auto}
   }
+  @media (max-width:600px){
+    .item img{height:140px}
+    .hero-left h1{font-size:24px}
+    .logo-wrap img{width:120px}
+  }
+
+  /* focus styles */
+  button:focus, a:focus, select:focus, input:focus, textarea:focus{outline:3px solid rgba(230,57,70,0.12);outline-offset:2px}
 </style>
 </head>
 <body>
 
-  <!-- TOP: logo centered above nav -->
+  <a class="skip-link" href="#main">Skip to content</a>
+
   <div class="top" id="top">
     <div class="logo-wrap">
-      <!-- Put your uploaded logo file in the same folder and name it logo.jpg -->
       <img src="logo.jpg" alt="Kufta logo">
-      <div class="hotline">Hotline: <strong>15544</strong></div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end">
+        <div class="hotline">Hotline: <strong>15544</strong></div>
+        <div class="muted" style="font-size:12px;margin-top:6px">Open: 10:00 - 02:00 (varies by branch)</div>
+      </div>
     </div>
 
     <nav class="nav" aria-label="Main navigation">
@@ -162,18 +215,24 @@
       <a href="#order" data-offset>Order Now</a>
       <a href="#promotions" data-offset>Promotions</a>
       <a href="#feedback" data-offset>Feedback</a>
-      <a href="#contact" data-offset>Contact / Franchise / Careers</a>
+      <a href="#contact" data-offset>Contact</a>
     </nav>
   </div>
 
   <!-- HERO -->
+  <main id="main">
   <section id="home" class="hero">
     <div class="hero-left">
       <h1>Kufta — Clean Street Food</h1>
       <p>Authentic kofta and hawawshi — simple, fast, unforgettable. Order online or visit our branches.</p>
       <div class="cta">
         <button class="btn" onclick="scrollToSection('menu')">Explore Menu</button>
-        <button class="btn" onclick="scrollToSection('order')">Order Now</button>
+        <button class="btn ghost" onclick="scrollToSection('order')">Order Now</button>
+      </div>
+      <div class="promo-grid" aria-hidden="true">
+        <div class="panel" style="margin-top:14px">🔥 Buy 1 Kofta Sandwich, Get 1 Free</div>
+        <div class="panel" style="margin-top:14px">🍟 20% Off Fries — Fridays</div>
+        <div class="panel" style="margin-top:14px">🥤 Free Drink with Combo</div>
       </div>
     </div>
 
@@ -197,12 +256,35 @@
     </aside>
   </section>
 
-  <!-- MENU (white) -->
-  <section id="menu" class="section-inner">
-    <h2>Menu</h2>
-    <div class="menu-grid">
-      <!-- Item 1 -->
-      <article class="item">
+  <!-- MENU -->
+  <section id="menu" class="section-inner" aria-labelledby="menu-heading">
+    <h2 id="menu-heading">Menu</h2>
+
+    <!-- Controls: category filter + search -->
+    <div class="menu-controls" role="region" aria-label="Menu controls">
+      <div class="picker">
+        <label for="menu-category" class="muted" style="margin-right:6px">Category</label>
+        <select id="menu-category" aria-label="Filter by category">
+          <option value="all">All</option>
+          <option value="sandwich">Sandwiches</option>
+          <option value="combo">Combos</option>
+          <option value="side">Sides</option>
+          <option value="drink">Drinks</option>
+          <option value="dessert">Desserts</option>
+        </select>
+        <label for="menu-search" class="muted" style="margin-left:10px;margin-right:6px">Search</label>
+        <input id="menu-search" placeholder="Search menu (e.g. Kufta, fries)" aria-label="Search menu">
+      </div>
+
+      <div style="display:flex;gap:8px;align-items:center">
+        <button class="btn" onclick="resetFilters()">Show All</button>
+        <div class="muted" id="menu-count">6 items</div>
+      </div>
+    </div>
+
+    <div id="menu-grid" class="menu-grid" aria-live="polite">
+      <!-- NOTE: data-category values used for filtering -->
+      <article class="item" data-category="sandwich">
         <img src="https://images.unsplash.com/photo-1601050690597-1f38f1f83a07?auto=format&fit=crop&w=1000&q=60" alt="Kufta Sandwich">
         <div class="item-body">
           <div>
@@ -211,13 +293,15 @@
           </div>
           <div class="item-footer">
             <div class="price">45 EGP</div>
-            <div><button class="btn" onclick="addToCart('Kufta Sandwich',45)">Add</button></div>
+            <div style="display:flex;gap:8px">
+              <button class="btn" onclick="addToCart('Kufta Sandwich',45)">Add</button>
+              <button class="btn ghost" onclick="openItemModal('Kufta Sandwich',45,'Grilled kofta, tahini, pickles, fresh salad.','https://images.unsplash.com/photo-1601050690597-1f38f1f83a07?auto=format&fit=crop&w=1000&q=60')">Details</button>
+            </div>
           </div>
         </div>
       </article>
 
-      <!-- Item 2 -->
-      <article class="item">
+      <article class="item" data-category="sandwich">
         <img src="https://images.unsplash.com/photo-1604908553958-593b3d8894d4?auto=format&fit=crop&w=1000&q=60" alt="Hawawshi">
         <div class="item-body">
           <div>
@@ -226,13 +310,15 @@
           </div>
           <div class="item-footer">
             <div class="price">60 EGP</div>
-            <div><button class="btn" onclick="addToCart('Hawawshi',60)">Add</button></div>
+            <div style="display:flex;gap:8px">
+              <button class="btn" onclick="addToCart('Hawawshi',60)">Add</button>
+              <button class="btn ghost" onclick="openItemModal('Hawawshi',60,'Traditional stuffed bread with seasoned minced meat.','https://images.unsplash.com/photo-1604908553958-593b3d8894d4?auto=format&fit=crop&w=1000&q=60')">Details</button>
+            </div>
           </div>
         </div>
       </article>
 
-      <!-- Item 3 -->
-      <article class="item">
+      <article class="item" data-category="combo">
         <img src="https://images.unsplash.com/photo-1606732803863-24b3f2d4ef7c?auto=format&fit=crop&w=1000&q=60" alt="Kufta Combo">
         <div class="item-body">
           <div>
@@ -241,13 +327,15 @@
           </div>
           <div class="item-footer">
             <div class="price">85 EGP</div>
-            <div><button class="btn" onclick="addToCart('Kufta Combo',85)">Add</button></div>
+            <div style="display:flex;gap:8px">
+              <button class="btn" onclick="addToCart('Kufta Combo',85)">Add</button>
+              <button class="btn ghost" onclick="openItemModal('Kufta Combo',85,'Sandwich + fries + soft drink — the combo meal.','https://images.unsplash.com/photo-1606732803863-24b3f2d4ef7c?auto=format&fit=crop&w=1000&q=60')">Details</button>
+            </div>
           </div>
         </div>
       </article>
 
-      <!-- Item 4 -->
-      <article class="item">
+      <article class="item" data-category="side">
         <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1000&q=60" alt="Fries">
         <div class="item-body">
           <div>
@@ -256,13 +344,15 @@
           </div>
           <div class="item-footer">
             <div class="price">25 EGP</div>
-            <div><button class="btn" onclick="addToCart('Fries',25)">Add</button></div>
+            <div style="display:flex;gap:8px">
+              <button class="btn" onclick="addToCart('Fries',25)">Add</button>
+              <button class="btn ghost" onclick="openItemModal('Fries',25,'Crispy seasoned fries — perfect side.','https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1000&q=60')">Details</button>
+            </div>
           </div>
         </div>
       </article>
 
-      <!-- Item 5 -->
-      <article class="item">
+      <article class="item" data-category="drink">
         <img src="https://images.unsplash.com/photo-1547592166-3b7e7f5b6fd0?auto=format&fit=crop&w=1000&q=60" alt="Soft Drink">
         <div class="item-body">
           <div>
@@ -271,14 +361,16 @@
           </div>
           <div class="item-footer">
             <div class="price">15 EGP</div>
-            <div><button class="btn" onclick="addToCart('Soft Drink',15)">Add</button></div>
+            <div style="display:flex;gap:8px">
+              <button class="btn" onclick="addToCart('Soft Drink',15)">Add</button>
+              <button class="btn ghost" onclick="openItemModal('Soft Drink',15,'Cold soft drink (can).','https://images.unsplash.com/photo-1547592166-3b7e7f5b6fd0?auto=format&fit=crop&w=1000&q=60')">Details</button>
+            </div>
           </div>
         </div>
       </article>
 
-      <!-- Item 6 -->
-      <article class="item">
-        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=1000&q=60" alt="Dessert">
+      <article class="item" data-category="dessert">
+        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=1000&q=60" alt="Dessert Cup">
         <div class="item-body">
           <div>
             <h3>Dessert Cup</h3>
@@ -286,18 +378,20 @@
           </div>
           <div class="item-footer">
             <div class="price">30 EGP</div>
-            <div><button class="btn" onclick="addToCart('Dessert Cup',30)">Add</button></div>
+            <div style="display:flex;gap:8px">
+              <button class="btn" onclick="addToCart('Dessert Cup',30)">Add</button>
+              <button class="btn ghost" onclick="openItemModal('Dessert Cup',30,'Seasonal sweet cup.','https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=1000&q=60')">Details</button>
+            </div>
           </div>
         </div>
       </article>
-
     </div>
   </section>
 
-  <!-- BRANCHES (white) -->
-  <section id="branches" class="section-inner">
-    <h2>Branches & Map</h2>
-    <div class="branches-grid" style="margin-bottom:18px">
+  <!-- BRANCHES -->
+  <section id="branches" class="section-inner" aria-labelledby="branches-heading">
+    <h2 id="branches-heading">Branches & Map</h2>
+    <div class="branches-grid" style="margin-bottom:12px">
       <div class="branch">
         <h3>Zamalek</h3>
         <p>123 Zamalek St, Cairo<br>Hours: 10:00 - 02:00<br>Hotline: 15544</p>
@@ -317,20 +411,20 @@
     </div>
 
     <div class="map-wrap panel">
-      <!-- Google Maps embed centered on Cairo -->
+      <!-- Map intentionally kept; moved into bottom-sheet too for better UX -->
       <iframe
         src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d13431.6178270223!2d31.235712!3d30.044420!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2seg!4v1696599999999"
-        allowfullscreen loading="lazy"></iframe>
+        allowfullscreen loading="lazy" title="Cairo map embed"></iframe>
     </div>
   </section>
 
-  <!-- ORDER (white) -->
-  <section id="order" class="section-inner">
-    <h2>Order Now</h2>
+  <!-- ORDER / CHECKOUT -->
+  <section id="order" class="section-inner" aria-labelledby="order-heading">
+    <h2 id="order-heading">Order Now</h2>
     <div class="order-wrap">
-      <div class="panel">
+      <div class="panel" aria-live="polite">
         <h3>Checkout</h3>
-        <p style="color:var(--muted)">Complete the form to place a demo order. This is static demo — it will show an alert and log to console.</p>
+        <p class="muted">Complete the form to place a demo order. This is static demo — it will show an alert and log to console.</p>
 
         <form id="checkout-form" onsubmit="return placeOrder(event)">
           <label for="branch">Choose Branch</label>
@@ -365,7 +459,7 @@
             <div style="color:var(--muted)">Subtotal</div><div id="cart-sub">0 EGP</div>
           </div>
           <div style="margin-top:12px">
-            <button class="btn" onclick="scrollToSection('order')">Go to Checkout</button>
+            <button class="btn" onclick="openBottomSheet('cart')">Open Cart</button>
           </div>
         </div>
       </aside>
@@ -375,34 +469,34 @@
   <!-- PROMOTIONS (dark) -->
   <section id="promotions" class="section-inner" style="background:var(--dark);color:var(--white)">
     <h2 style="color:var(--white)">Promotions</h2>
-    <div class="grid" style="max-width:var(--container);margin:0 auto">
-      <div class="card" style="background:#1b1b1b;color:#fff;border:none">🔥 Buy 1 Kofta Sandwich, Get 1 Free</div>
-      <div class="card" style="background:#1b1b1b;color:#fff;border:none">🍟 20% Off Fries — Fridays</div>
-      <div class="card" style="background:#1b1b1b;color:#fff;border:none">🥤 Free Drink with Combo</div>
+    <div style="max-width:var(--container);margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px">
+      <div class="card panel-dark" style="padding:12px;border-radius:10px">🔥 Buy 1 Kofta Sandwich, Get 1 Free</div>
+      <div class="card panel-dark" style="padding:12px;border-radius:10px">🍟 20% Off Fries — Fridays</div>
+      <div class="card panel-dark" style="padding:12px;border-radius:10px">🥤 Free Drink with Combo</div>
     </div>
   </section>
 
-  <!-- FEEDBACK (white) -->
+  <!-- FEEDBACK -->
   <section id="feedback" class="section-inner">
     <h2>Feedback</h2>
     <div class="panel">
       <form id="feedback-form" onsubmit="return submitFeedback(event)">
-        <label>Name</label>
+        <label for="fb-name">Name</label>
         <input id="fb-name" type="text" required>
-        <label>Branch</label>
+        <label for="fb-branch">Branch</label>
         <select id="fb-branch"><option>Zamalek</option><option>Dokki</option><option>North Coast</option><option>Nasr City</option></select>
-        <label>Comments</label>
+        <label for="fb-text">Comments</label>
         <textarea id="fb-text" required></textarea>
         <div style="margin-top:10px"><button class="btn" type="submit">Submit Feedback</button></div>
       </form>
     </div>
   </section>
 
-  <!-- CONTACT / FRANCHISE / CAREERS (dark) -->
+  <!-- CONTACT / FRANCHISE / CAREERS -->
   <section id="contact" class="section-inner" style="background:var(--dark);color:var(--white)">
     <h2 style="color:var(--white)">Contact / Franchise / Careers</h2>
     <div class="contact-panel">
-      <div class="form">
+      <div class="form panel-dark">
         <form id="contact-form" onsubmit="return submitContact(event)">
           <label>Reason</label>
           <select id="contact-reason" required>
@@ -424,21 +518,110 @@
     </div>
   </section>
 
+  </main>
+
   <!-- FOOTER -->
   <footer>
     Kufta • Hotline <strong>15544</strong> • © 2025
   </footer>
+
+  <!-- Item Modal -->
+  <div id="item-modal" class="modal" aria-hidden="true">
+    <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="item-modal-title">
+      <button class="close" onclick="closeItemModal()" aria-label="Close">✕</button>
+      <div id="item-modal-content" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:start">
+        <!-- populated by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom-sheet used for cart / map / feedback / contact -->
+  <div id="bottom-sheet" class="bottom-sheet" aria-hidden="true">
+    <div class="sheet" role="dialog" aria-modal="true" id="bottom-sheet-content">
+      <button class="close" onclick="closeBottomSheet()" aria-label="Close">✕</button>
+      <div id="bottom-sheet-body" style="margin-top:8px"></div>
+    </div>
+  </div>
+
+  <!-- Mobile bottom bar -->
+  <div class="mobile-bottom-bar" aria-hidden="false">
+    <div class="action" onclick="openBottomSheet('cart')">Cart (<span id="mobile-cart-count">0</span>)</div>
+    <div class="action" onclick="openBottomSheet('map')">Map</div>
+    <div class="action" onclick="openBottomSheet('feedback')">Survey</div>
+    <div class="action primary" onclick="openBottomSheet('contact')">Contact</div>
+  </div>
 
 <script>
 /* Smooth scroll with offset for sticky header */
 function scrollToSection(id){
   const el = document.getElementById(id);
   if(!el) return;
-  // header height estimation
   const headerHeight = document.querySelector('.top').offsetHeight || 80;
   const y = el.getBoundingClientRect().top + window.pageYOffset - headerHeight - 12;
   window.scrollTo({top: y, behavior: 'smooth'});
 }
+
+/* Menu filtering + search */
+const menuGrid = document.getElementById('menu-grid');
+const categorySelect = document.getElementById('menu-category');
+const searchInput = document.getElementById('menu-search');
+const menuCountEl = document.getElementById('menu-count');
+
+function updateMenuCount(){
+  const visible = [...menuGrid.querySelectorAll('.item')].filter(el => el.style.display !== 'none').length;
+  menuCountEl.innerText = visible + ' item' + (visible!==1?'s':'');
+}
+function filterMenu(){
+  const cat = categorySelect.value;
+  const q = (searchInput.value||'').trim().toLowerCase();
+  const items = [...menuGrid.querySelectorAll('.item')];
+  items.forEach(it=>{
+    const title = it.querySelector('h3').innerText.toLowerCase();
+    const desc = it.querySelector('p').innerText.toLowerCase();
+    const catMatch = (cat==='all' || it.dataset.category === cat);
+    const searchMatch = (!q) || title.includes(q) || desc.includes(q);
+    it.style.display = (catMatch && searchMatch) ? '' : 'none';
+  });
+  updateMenuCount();
+}
+categorySelect.addEventListener('change', filterMenu);
+searchInput.addEventListener('input', () => {
+  // debounce small
+  clearTimeout(window._menuSearchTimer);
+  window._menuSearchTimer = setTimeout(filterMenu, 160);
+});
+function resetFilters(){ categorySelect.value='all'; searchInput.value=''; filterMenu(); }
+filterMenu();
+
+/* Item modal */
+function openItemModal(name, price, desc, img){
+  const modal = document.getElementById('item-modal');
+  const content = document.getElementById('item-modal-content');
+  content.innerHTML = `
+    <div>
+      <img src="${img}" alt="${name}" style="width:100%;height:220px;object-fit:cover;border-radius:8px">
+    </div>
+    <div>
+      <h2 id="item-modal-title">${name}</h2>
+      <p class="muted">${desc}</p>
+      <div style="margin-top:12px;font-weight:800;color:var(--red)">${price} EGP</div>
+      <div style="margin-top:12px;display:flex;gap:8px">
+        <button class="btn" onclick="addToCart('${escapeJs(name)}',${price}); closeItemModal();">Add to cart</button>
+        <button class="btn ghost" onclick="closeItemModal()">Close</button>
+      </div>
+    </div>
+  `;
+  modal.classList.add('show');
+  modal.setAttribute('aria-hidden','false');
+  document.body.style.overflow='hidden';
+}
+function closeItemModal(){
+  const modal = document.getElementById('item-modal');
+  modal.classList.remove('show');
+  modal.setAttribute('aria-hidden','true');
+  document.body.style.overflow='';
+}
+function escapeJs(s){ return s.replace(/'/g,"\\'").replace(/"/g,'\\"'); }
 
 /* Cart logic (client-side demo) */
 let cart = [];
@@ -459,10 +642,12 @@ function addQuick(){
 function renderCart(){
   const el = document.getElementById('cart-items');
   el.innerHTML = '';
+  const mobileCount = document.getElementById('mobile-cart-count');
   if(cart.length===0){
     el.innerHTML = '<div style="color:var(--muted)">Your cart is empty.</div>';
     document.getElementById('cart-sub').innerText = '0 EGP';
     document.getElementById('total-amount').innerText = '0';
+    if(mobileCount) mobileCount.innerText = '0';
     return;
   }
   let sub = 0;
@@ -482,10 +667,13 @@ function renderCart(){
   });
   document.getElementById('cart-sub').innerText = sub + ' EGP';
   document.getElementById('total-amount').innerText = sub;
+  const mobileCount = document.getElementById('mobile-cart-count');
+  if(mobileCount) mobileCount.innerText = cart.reduce((s,i)=>s+i.qty,0);
 }
 function increase(i){ cart[i].qty++; renderCart(); }
 function decrease(i){ if(cart[i].qty>1) cart[i].qty--; else cart.splice(i,1); renderCart(); }
 
+/* Checkout / demo order */
 function placeOrder(e){
   e.preventDefault();
   if(cart.length===0){ alert('Cart is empty — add items first.'); return false; }
@@ -502,6 +690,7 @@ function placeOrder(e){
   // reset
   cart = []; renderCart();
   document.getElementById('checkout-form').reset();
+  closeBottomSheet();
   return false;
 }
 
@@ -518,6 +707,7 @@ function submitContact(e){
   alert('Message sent (demo). Thank you!');
   console.log('CONTACT DEMO', payload);
   document.getElementById('contact-form').reset();
+  closeBottomSheet();
   return false;
 }
 function submitFeedback(e){
@@ -530,11 +720,96 @@ function submitFeedback(e){
   alert('Thanks for the feedback (demo).');
   console.log('FEEDBACK DEMO', payload);
   document.getElementById('feedback-form').reset();
+  closeBottomSheet();
   return false;
 }
 
+/* Bottom sheet for mobile interactions */
+const bottomSheet = document.getElementById('bottom-sheet');
+const bottomBody = document.getElementById('bottom-sheet-body');
+
+function openBottomSheet(kind){
+  let html = '';
+  if(kind==='cart'){
+    html = `<h3>Your Cart</h3><div id="bs-cart-items"></div>
+            <div style="display:flex;justify-content:space-between;margin-top:12px"><div class="muted">Subtotal</div><div id="bs-cart-sub">0 EGP</div></div>
+            <div style="margin-top:12px"><button class="btn" onclick="scrollToSection('order');closeBottomSheet()">Go to Checkout</button></div>`;
+    bottomBody.innerHTML = html;
+    renderBottomCart();
+  } else if(kind==='map'){
+    html = `<h3>Branches Map</h3>
+            <div style="margin-top:8px" class="map-wrap">
+              <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d13431.6178270223!2d31.235712!3d30.044420!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2seg!4v1696599999999" style="width:100%;height:360px;border:0;border-radius:8px" allowfullscreen loading="lazy"></iframe>
+            </div>`;
+    bottomBody.innerHTML = html;
+  } else if(kind==='feedback'){
+    // load a quick survey in the bottom sheet (same fields as feedback)
+    html = `<h3>Quick Survey</h3>
+            <form id="bs-feedback-form" onsubmit="return submitFeedback(event)">
+              <label>Name</label><input id="fb-name" type="text" required>
+              <label>Branch</label><select id="fb-branch"><option>Zamalek</option><option>Dokki</option><option>North Coast</option><option>Nasr City</option></select>
+              <label>Comments</label><textarea id="fb-text" required></textarea>
+              <div style="margin-top:10px"><button class="btn" type="submit">Submit</button></div>
+            </form>`;
+    bottomBody.innerHTML = html;
+  } else if(kind==='contact'){
+    html = `<h3>Contact / Franchise</h3>
+            <form id="bs-contact-form" onsubmit="return submitContact(event)">
+              <label>Reason</label><select id="contact-reason" required><option>General Inquiry</option><option>Franchise Request</option><option>Career Opportunity</option></select>
+              <label>Full Name</label><input id="contact-name" type="text" required>
+              <label>Email</label><input id="contact-email" type="email" required>
+              <label>Phone</label><input id="contact-phone" type="tel">
+              <label>Message</label><textarea id="contact-message" required></textarea>
+              <div style="margin-top:12px"><button class="btn" type="submit">Send Message</button></div>
+            </form>`;
+    bottomBody.innerHTML = html;
+  } else {
+    bottomBody.innerHTML = '<div>Unknown panel</div>';
+  }
+  bottomSheet.style.display='flex';
+  bottomSheet.setAttribute('aria-hidden','false');
+  document.body.style.overflow='hidden';
+}
+function closeBottomSheet(){
+  bottomSheet.style.display='none';
+  bottomSheet.setAttribute('aria-hidden','true');
+  bottomBody.innerHTML='';
+  document.body.style.overflow='';
+}
+
+/* render cart inside bottom sheet */
+function renderBottomCart(){
+  const bsItems = document.getElementById('bs-cart-items');
+  if(!bsItems) return;
+  bsItems.innerHTML='';
+  if(cart.length===0){
+    bsItems.innerHTML = '<div class="muted">Cart is empty.</div>';
+    document.getElementById('bs-cart-sub').innerText='0 EGP';
+    return;
+  }
+  let sub=0;
+  cart.forEach((it,i)=>{
+    sub += it.price*it.qty;
+    const r = document.createElement('div');
+    r.style.display='flex';
+    r.style.justifyContent='space-between';
+    r.style.padding='8px 0';
+    r.innerHTML = `<div><strong>${it.name}</strong><div class="muted">${it.qty} × ${it.price} EGP</div></div>
+                   <div style="text-align:right"><div style="font-weight:700">${it.price*it.qty} EGP</div>
+                   <div style="margin-top:6px"><button style="padding:6px;border-radius:6px;border:1px solid #eee;margin-right:6px" onclick="decrease(${i}); renderBottomCart()">-</button><button style="padding:6px;border-radius:6px;border:0;background:var(--red);color:#fff" onclick="increase(${i}); renderBottomCart()">+</button></div></div>`;
+    bsItems.appendChild(r);
+  });
+  document.getElementById('bs-cart-sub').innerText = sub+' EGP';
+}
+
+/* utilities */
+document.addEventListener('keydown', function(e){
+  if(e.key==='Escape'){ closeItemModal(); closeBottomSheet(); }
+});
+
 /* init */
 renderCart();
+updateMenuCount();
 </script>
 
 </body>
