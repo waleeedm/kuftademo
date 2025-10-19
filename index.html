@@ -8,945 +8,635 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
-    --black:#0b0b0b;
-    --dark:#111;
-    --mid:#444;
-    --muted:#888;
-    --white:#ffffff;
-    --red:#e63946;
-    --red-dark:#b22a34;
-    --container:1100px;
-    --gutter:18px;
-    --radius:12px;
-    --transition:220ms;
+    --black:#0b0b0b; --dark:#111; --mid:#444; --muted:#888; --white:#ffffff;
+    --red:#e63946; --red-dark:#b22a34; --container:1100px;
+    --shadow:0 8px 28px rgba(0,0,0,0.08);
   }
   *{box-sizing:border-box}
   html,body{height:100%}
   body{
-    margin:0;
-    font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,Arial;
-    color:var(--black);
-    background:var(--white);
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
-    scroll-behavior:smooth;
-    line-height:1.35;
+    margin:0; font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,Arial;
+    color:var(--black); background:var(--white);
+    -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
   }
-
-  /* Header */
-  .top {
-    background:var(--white);
-    border-bottom:1px solid #eee;
-    position:sticky;
-    top:0;
-    z-index:1400;
-    backdrop-filter: blur(6px);
-  }
-  .logo-wrap{max-width:var(--container);margin:8px auto;padding:12px var(--gutter);display:flex;align-items:center;gap:12px;justify-content:space-between}
-  .logo-wrap img{width:140px;height:auto;display:block}
-  .hotline{font-size:14px;color:var(--muted)}
-  .nav{display:flex;justify-content:center;gap:18px;padding:8px var(--gutter) 12px;background:transparent;overflow:auto}
-  .nav a{color:var(--black);text-decoration:none;font-weight:600;padding:8px 10px;border-radius:8px;white-space:nowrap}
-  .nav a:hover{color:var(--red)}
-
-  /* Layout */
-  main{max-width:var(--container);margin:16px auto;padding:0 var(--gutter)}
-  section{margin-bottom:28px}
-
-  /* Hero */
-  .hero{display:grid;grid-template-columns:1fr 360px;gap:20px;align-items:center}
-  .hero h1{margin:0 0 8px;font-size:clamp(26px,4vw,40px)}
-  .hero p{color:var(--muted);margin:0 0 14px}
-  .cta{display:flex;gap:10px}
-  .btn{background:var(--red);color:var(--white);border:none;padding:10px 14px;border-radius:12px;font-weight:700;cursor:pointer}
-  .btn.ghost{background:transparent;color:var(--black);border:1px solid #eee}
-
-  /* Menu */
-  .menu-controls{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}
-  .picker{display:flex;gap:8px;align-items:center}
-  .picker select,.picker input{padding:10px;border-radius:10px;border:1px solid #ddd;font-size:14px}
-  .menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:12px}
-  .item{background:var(--white);border:1px solid #eee;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.04);display:flex;flex-direction:column;min-height:220px}
-  .item img{width:100%;height:160px;object-fit:cover}
-  .item-body{padding:12px;flex:1;display:flex;flex-direction:column;justify-content:space-between}
-  .price{font-weight:800;color:var(--red)}
-
-  /* Branch list */
-  .branch-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-top:12px}
-  .branch{background:#fff;border-radius:10px;border:1px solid #eee;padding:10px}
-
-  /* Tabs for desktop forms */
-  .tabs{display:flex;gap:8px;align-items:center;border-bottom:1px solid #eee;padding-bottom:8px;flex-wrap:wrap}
-  .tab{padding:10px 12px;border-radius:10px;background:transparent;border:1px solid transparent;cursor:pointer;font-weight:700}
-  .tab.active{background:#fff;border:1px solid #eee;box-shadow:0 8px 24px rgba(0,0,0,0.04)}
-  .tab-panel{margin-top:12px;background:var(--white);border:1px solid #eee;border-radius:12px;padding:16px;box-shadow:0 6px 18px rgba(0,0,0,0.04)}
-
-  .form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
-  label{display:block;margin:8px 0 6px;font-weight:600}
-  input,select,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #ddd;font-size:14px}
-  textarea{min-height:100px}
-
-  /* Floating cart */
-  .floating-cart{
-    position:fixed;
-    right:18px;
-    bottom:18px;
-    width:66px;
-    height:66px;
-    border-radius:50%;
-    background:var(--red);
-    color:#fff;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    box-shadow:0 12px 40px rgba(0,0,0,0.18);
-    z-index:1600;
-    cursor:pointer;
-    transition:transform 160ms ease;
-  }
-  .floating-cart:hover{transform:translateY(-4px)}
-  .floating-cart .count{position:absolute;top:-6px;right:-6px;background:#fff;color:var(--red);width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;box-shadow:0 6px 18px rgba(0,0,0,0.12)}
-
-  /* WhatsApp floating (placeholder) */
-  .floating-whatsapp{
-    position:fixed;
-    right:18px;
-    bottom:96px; /* above cart */
-    width:56px;
-    height:56px;
-    border-radius:50%;
-    background:#25D366;
-    color:#fff;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    box-shadow:0 12px 40px rgba(0,0,0,0.18);
-    z-index:1600;
-    text-decoration:none;
-    font-weight:800;
-  }
-
-  /* Checkout modal */
-  .modal-backdrop{position:fixed;left:0;top:0;right:0;bottom:0;background:rgba(0,0,0,0.4);display:none;align-items:center;justify-content:center;z-index:1700;padding:12px}
-  .modal-backdrop.show{display:flex}
-  .modal-card{background:#fff;border-radius:12px;padding:16px;max-width:920px;width:100%;box-shadow:0 30px 80px rgba(0,0,0,0.3);max-height:90vh;overflow:auto}
-
-  /* Mobile accordions */
-  @media (max-width:980px){
-    .hero{grid-template-columns:1fr;gap:12px}
-    .menu-grid{grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}
-    .tabs{display:none}
-    .accordion{display:block}
-    .accordion-btn{display:flex;width:100%;justify-content:space-between;padding:12px;border-radius:10px;border:1px solid #eee;background:#fff;margin-bottom:8px;font-weight:700;cursor:pointer}
-    .accordion-content{overflow:hidden;transition:max-height var(--transition) ease,opacity var(--transition) ease;max-height:0;opacity:0}
-    .accordion-content.open{max-height:1600px;opacity:1}
-    .floating-cart{right:12px;bottom:12px;width:60px;height:60px}
-    .floating-whatsapp{right:12px;bottom:80px}
-  }
-
-  @media (min-width:981px){ .accordion { display:none } }
-  footer{padding:22px;text-align:center;color:var(--muted);border-top:1px solid #f2f2f2;margin-top:20px}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  .container{max-width:var(--container);margin:0 auto;padding:0 18px}
+  .btn{background:var(--red);color:#fff;border:none;padding:12px 18px;border-radius:10px;font-weight:700;cursor:pointer}
+  .btn:hover{background:var(--red-dark)}
+  .btn.ghost{background:#fff;border:1px solid #eee;color:var(--black)}
+  .pill{padding:8px 12px;border-radius:999px;border:1px solid #eee;background:#fff;cursor:pointer;white-space:nowrap}
+  .pill.active{border-color:var(--red);color:var(--red)}
+  .card{background:#fff;border:1px solid #eee;border-radius:12px;box-shadow:var(--shadow)}
+  .small{font-size:0.92rem;color:var(--muted)}
   .muted{color:var(--muted)}
-  button:focus, a:focus, select:focus, input:focus, textarea:focus{outline:3px solid rgba(230,57,70,0.12);outline-offset:2px}
+  /* Top */
+  .top{position:sticky;top:0;z-index:1200;background:#fff;border-bottom:1px solid #eee;backdrop-filter:blur(6px)}
+  .logo-wrap{display:flex;align-items:center;justify-content:center;gap:16px;padding:12px 0}
+  .logo-wrap img{width:140px;height:auto}
+  .hotline{font-size:14px;color:var(--black);font-weight:700}
+  .nav{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;padding:10px 0 16px}
+  .nav a{font-weight:600;padding:8px 10px;border-radius:8px}
+  .nav a:hover{color:var(--red)}
+  /* Hero */
+  .hero{display:grid;grid-template-columns:1fr 360px;gap:22px;align-items:center;padding:34px 0}
+  .hero h1{margin:0 0 10px;font-size:clamp(26px,4vw,40px);letter-spacing:.3px}
+  .hero p{margin:0 0 12px;color:var(--muted)}
+  .quick{padding:16px}
+  /* Menu + Cart */
+  .menu-section{padding:42px 0}
+  .cat-scroll{display:flex;gap:10px;overflow:auto;padding-bottom:8px;scroll-snap-type:x mandatory}
+  .cat-scroll .pill{scroll-snap-align:start}
+  .menu-wrap{display:grid;grid-template-columns:1fr 360px;gap:18px;align-items:start}
+  .menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+  .item{overflow:hidden}
+  .item img{width:100%;height:160px;object-fit:cover}
+  .item-body{padding:12px}
+  .item h3{margin:0 0 6px;font-size:18px}
+  .item p{margin:0;color:var(--muted);font-size:14px}
+  .item-foot{display:flex;align-items:center;justify-content:space-between;margin-top:10px}
+  .price{font-weight:800;color:var(--red)}
+  .cart{position:sticky;top:90px}
+  .cart .panel{padding:14px}
+  .cart-item{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px dashed #eee}
+  .qty-btn{background:#fff;border:1px solid #eee;padding:6px;border-radius:6px;cursor:pointer;margin-left:6px}
+  /* Sticky checkout bar */
+  .checkout-bar{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid #eee;box-shadow:0 -6px 20px rgba(0,0,0,0.06);padding:10px 14px;display:none;z-index:1200}
+  .checkout-inner{max-width:var(--container);margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:10px}
+  /* Promotions */
+  .promos{padding:42px 0;background:#111;color:#fff}
+  .promos h2{margin:0 0 14px;text-align:center}
+  .promo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+  .promo-card{background:#1b1b1b;border:1px solid #222;border-radius:12px;padding:14px}
+  /* Branches + Map (accordion) */
+  .branches{padding:42px 0}
+  .branches-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-bottom:12px}
+  .map-iframe{width:100%;height:320px;border:0;border-radius:10px}
+  .acc{border:1px solid #eee;border-radius:10px;overflow:hidden}
+  .acc h3{margin:0}
+  .acc button{width:100%;text-align:left;background:#fff;border:0;padding:14px 16px;font-weight:700;cursor:pointer}
+  .acc button::after{content:"▾";float:right;color:var(--muted)}
+  .acc .acc-panel{display:none;padding:0 16px 16px;background:#fff}
+  /* Survey */
+  .stars{display:flex;gap:6px;font-size:22px;color:#ddd;cursor:pointer}
+  .star.sel{color:var(--red)}
+  /* Contact */
+  .contact{padding:42px 0;background:#111;color:#fff}
+  .contact .card{background:#111;border-color:#222}
+  .contact input,.contact select,.contact textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #333;background:#0b0b0b;color:#fff}
+  /* Footer + WhatsApp */
+  footer{background:#0b0b0b;color:#fff;text-align:center;padding:18px}
+  .socials{display:flex;gap:10px;justify-content:center;margin-top:8px}
+  .socials a{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:8px;background:rgba(255,255,255,.06)}
+  .wa-fab{position:fixed;right:16px;bottom:72px;width:52px;height:52px;border-radius:999px;background:#25d366;display:flex;align-items:center;justify-content:center;color:#fff;box-shadow:var(--shadow);z-index:1200}
+  /* Responsive */
+  @media (max-width:980px){
+    .hero{grid-template-columns:1fr}
+    .menu-wrap{grid-template-columns:1fr}
+    .cart{position:relative;top:auto}
+  }
+  @media (max-width:560px){
+    .item img{height:140px}
+    .logo-wrap img{width:120px}
+  }
 </style>
 </head>
 <body>
 
-  <!-- Header -->
-  <div class="top">
+<!-- TOP -->
+<header class="top">
+  <div class="container">
     <div class="logo-wrap">
+      <!-- Put logo.jpg next to this file -->
       <img src="logo.jpg" alt="Kufta logo">
-      <div style="display:flex;flex-direction:column;align-items:flex-end">
-        <div class="hotline">Hotline: <strong>15544</strong></div>
-        <div class="muted" style="font-size:12px;margin-top:6px">Open: 10:00 - 02:00 (varies by branch)</div>
-      </div>
+      <div class="hotline">Hotline: <strong>15544</strong></div>
     </div>
-
-    <nav class="nav" aria-label="Main navigation">
-      <a href="#home">Home</a>
-      <a href="#menu">Menu</a>
-      <a href="#branches">Branches</a>
-      <a href="#forms">Forms</a>
-      <a href="#contact">Contact</a>
+    <nav class="nav">
+      <a href="#home" onclick="to('home')">Home</a>
+      <a href="#menu" onclick="to('menu')">Menu</a>
+      <a href="#promotions" onclick="to('promotions')">Promotions</a>
+      <a href="#branches" onclick="to('branches')">Branches</a>
+      <a href="#survey" onclick="to('survey')">Feedback</a>
+      <a href="#contact" onclick="to('contact')">Contact</a>
+      <a href="#order" onclick="to('order')">Order</a>
     </nav>
   </div>
+</header>
 
-  <main>
-    <!-- HERO -->
-    <section id="home">
-      <div class="hero">
-        <div>
-          <h1>Kufta — Clean Street Food</h1>
-          <p>Authentic kofta and hawawshi — simple, fast, unforgettable. Order online or visit our branches.</p>
-          <div class="cta">
-            <button class="btn" onclick="scrollTo('#menu')">Explore Menu</button>
-            <button class="btn ghost" onclick="scrollTo('#forms')">Forms</button>
-          </div>
-          <div style="margin-top:12px" class="muted">Hotline: <strong>15544</strong></div>
-        </div>
+<!-- HERO -->
+<section id="home" class="container hero">
+  <div>
+    <h1>Kufta — Clean Street Food</h1>
+    <p>Authentic Kufta, Hawawshi & boxes. Order online or visit our branches.</p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <button class="btn" onclick="to('menu')">Explore Menu</button>
+      <button class="btn ghost" onclick="to('order')">Order Now</button>
+    </div>
+  </div>
+  <aside class="card quick">
+    <h3 style="margin:0 0 8px">Quick Order</h3>
+    <p class="small" style="margin:0 0 10px">Pick an item & quantity — it goes to your cart.</p>
+    <label class="small">Item</label>
+    <select id="quick-item" style="width:100%;padding:10px;border-radius:8px;border:1px solid #eee"></select>
+    <div style="display:flex;gap:8px;margin-top:10px">
+      <input id="quick-qty" type="number" min="1" value="1" style="flex:1;padding:10px;border-radius:8px;border:1px solid #eee">
+      <button class="btn" onclick="addQuick()">Add</button>
+    </div>
+  </aside>
+</section>
 
-        <aside style="background:var(--dark);color:#fff;padding:14px;border-radius:12px">
-          <h3 style="margin:0 0 8px">Quick Order (demo)</h3>
-          <small style="color:#ddd">Select item and quantity — it will go to your cart.</small>
+<!-- MENU -->
+<section id="menu" class="menu-section">
+  <div class="container">
+    <h2 style="text-align:center;margin:0 0 12px">Menu & Order</h2>
+
+    <!-- Category tabs (scrollable) -->
+    <div class="cat-scroll" id="cat-tabs" aria-label="Categories"></div>
+
+    <div class="menu-wrap" style="margin-top:14px">
+      <!-- Grid -->
+      <div>
+        <div id="menu-grid" class="menu-grid"></div>
+      </div>
+
+      <!-- Cart -->
+      <aside class="cart">
+        <div class="card panel">
+          <h3 style="margin-top:0">Your Cart</h3>
+          <div id="cart-items" class="small">Cart is empty</div>
+
           <div style="margin-top:12px">
-            <label style="color:#ddd;font-weight:700">Item</label>
-            <select id="quick-item" style="width:100%;padding:10px;border-radius:8px;border:1px solid #ddd">
-              <option value="Kufta Sandwich|45">Kufta Sandwich — 45 EGP</option>
-              <option value="Hawawshi|60">Hawawshi — 60 EGP</option>
-              <option value="Kufta Combo|85">Kufta Combo — 85 EGP</option>
-              <option value="Fries|25">Fries — 25 EGP</option>
-            </select>
-            <div style="display:flex;gap:8px;margin-top:10px">
-              <input id="quick-qty" type="number" value="1" min="1" style="flex:1;padding:10px;border-radius:8px;border:1px solid #ddd">
-              <button class="btn" onclick="addQuick()">Add</button>
-            </div>
-            <div style="margin-top:12px" class="muted">Promo codes available in checkout</div>
+            <label class="small">Choose Branch</label>
+            <select id="branch-select" style="width:100%;padding:10px;border-radius:8px;border:1px solid #eee"></select>
           </div>
-        </aside>
-      </div>
-    </section>
 
-    <!-- MENU -->
-    <section id="menu">
-      <div style="display:flex;justify-content:space-between;align-items:center">
-        <h2 style="margin:0">Menu</h2>
-        <div class="muted" id="menu-count">6 items</div>
-      </div>
-
-      <div class="menu-controls" style="margin-top:12px">
-        <div class="picker">
-          <label class="muted" for="menu-category">Category</label>
-          <select id="menu-category" aria-label="Filter by category">
-            <option value="all">All</option>
-            <option value="sandwich">Sandwiches</option>
-            <option value="combo">Combos</option>
-            <option value="side">Sides</option>
-            <option value="drink">Drinks</option>
-            <option value="dessert">Desserts</option>
-          </select>
-          <label class="muted" for="menu-search">Search</label>
-          <input id="menu-search" placeholder="Search menu">
-        </div>
-        <div>
-          <button class="btn" onclick="resetFilters()">Show All</button>
-        </div>
-      </div>
-
-      <div id="menu-grid" class="menu-grid">
-        <!-- Items with product images (unsplash placeholders) -->
-        <article class="item" data-category="sandwich">
-          <img src="https://images.unsplash.com/photo-1601050690597-1f38f1f83a07?auto=format&fit=crop&w=1000&q=60" alt="Kufta Sandwich">
-          <div class="item-body">
-            <div>
-              <h3>Kufta Sandwich</h3>
-              <p>Grilled kofta, tahini, pickles, fresh salad.</p>
+          <div style="margin-top:12px">
+            <label class="small">Promo Code</label>
+            <div style="display:flex;gap:8px">
+              <input id="checkout-promo" type="text" placeholder="Enter promo code" style="flex:1;padding:10px;border-radius:8px;border:1px solid #eee">
+              <button onclick="applyCheckoutPromo()" class="btn">Apply</button>
             </div>
-            <div style="display:flex;justify-content:space-between;align-items:center">
-              <div class="price">45 EGP</div>
-              <div style="display:flex;gap:8px">
-                <button class="btn" onclick="addToCart('Kufta Sandwich',45)">Add</button>
-                <button class="btn ghost" onclick="openItemModal('Kufta Sandwich',45,'Grilled kofta, tahini, pickles, fresh salad.','https://images.unsplash.com/photo-1601050690597-1f38f1f83a07?auto=format&fit=crop&w=1000&q=60')">Details</button>
-              </div>
-            </div>
+            <div id="promo-feedback" class="small" style="margin-top:8px;color:#e63946"></div>
           </div>
-        </article>
 
-        <article class="item" data-category="sandwich">
-          <img src="https://images.unsplash.com/photo-1604908553958-593b3d8894d4?auto=format&fit=crop&w=1000&q=60" alt="Hawawshi">
-          <div class="item-body">
-            <div>
-              <h3>Hawawshi</h3>
-              <p>Traditional stuffed bread with seasoned minced meat.</p>
-            </div>
-            <div style="display:flex;justify-content:space-between;align-items:center">
-              <div class="price">60 EGP</div>
-              <div style="display:flex;gap:8px">
-                <button class="btn" onclick="addToCart('Hawawshi',60)">Add</button>
-                <button class="btn ghost" onclick="openItemModal('Hawawshi',60,'Traditional stuffed bread with seasoned minced meat.','https://images.unsplash.com/photo-1604908553958-593b3d8894d4?auto=format&fit=crop&w=1000&q=60')">Details</button>
-              </div>
-            </div>
+          <div style="display:flex;justify-content:space-between;margin-top:12px">
+            <span class="small">Subtotal</span><strong id="cart-subtotal">0 EGP</strong>
           </div>
-        </article>
-
-        <article class="item" data-category="combo">
-          <img src="https://images.unsplash.com/photo-1606732803863-24b3f2d4ef7c?auto=format&fit=crop&w=1000&q=60" alt="Kufta Combo">
-          <div class="item-body">
-            <div>
-              <h3>Kufta Combo</h3>
-              <p>Sandwich + fries + soft drink — the combo meal.</p>
-            </div>
-            <div style="display:flex;justify-content:space-between;align-items:center">
-              <div class="price">85 EGP</div>
-              <div style="display:flex;gap:8px">
-                <button class="btn" onclick="addToCart('Kufta Combo',85)">Add</button>
-                <button class="btn ghost" onclick="openItemModal('Kufta Combo',85,'Sandwich + fries + soft drink — the combo meal.','https://images.unsplash.com/photo-1606732803863-24b3f2d4ef7c?auto=format&fit=crop&w=1000&q=60')">Details</button>
-              </div>
-            </div>
+          <div style="display:flex;justify-content:space-between;margin-top:6px">
+            <span class="small">Discount</span><strong id="cart-discount">0 EGP</strong>
           </div>
-        </article>
-
-        <article class="item" data-category="side">
-          <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1000&q=60" alt="Fries">
-          <div class="item-body">
-            <div>
-              <h3>Fries</h3>
-              <p>Crispy seasoned fries — perfect side.</p>
-            </div>
-            <div style="display:flex;justify-content:space-between;align-items:center">
-              <div class="price">25 EGP</div>
-              <div style="display:flex;gap:8px">
-                <button class="btn" onclick="addToCart('Fries',25)">Add</button>
-                <button class="btn ghost" onclick="openItemModal('Fries',25,'Crispy seasoned fries — perfect side.','https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1000&q=60')">Details</button>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <article class="item" data-category="drink">
-          <img src="https://images.unsplash.com/photo-1547592166-3b7e7f5b6fd0?auto=format&fit=crop&w=1000&q=60" alt="Soft Drink">
-          <div class="item-body">
-            <div>
-              <h3>Soft Drink</h3>
-              <p>Cold soft drink (can).</p>
-            </div>
-            <div style="display:flex;justify-content:space-between;align-items:center">
-              <div class="price">15 EGP</div>
-              <div style="display:flex;gap:8px">
-                <button class="btn" onclick="addToCart('Soft Drink',15)">Add</button>
-                <button class="btn ghost" onclick="openItemModal('Soft Drink',15,'Cold soft drink (can).','https://images.unsplash.com/photo-1547592166-3b7e7f5b6fd0?auto=format&fit=crop&w=1000&q=60')">Details</button>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <article class="item" data-category="dessert">
-          <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=1000&q=60" alt="Dessert Cup">
-          <div class="item-body">
-            <div>
-              <h3>Dessert Cup</h3>
-              <p>Seasonal sweet cup.</p>
-            </div>
-            <div style="display:flex;justify-content:space-between;align-items:center">
-              <div class="price">30 EGP</div>
-              <div style="display:flex;gap:8px">
-                <button class="btn" onclick="addToCart('Dessert Cup',30)">Add</button>
-                <button class="btn ghost" onclick="openItemModal('Dessert Cup',30,'Seasonal sweet cup.','https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=1000&q=60')">Details</button>
-              </div>
-            </div>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- Branches (show first 3 + show more) -->
-    <section id="branches">
-      <div style="display:flex;justify-content:space-between;align-items:center">
-        <h2 style="margin:0">Branches & Map</h2>
-        <div class="muted">Showing first 3 — click "Show More" to expand</div>
-      </div>
-
-      <!-- First 3 visible -->
-      <div id="branch-short" class="branch-list" style="margin-top:12px">
-        <div class="branch"><strong>Zamalek</strong><div class="muted">123 Zamalek St, Cairo — 10:00–02:00</div></div>
-        <div class="branch"><strong>Dokki</strong><div class="muted">45 Dokki Rd, Giza — 11:00–01:00</div></div>
-        <div class="branch"><strong>North Coast</strong><div class="muted">Marina Gate 5, North Coast — Seasonal hours</div></div>
-      </div>
-
-      <!-- Hidden extra branches + map — toggled by Show More -->
-      <div id="branch-full" class="branch-list" style="margin-top:12px;display:none">
-        <!-- keep all branches intact here -->
-        <div class="branch"><strong>Nasr City</strong><div class="muted">Central Plaza, Nasr City — 11:00–00:00</div></div>
-        <div class="branch"><strong>Mohandessin</strong><div class="muted">Talaat Harb St — 10:00–23:00</div></div>
-        <div class="branch"><strong>Heliopolis</strong><div class="muted">El Merghany St — 10:00–23:00</div></div>
-        <!-- Add more branches here if you have them -->
-      </div>
-
-      <div style="margin-top:12px">
-        <button class="btn ghost" id="show-more-branches" onclick="toggleBranches()">Show More</button>
-      </div>
-
-      <div id="branch-map" style="margin-top:12px;display:none" class="map-wrap">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d13431.6178270223!2d31.235712!3d30.044420!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2seg!4v1696599999999" allowfullscreen loading="lazy" style="width:100%;height:300px;border:0;border-radius:8px"></iframe>
-      </div>
-    </section>
-
-    <!-- Forms area: Desktop tabs / Mobile accordions -->
-    <section id="forms">
-      <h2 style="margin:0 0 12px">Survey • Franchise • Jobs • Contact</h2>
-
-      <!-- Desktop tabs -->
-      <div class="tabs" role="tablist" aria-label="Forms tabs">
-        <button class="tab active" role="tab" data-tab="tab-survey" aria-selected="true">Survey</button>
-        <button class="tab" role="tab" data-tab="tab-franchise">Franchise</button>
-        <button class="tab" role="tab" data-tab="tab-jobs">Jobs</button>
-        <button class="tab" role="tab" data-tab="tab-contact">Contact</button>
-      </div>
-
-      <!-- Tab panels -->
-      <div id="tab-survey" class="tab-panel" data-tabpanel>
-        <h3>Survey</h3>
-        <p class="muted">Share your experience — branch dropdown uses the shared branch list.</p>
-        <form id="survey-form" onsubmit="return submitSurvey(event)">
-          <div class="form-grid">
-            <div>
-              <label for="sv-visit">Branch</label>
-              <select id="sv-visit" required></select>
-
-              <label>Overall experience</label>
-              <div style="display:flex;gap:8px;margin-top:6px">
-                <label><input type="radio" name="exp" value="5" required> 5</label>
-                <label><input type="radio" name="exp" value="4"> 4</label>
-                <label><input type="radio" name="exp" value="3"> 3</label>
-                <label><input type="radio" name="exp" value="2"> 2</label>
-                <label><input type="radio" name="exp" value="1"> 1</label>
-              </div>
-            </div>
-
-            <div>
-              <label for="sv-speed">Speed of service</label>
-              <select id="sv-speed" required><option>Excellent</option><option>Good</option><option>Average</option><option>Poor</option></select>
-
-              <label for="sv-comments">Anything else?</label>
-              <textarea id="sv-comments" placeholder="Tell us about your visit"></textarea>
-            </div>
+          <div style="display:flex;justify-content:space-between;margin-top:6px">
+            <span class="small">Total</span><strong id="cart-total">0 EGP</strong>
           </div>
 
           <div style="margin-top:12px;display:flex;gap:8px">
-            <button class="btn" type="submit">Submit Survey</button>
-            <button class="btn ghost" type="button" onclick="document.getElementById('survey-form').reset()">Reset</button>
+            <button class="btn" onclick="to('order')">Checkout</button>
+            <button class="btn ghost" onclick="clearCart()">Clear</button>
           </div>
-        </form>
-      </div>
-
-      <div id="tab-franchise" class="tab-panel" data-tabpanel hidden>
-        <h3>Franchise Request</h3>
-        <p class="muted">Interested in partnering? Fill this form.</p>
-        <form id="franchise-form" onsubmit="return submitFranchise(event)">
-          <div class="form-grid">
-            <div>
-              <label for="fr-name">Full Name</label>
-              <input id="fr-name" required>
-
-              <label for="fr-email">Email</label>
-              <input id="fr-email" type="email" required>
-
-              <label for="fr-phone">Phone</label>
-              <input id="fr-phone" type="tel">
-            </div>
-            <div>
-              <label for="fr-location">Location (city / area)</label>
-              <input id="fr-location" required>
-
-              <label for="fr-invest">Estimated Investment</label>
-              <input id="fr-invest" placeholder="EGP ...">
-
-              <label for="fr-message">Message</label>
-              <textarea id="fr-message"></textarea>
-            </div>
-          </div>
-          <div style="margin-top:12px"><button class="btn" type="submit">Send Request</button></div>
-        </form>
-      </div>
-
-      <div id="tab-jobs" class="tab-panel" data-tabpanel hidden>
-        <h3>Job Opportunities</h3>
-        <p class="muted">Apply for open roles or send your CV.</p>
-        <form id="jobs-form" onsubmit="return submitJobs(event)">
-          <div class="form-grid">
-            <div>
-              <label for="job-name">Full name</label>
-              <input id="job-name" required>
-
-              <label for="job-role">Position applied for</label>
-              <input id="job-role" required>
-
-              <label for="job-phone">Phone</label>
-              <input id="job-phone" type="tel">
-            </div>
-            <div>
-              <label for="job-email">Email</label>
-              <input id="job-email" type="email" required>
-
-              <label for="job-cv">CV or message</label>
-              <textarea id="job-cv" placeholder="Paste CV or write short message"></textarea>
-            </div>
-          </div>
-          <div style="margin-top:12px"><button class="btn" type="submit">Apply</button></div>
-        </form>
-      </div>
-
-      <div id="tab-contact" class="tab-panel" data-tabpanel hidden>
-        <h3>Contact</h3>
-        <p class="muted">General inquiries, partnerships, media.</p>
-        <form id="contact-form" onsubmit="return submitContact(event)">
-          <div class="form-grid">
-            <div>
-              <label for="contact-reason">Reason</label>
-              <select id="contact-reason" required><option>General Inquiry</option><option>Franchise Request</option><option>Career Opportunity</option></select>
-
-              <label for="contact-name">Full Name</label>
-              <input id="contact-name" required>
-            </div>
-            <div>
-              <label for="contact-email">Email</label>
-              <input id="contact-email" type="email" required>
-
-              <label for="contact-phone">Phone</label>
-              <input id="contact-phone" type="tel">
-
-              <label for="contact-message">Message</label>
-              <textarea id="contact-message" required></textarea>
-            </div>
-          </div>
-
-          <div style="margin-top:12px"><button class="btn" type="submit">Send Message</button></div>
-        </form>
-      </div>
-
-      <!-- Mobile accordions (same forms, mobile-specific IDs) -->
-      <div class="accordion" style="margin-top:12px">
-        <button class="accordion-btn" data-acc="survey-acc">Survey ▾</button>
-        <div id="survey-acc" class="accordion-content">
-          <form id="survey-form-mobile" onsubmit="return submitSurveyMobile(event)" style="padding:12px 0">
-            <label>Branch</label>
-            <select id="sv-visit-mobile" required></select>
-            <label>Overall experience</label>
-            <div style="display:flex;gap:8px;margin-top:6px">
-              <label><input type="radio" name="exp-mobile" value="5" required> 5</label>
-              <label><input type="radio" name="exp-mobile" value="4"> 4</label>
-              <label><input type="radio" name="exp-mobile" value="3"> 3</label>
-              <label><input type="radio" name="exp-mobile" value="2"> 2</label>
-              <label><input type="radio" name="exp-mobile" value="1"> 1</label>
-            </div>
-            <label>Speed of service</label>
-            <select id="sv-speed-mobile" required><option>Excellent</option><option>Good</option><option>Average</option><option>Poor</option></select>
-            <label>Comments</label>
-            <textarea id="sv-comments-mobile"></textarea>
-            <div style="margin-top:8px"><button class="btn" type="submit">Submit Survey</button></div>
-          </form>
         </div>
-
-        <button class="accordion-btn" data-acc="fr-acc">Franchise ▾</button>
-        <div id="fr-acc" class="accordion-content">
-          <form id="franchise-form-mobile" onsubmit="return submitFranchiseMobile(event)" style="padding:12px 0">
-            <label>Full name</label><input id="fr-name-mobile" required>
-            <label>Email</label><input id="fr-email-mobile" type="email" required>
-            <label>Phone</label><input id="fr-phone-mobile" type="tel">
-            <label>Location</label><input id="fr-location-mobile">
-            <label>Message</label><textarea id="fr-message-mobile"></textarea>
-            <div style="margin-top:8px"><button class="btn" type="submit">Send</button></div>
-          </form>
-        </div>
-
-        <button class="accordion-btn" data-acc="jobs-acc">Jobs ▾</button>
-        <div id="jobs-acc" class="accordion-content">
-          <form id="jobs-form-mobile" onsubmit="return submitJobsMobile(event)" style="padding:12px 0">
-            <label>Full name</label><input id="job-name-mobile" required>
-            <label>Role</label><input id="job-role-mobile" required>
-            <label>Email</label><input id="job-email-mobile" type="email">
-            <label>CV / Message</label><textarea id="job-cv-mobile"></textarea>
-            <div style="margin-top:8px"><button class="btn" type="submit">Apply</button></div>
-          </form>
-        </div>
-
-        <button class="accordion-btn" data-acc="contact-acc">Contact ▾</button>
-        <div id="contact-acc" class="accordion-content">
-          <form id="contact-form-mobile" onsubmit="return submitContactMobile(event)" style="padding:12px 0">
-            <label>Reason</label><select id="contact-reason-mobile" required><option>General Inquiry</option><option>Franchise Request</option><option>Career Opportunity</option></select>
-            <label>Full name</label><input id="contact-name-mobile" required>
-            <label>Email</label><input id="contact-email-mobile" type="email">
-            <label>Message</label><textarea id="contact-message-mobile"></textarea>
-            <div style="margin-top:8px"><button class="btn" type="submit">Send</button></div>
-          </form>
-        </div>
-      </div>
-    </section>
-
-    <!-- Footer / promos -->
-    <section id="contact" style="margin-bottom:40px">
-      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
-        <div>
-          <h3 style="margin:0">Contact / Franchise / Careers</h3>
-          <div class="muted">Hotline: <strong>15544</strong></div>
-        </div>
-        <div>
-          <div class="muted">Promotions: Buy 1 Get 1 / 20% off fries on Fridays / Free drink with combo</div>
-        </div>
-      </div>
-
-      <div style="margin-top:12px" class="muted">© 2025 Kufta — All content preserved.</div>
-    </section>
-  </main>
-
-  <footer>
-    Kufta • Hotline <strong>15544</strong> • © 2025
-  </footer>
-
-  <!-- Floating WhatsApp (placeholder) -->
-  <a class="floating-whatsapp" href="#" title="WhatsApp (placeholder)" aria-label="Open WhatsApp chat">💬</a>
-
-  <!-- Floating Cart -->
-  <div class="floating-cart" id="floating-cart" title="Open cart" aria-label="Open cart" onclick="openCheckoutModal()">
-    <div style="font-size:22px">🛒</div>
-    <div class="count" id="cart-count">0</div>
+      </aside>
+    </div>
   </div>
+</section>
 
-  <!-- Checkout Modal (cart + checkout form) -->
-  <div id="checkout-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-hidden="true">
-    <div class="modal-card">
-      <button style="float:right;border:none;background:transparent;font-size:20px;cursor:pointer" onclick="closeCheckoutModal()">✕</button>
-      <h3 style="margin-top:0">Checkout</h3>
-      <div style="display:grid;grid-template-columns:1fr 360px;gap:12px">
-        <div>
-          <div id="checkout-items" style="max-height:320px;overflow:auto;border:1px solid #eee;padding:10px;border-radius:8px">
-            <div class="muted">Your cart is empty.</div>
-          </div>
+<!-- PROMOTIONS -->
+<section id="promotions" class="promos">
+  <div class="container">
+    <h2>Promotions & Promo Codes</h2>
+    <p class="small" style="text-align:center;margin:0 0 12px">Use at checkout: <strong>3ALADEEMO</strong>, <strong>WELCOME10</strong>, <strong>FREEFRIES</strong></p>
+    <div id="promo-grid" class="promo-grid"></div>
+  </div>
+</section>
 
-          <div style="margin-top:12px">
-            <label for="checkout-branch">Choose Branch</label>
-            <select id="checkout-branch" required></select>
-          </div>
+<!-- BRANCHES + MAP (Accordion) -->
+<section id="branches" class="branches">
+  <div class="container">
+    <h2 style="text-align:center;margin:0 0 12px">Branches</h2>
+    <div id="branches-grid" class="branches-grid"></div>
+    <div style="text-align:center;margin-top:10px">
+      <button class="btn ghost" id="showMoreBranches" onclick="toggleBranches()">Show More</button>
+    </div>
 
-          <div style="margin-top:12px">
-            <label for="checkout-name">Full Name</label>
-            <input id="checkout-name" required>
-          </div>
-
-          <div style="margin-top:12px">
-            <label for="checkout-phone">Phone</label>
-            <input id="checkout-phone" type="tel" required>
-          </div>
-
-          <div style="margin-top:12px">
-            <label for="checkout-address">Delivery Address</label>
-            <textarea id="checkout-address" required></textarea>
-          </div>
+    <div class="acc" style="margin-top:16px">
+      <button type="button" onclick="acc(this)">View Map (Downtown Cairo)</button>
+      <div class="acc-panel">
+        <div style="padding-top:12px">
+          <iframe class="map-iframe"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3457.20!2d31.235712!3d30.044420!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x145841e6b2bdc6b1%3A0x0!2sTalaat%20Harb%20St%2C%20Downtown%20Cairo!5e0!3m2!1sen!2seg!4v1696600000000"
+            loading="lazy"></iframe>
         </div>
-
-        <aside style="border:1px solid #eee;padding:12px;border-radius:8px;height:100%">
-          <div style="display:flex;justify-content:space-between;align-items:center">
-            <strong>Order summary</strong>
-            <div class="muted" id="checkout-count">0 items</div>
-          </div>
-
-          <div style="margin-top:12px;display:flex;flex-direction:column;gap:8px">
-            <div style="display:flex;justify-content:space-between"><div class="muted">Subtotal</div><div id="checkout-sub">0 EGP</div></div>
-            <div style="display:flex;justify-content:space-between"><div class="muted">Discount</div><div id="checkout-discount">0 EGP</div></div>
-            <div style="display:flex;justify-content:space-between;font-weight:800"><div>Total</div><div id="checkout-total">0 EGP</div></div>
-          </div>
-
-          <div style="margin-top:12px">
-            <label for="checkout-promo">Promo code</label>
-            <div style="display:flex;gap:8px">
-              <input id="checkout-promo" placeholder="Enter promo code">
-              <button class="btn ghost" type="button" onclick="applyPromoModal()">Apply</button>
-            </div>
-            <div class="muted" style="font-size:13px;margin-top:6px">Demo promo: <strong>SAVE10</strong> = 10% off</div>
-          </div>
-
-          <div style="margin-top:12px">
-            <button class="btn" onclick="placeOrderFromModal()">Place Demo Order</button>
-            <button class="btn ghost" style="margin-left:8px" onclick="clearCart(); updateCheckoutModal()">Clear</button>
-          </div>
-        </aside>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- Item modal (details) -->
-  <div id="item-modal" style="display:none;position:fixed;left:0;right:0;top:0;bottom:0;align-items:center;justify-content:center;z-index:1700;background:rgba(0,0,0,0.35)">
-    <div style="background:#fff;padding:16px;border-radius:12px;max-width:820px;width:92%;box-shadow:0 30px 80px rgba(0,0,0,0.25);position:relative">
-      <button style="position:absolute;right:12px;top:12px;border:none;background:transparent;font-size:18px;cursor:pointer" onclick="closeItemModal()">✕</button>
-      <div id="item-modal-content" style="display:grid;grid-template-columns:1fr 1fr;gap:12px"></div>
+<!-- SURVEY (Accordion) -->
+<section id="survey" class="branches">
+  <div class="container">
+    <div class="acc">
+      <button type="button" onclick="acc(this)">Feedback & Survey (with Receipt)</button>
+      <div class="acc-panel">
+        <div class="card" style="margin-top:14px;padding:16px">
+          <p class="small">Enter your receipt number, pick a branch and rate your experience.</p>
+          <form id="survey-form" onsubmit="return submitSurvey(event)">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+              <div><label class="small">Receipt Number</label><input id="survey-receipt" type="text" placeholder="e.g. 2025-0001" required></div>
+              <div><label class="small">Branch</label><select id="survey-branch"></select></div>
+            </div>
+            <div style="margin-top:10px"><label class="small">Your Name (optional)</label><input id="survey-name" type="text" placeholder="Full name"></div>
+            <div style="margin-top:10px"><label class="small">Rating</label>
+              <div id="rating-stars" class="stars" role="radiogroup" aria-label="Rating">
+                <span class="star" data-v="1">★</span><span class="star" data-v="2">★</span><span class="star" data-v="3">★</span><span class="star" data-v="4">★</span><span class="star" data-v="5">★</span>
+              </div>
+            </div>
+            <div style="margin-top:10px"><label class="small">Comments</label><textarea id="survey-comments" placeholder="Tell us about your experience..." required></textarea></div>
+            <div style="margin-top:12px;display:flex;gap:8px">
+              <button class="btn" type="submit">Submit Feedback</button>
+              <button class="btn ghost" type="button" onclick="document.getElementById('survey-form').reset(); setRating(0);">Reset</button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
+</section>
+
+<!-- ORDER / CHECKOUT -->
+<section id="order" class="branches">
+  <div class="container">
+    <div class="acc">
+      <button type="button" onclick="acc(this)">Checkout</button>
+      <div class="acc-panel">
+        <div class="card" style="margin-top:14px;padding:16px">
+          <form id="checkout-form" onsubmit="return submitCheckout(event)">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+              <div><label class="small">Full Name</label><input id="chk-name" type="text" required></div>
+              <div><label class="small">Phone</label><input id="chk-phone" type="tel" required></div>
+            </div>
+            <div style="margin-top:10px"><label class="small">Delivery Address</label><textarea id="chk-address" required></textarea></div>
+
+            <div style="margin-top:10px;display:flex;gap:8px;align-items:center">
+              <label class="small" style="margin:0">Promo</label>
+              <input id="chk-promo" type="text" placeholder="Promo code (optional)" style="flex:1;padding:10px;border-radius:8px;border:1px solid #eee">
+              <button type="button" class="btn" onclick="applyPromoAtCheckout()">Apply</button>
+            </div>
+            <div id="chk-promo-msg" class="small" style="margin-top:6px;color:#e63946"></div>
+
+            <div style="margin-top:12px">
+              <table style="width:100%;border-collapse:collapse" id="checkout-summary">
+                <tr><td style="padding:10px;border:1px solid #eee" colspan="3" class="small muted">Your cart is empty</td></tr>
+              </table>
+            </div>
+
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px">
+              <div class="small">Subtotal</div><div id="checkout-sub">0 EGP</div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px">
+              <div class="small">Discount</div><div id="checkout-disc">0 EGP</div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px;font-weight:800">
+              <div>Total</div><div id="checkout-total">0 EGP</div>
+            </div>
+
+            <div style="margin-top:12px">
+              <button class="btn" type="submit">Place Order</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT (Accordion, dark) -->
+<section id="contact" class="contact">
+  <div class="container">
+    <div class="acc" style="border-color:#222">
+      <button type="button" onclick="acc(this)">Contact / Franchise / Careers</button>
+      <div class="acc-panel">
+        <div class="card" style="margin-top:14px;padding:16px;border-color:#222">
+          <form id="contact-form" onsubmit="return submitContactForm(event)">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+              <div>
+                <label class="small">Inquiry type</label>
+                <select id="contact-type">
+                  <option>General Inquiry</option>
+                  <option>Franchise Request</option>
+                  <option>Career Opportunity</option>
+                </select>
+              </div>
+              <div>
+                <label class="small">Phone</label>
+                <input id="contact-phone" type="tel" placeholder="Phone">
+              </div>
+            </div>
+            <div style="margin-top:10px">
+              <label class="small">Full name</label>
+              <input id="contact-name" type="text" placeholder="Full name" required>
+            </div>
+            <div style="margin-top:10px">
+              <label class="small">Email</label>
+              <input id="contact-email" type="email" placeholder="Email" required>
+            </div>
+            <div style="margin-top:10px">
+              <label class="small">Message</label>
+              <textarea id="contact-message" placeholder="Tell us about your inquiry..." required></textarea>
+            </div>
+            <div style="margin-top:12px">
+              <button class="btn" type="submit">Send Message</button>
+              <a class="btn ghost" style="margin-left:8px" href="https://wa.me/?text=Hi%20Kufta" target="_blank" rel="noopener">Open WhatsApp</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>Kufta • Hotline <strong>15544</strong> • © 2025</div>
+  <div class="socials" aria-hidden="false">
+    <a href="#" title="Instagram" aria-label="Instagram">
+      <svg width="18" height="18" viewBox="0 0 24 24"><path fill="white" d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.9.3 2.4.5.6.3 1 .6 1.5 1.1s.8 1 1.1 1.5c.2.5.4 1.2.5 2.4.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.9-.5 2.4-.3.6-.6 1-1.1 1.5s-1 0-1.5 1.1c-.5.2-1.2.4-2.4.5-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.9-.3-2.4-.5-.6-.3-1-.6-1.5-1.1S2.6 20 2.3 19.4c-.2-.5-.4-1.2-.5-2.4C1.6 15.7 1.6 15.3 1.6 12s0-3.6.1-4.9c.1-1.2.3-1.9.5-2.4.3-.6.6-1 1.1-1.5S5 2.9 5.5 2.6C6 .2 6.7 2.2 12 2.2z"/></svg>
+    </a>
+    <a href="#" title="Facebook" aria-label="Facebook">
+      <svg width="18" height="18" viewBox="0 0 24 24"><path fill="white" d="M22 12.1C22 6.6 17.5 2 12 2S2 6.6 2 12.1c0 5 3.7 9.2 8.5 9.9v-7H8.1v-2.9h2.4V9.2c0-2.4 1.4-3.8 3.6-3.8 1 0 2 .2 2 .2v2.2h-1.1c-1.1 0-1.4.7-1.4 1.4v1.7h2.5l-.4 2.9h-2.1v7C18.3 21.3 22 17.1 22 12.1z"/></svg>
+    </a>
+    <a href="https://wa.me/?text=Hi%20Kufta" title="WhatsApp" aria-label="WhatsApp" target="_blank" rel="noopener">
+      <svg width="18" height="18" viewBox="0 0 24 24"><path fill="white" d="M20.5 3.5C18.9 2 16.8 1 14.5 1 8.8 1 4 5.8 4 11.5c0 1.9.5 3.8 1.5 5.4L4 23l6.2-1.6c1.5.8 3.1 1.3 4.8 1.3 5.7 0 10.5-4.8 10.5-10.5 0-2.3-1-4.4-2.9-6z"/></svg>
+    </a>
+  </div>
+</footer>
+
+<!-- WhatsApp floating shortcut (no number yet) -->
+<a class="wa-fab" href="https://wa.me/?text=Hi%20Kufta" target="_blank" rel="noopener" title="Open WhatsApp" aria-label="WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M20.5 3.5C18.9 2 16.8 1 14.5 1 8.8 1 4 5.8 4 11.5c0 1.9.5 3.8 1.5 5.4L4 23l6.2-1.6c1.5.8 3.1 1.3 4.8 1.3 5.7 0 10.5-4.8 10.5-10.5 0-2.3-1-4.4-2.9-6z"/></svg>
+</a>
+
+<!-- Sticky checkout bar -->
+<div class="checkout-bar" id="checkout-bar">
+  <div class="checkout-inner">
+    <div><strong id="bar-count">0</strong> items • <strong id="bar-total">0 EGP</strong></div>
+    <button class="btn" onclick="to('order')">Checkout</button>
+  </div>
+</div>
 
 <script>
-/* ========= Shared branch list (single source) ========= */
-/* Add or edit branches here — all selects will be populated from this array */
-const BRANCHES = [
-  'Zamalek',
-  'Dokki',
-  'North Coast',
-  'Nasr City',
-  'Mohandessin',
-  'Heliopolis'
-  // Add more branches here if needed
+/* ===== Data ===== */
+const MENU = [
+  // Sandwiches
+  {cat:'Sandwiches', name:'Kufta Sandwich', price:45, desc:'Grilled kofta, tahini, pickles, salad', img:'https://images.unsplash.com/photo-1601050690597-1f38f1f83a07?auto=format&fit=crop&w=1000&q=60'},
+  {cat:'Sandwiches', name:'Hawawshi', price:60, desc:'Traditional Egyptian spiced meat bread', img:'https://images.unsplash.com/photo-1604908553958-593b3d8894d4?auto=format&fit=crop&w=1000&q=60'},
+  {cat:'Sandwiches', name:'Kufta Double', price:105, desc:'Double portion of kufta', img:'https://images.unsplash.com/photo-1606732803863-24b3f2d4ef7c?auto=format&fit=crop&w=1000&q=60'},
+  // Boxes
+  {cat:'Boxes', name:'3 Sandwiches Box', price:170, desc:'Mix of Kufta/Hawawshi', img:'https://images.unsplash.com/photo-1567620832903-9fc6debc209f?auto=format&fit=crop&w=1000&q=60'},
+  {cat:'Boxes', name:'4 Sandwiches Box', price:225, desc:'Mix of Kufta/Hawawshi', img:'https://images.unsplash.com/photo-1552332386-f8dd00dc2f85?auto=format&fit=crop&w=1000&q=60'},
+  {cat:'Boxes', name:'8 Sandwiches Box', price:450, desc:'Family bundle', img:'https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?auto=format&fit=crop&w=1000&q=60'},
+  {cat:'Boxes', name:'10 Sandwiches Box', price:560, desc:'Party box', img:'https://images.unsplash.com/photo-1539136788836-5699e78bfc75?auto=format&fit=crop&w=1000&q=60'},
+  // Sides
+  {cat:'Sides', name:'Potato Chips', price:15, desc:'Freshly fried chips', img:'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1000&q=60'},
+  {cat:'Sides', name:'Egyptian Salad', price:15, desc:'Fresh baladi salad', img:'https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=1000&q=60'},
+  {cat:'Sides', name:'Tahini', price:15, desc:'Classic tahini dip', img:'https://images.unsplash.com/photo-1523292562811-8fa7962a78c8?auto=format&fit=crop&w=1000&q=60'},
+  {cat:'Sides', name:'Spicy Tahini', price:15, desc:'Tahini with heat', img:'https://images.unsplash.com/photo-1523292562811-8fa7962a78c8?auto=format&fit=crop&w=1000&q=60'},
+  {cat:'Sides', name:'Pickled Tomatoes', price:15, desc:'House pickles', img:'https://images.unsplash.com/photo-1537774965631-6e5e9f03b3a3?auto=format&fit=crop&w=1000&q=60'},
+  {cat:'Sides', name:'Mixed Pickles / Cucumber', price:10, desc:'Crunchy pickles', img:'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=1000&q=60'},
+  {cat:'Sides', name:'Whiskey (Salad Drink)', price:15, desc:'Tangy salad drink', img:'https://images.unsplash.com/photo-1517705008128-361805f42e86?auto=format&fit=crop&w=1000&q=60'},
+  // Drinks
+  {cat:'Drinks', name:'Rayeb Lemon & Blueberry', price:25, desc:'Refreshing drink', img:'https://images.unsplash.com/photo-1542444459-db4d4b3d1b2b?auto=format&fit=crop&w=1000&q=60'},
+  {cat:'Drinks', name:'Tabasko (Fruity & Spicy)', price:25, desc:'Fruity & spicy', img:'https://images.unsplash.com/photo-1541976076758-347942db1970?auto=format&fit=crop&w=1000&q=60'},
+  {cat:'Drinks', name:'V7', price:25, desc:'Energy drink', img:'https://images.unsplash.com/photo-1600275669283-4b6e01b3a8a5?auto=format&fit=crop&w=1000&q=60'},
+  {cat:'Drinks', name:'Mineral Water', price:15, desc:'Still water', img:'https://images.unsplash.com/photo-1502741338009-cac2772e18bc?auto=format&fit=crop&w=1000&q=60'}
 ];
 
-/* populate branch selects (order checkout, survey desktop/mobile) */
-function populateBranchSelects(){
-  const selects = ['sv-visit','sv-visit-mobile','checkout-branch','checkout-branch-mobile'];
-  // some selects may not exist (mobile ones), handle gracefully
-  selects.forEach(id => {
-    const el = document.getElementById(id);
-    if(!el) return;
-    el.innerHTML = '';
-    BRANCHES.forEach(b => {
-      const opt = document.createElement('option');
-      opt.value = b;
-      opt.textContent = b;
-      el.appendChild(opt);
-    });
+const BRANCHES = [
+  {name:'Downtown (Talaat Harb)', addr:'Talaat Harb St, Downtown Cairo', hours:'10:00 - 02:00', phone:'15544'},
+  {name:'Zamalek', addr:'Street 123, Zamalek, Cairo', hours:'10:00 - 02:00', phone:'15544'},
+  {name:'North Coast (Marina)', addr:'Marina Gate 5, North Coast', hours:'Seasonal hours', phone:'15544'},
+  {name:'Dokki', addr:'45 Dokki Rd, Giza', hours:'10:00 - 01:00', phone:'15544'},
+  {name:'Nasr City', addr:'Central Plaza, Nasr City', hours:'11:00 - 00:00', phone:'15544'},
+  {name:'Heliopolis', addr:'Heliopolis Main St', hours:'11:00 - 00:00', phone:'15544'},
+  {name:'Maadi', addr:'Maadi Corniche', hours:'10:00 - 01:00', phone:'15544'}
+];
+
+const PROMOS = {
+  '3ALADEEMO': {type:'percent', amt:15, min:150, note:'15% off orders over 150 EGP'},
+  'WELCOME10': {type:'percent', amt:10, min:100, note:'10% off first orders over 100 EGP'},
+  'FREEFRIES': {type:'freeitem', item:'Potato Chips', min:0, note:'Free Potato Chips with any sandwich'}
+};
+
+/* ===== State ===== */
+let activeCat = 'All';
+let cart = [];
+let appliedPromo = null;
+let showAllBranches = false;
+let rating = 0;
+
+/* ===== Helpers ===== */
+const $ = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
+const money = n => Math.round(n) + ' EGP';
+function to(id){ const el = document.getElementById(id); if(!el) return; const top = document.querySelector('.top').offsetHeight || 80; const y = el.getBoundingClientRect().top + window.pageYOffset - top - 8; window.scrollTo({top:y,behavior:'smooth'}); }
+function openMap(addr){ window.open('https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(addr),'_blank'); }
+
+/* ===== Menu Render ===== */
+function cats(){ return ['All', ...new Set(MENU.map(m=>m.cat))]; }
+function renderTabs(){
+  const box = $('#cat-tabs'); box.innerHTML = '';
+  cats().forEach(c=>{
+    const b = document.createElement('button');
+    b.className = 'pill' + (c===activeCat?' active':''); b.textContent = c;
+    b.onclick = () => { activeCat = c; renderMenu(); };
+    box.appendChild(b);
   });
 }
-populateBranchSelects();
-
-/* ========= Smooth scroll util ========= */
-function scrollTo(sel){
-  const el = document.querySelector(sel);
-  if(!el) return;
-  const header = document.querySelector('.top');
-  const offset = header ? header.offsetHeight + 8 : 80;
-  const y = el.getBoundingClientRect().top + window.pageYOffset - offset;
-  window.scrollTo({top:y, behavior:'smooth'});
+function renderMenu(){
+  const grid = $('#menu-grid'); grid.innerHTML='';
+  const list = activeCat==='All' ? MENU : MENU.filter(m=>m.cat===activeCat);
+  list.forEach(m=>{
+    const art = document.createElement('article');
+    art.className = 'card item';
+    art.innerHTML = `
+      <img src="${m.img}" alt="${m.name}">
+      <div class="item-body">
+        <div><h3>${m.name}</h3><p>${m.desc}</p></div>
+        <div class="item-foot"><div class="price">${m.price} EGP</div>
+          <button class="btn" onclick="addToCart('${m.name.replace(/'/g,"\\'")}', ${m.price})">Add</button>
+        </div>
+      </div>`;
+    grid.appendChild(art);
+  });
+  // Quick select (Sandwiches for speed)
+  const qs = $('#quick-item'); qs.innerHTML='';
+  MENU.filter(m=>m.cat==='Sandwiches').forEach(m=>{
+    const o = document.createElement('option');
+    o.value = `${m.name}|${m.price}`; o.textContent = `${m.name} — ${m.price} EGP`;
+    qs.appendChild(o);
+  });
 }
 
-/* ========= Menu filtering ========= */
-const menuGrid = document.getElementById('menu-grid');
-const categorySelect = document.getElementById('menu-category');
-const searchInput = document.getElementById('menu-search');
-const menuCountEl = document.getElementById('menu-count');
+/* ===== Branches ===== */
+function renderBranches(){
+  const grid = $('#branches-grid'); grid.innerHTML='';
+  const list = showAllBranches ? BRANCHES : BRANCHES.slice(0,3);
+  list.forEach(b=>{
+    const c = document.createElement('div'); c.className='card'; c.style.padding='14px';
+    c.innerHTML = `<h3 style="margin:0 0 6px">${b.name}</h3>
+      <div class="small">${b.addr}<br>Hours: ${b.hours}<br>Hotline: ${b.phone}</div>
+      <div style="margin-top:10px"><button class="btn ghost" onclick="openMap('${b.addr}')">Open in Google Maps</button></div>`;
+    grid.appendChild(c);
+  });
+  $('#showMoreBranches').textContent = showAllBranches ? 'Show Less' : 'Show More';
 
-function updateMenuCount(){ const items=[...menuGrid.querySelectorAll('.item')]; const visible = items.filter(i=>i.style.display!=='none').length; menuCountEl.innerText = visible + ' item' + (visible!==1?'s':''); }
-function filterMenu(){ const cat = categorySelect.value; const q = (searchInput.value||'').trim().toLowerCase(); const items = [...menuGrid.querySelectorAll('.item')]; items.forEach(it=>{ const title = it.querySelector('h3').innerText.toLowerCase(); const desc = it.querySelector('p').innerText.toLowerCase(); const catMatch = (cat==='all' || it.dataset.category === cat); const searchMatch = (!q) || title.includes(q) || desc.includes(q); it.style.display = (catMatch && searchMatch)?'':'none'; }); updateMenuCount(); }
-categorySelect.addEventListener('change', filterMenu);
-searchInput.addEventListener('input', ()=>{ clearTimeout(window._menuSearchTimer); window._menuSearchTimer = setTimeout(filterMenu, 160); });
-filterMenu();
-function resetFilters(){ categorySelect.value='all'; searchInput.value=''; filterMenu(); }
-
-/* ========= Item details modal ========= */
-function openItemModal(name, price, desc, img){
-  const content = document.getElementById('item-modal-content');
-  content.innerHTML = `
-    <div><img src="${img}" alt="${name}" style="width:100%;height:360px;object-fit:cover;border-radius:8px"></div>
-    <div>
-      <h2 style="margin-top:0">${name}</h2>
-      <p class="muted">${desc}</p>
-      <div style="margin-top:12px;font-weight:800;color:var(--red)">${price} EGP</div>
-      <div style="margin-top:12px;display:flex;gap:8px">
-        <button class="btn" onclick="addToCart('${escapeJs(name)}',${price}); closeItemModal();">Add to cart</button>
-        <button class="btn ghost" onclick="closeItemModal()">Close</button>
-      </div>
-    </div>
-  `;
-  document.getElementById('item-modal').style.display='flex';
+  // Fill selects
+  const sel = $('#branch-select'); const s2 = $('#survey-branch');
+  sel.innerHTML=''; s2.innerHTML='';
+  BRANCHES.forEach(b=>{ const o=document.createElement('option'); o.value=b.name; o.textContent=b.name; sel.appendChild(o); s2.appendChild(o.cloneNode(true)); });
 }
-function closeItemModal(){ document.getElementById('item-modal').style.display='none'; }
-function escapeJs(s){ return s.replace(/'/g,"\\'").replace(/"/g,'\\"'); }
+function toggleBranches(){ showAllBranches = !showAllBranches; renderBranches(); }
 
-/* ========= Cart logic (shared) ========= */
-let cart = []; // array of {name,price,qty}
-
-function addToCart(name, price){
-  const idx = cart.findIndex(i=>i.name===name);
-  if(idx >= 0) cart[idx].qty++;
-  else cart.push({name,price,qty:1});
-  renderCart();
-}
+/* ===== Cart ===== */
 function addQuick(){
-  const val = document.getElementById('quick-item').value.split('|');
-  const name = val[0], price = Number(val[1]||0);
-  const qty = Number(document.getElementById('quick-qty').value||1);
-  const idx = cart.findIndex(i=>i.name===name);
-  if(idx >= 0) cart[idx].qty += qty; else cart.push({name,price,qty});
+  const [name, price] = $('#quick-item').value.split('|'); const qty = Number($('#quick-qty').value||1);
+  const f = cart.find(i=>i.name===name);
+  if(f) f.qty+=qty; else cart.push({name,price:Number(price),qty});
   renderCart();
+}
+function addToCart(name, price){
+  const f = cart.find(i=>i.name===name);
+  if(f) f.qty++; else cart.push({name,price,qty:1});
+  renderCart();
+}
+function changeQty(i, d){ cart[i].qty += d; if(cart[i].qty<1) cart[i].qty=1; renderCart(); }
+function removeItem(i){ cart.splice(i,1); renderCart(); }
+function clearCart(){ cart=[]; appliedPromo=null; $('#checkout-promo').value=''; $('#promo-feedback').textContent=''; renderCart(); }
+function totals(){
+  const sub = cart.reduce((s,i)=>s + i.price*i.qty, 0);
+  let disc = 0;
+  if(appliedPromo){
+    const p = PROMOS[appliedPromo];
+    if(p.type==='percent' && sub >= p.min) disc = Math.round(sub * (p.amt/100));
+    if(p.type==='freeitem'){
+      const fries = MENU.find(m=>/potato/i.test(m.name) || /fries/i.test(m.name)); disc = fries ? fries.price : 15;
+    }
+  }
+  return {sub, disc, total: sub-disc};
 }
 function renderCart(){
-  const countEl = document.getElementById('cart-count');
-  if(!countEl) return;
-  const totalQty = cart.reduce((s,i)=>s+i.qty,0);
-  countEl.innerText = totalQty;
-  updateCheckoutModal(); // keep modal in sync in case open
-}
-function increase(i){ cart[i].qty++; renderCart(); }
-function decrease(i){ if(cart[i].qty>1) cart[i].qty--; else cart.splice(i,1); renderCart(); }
-function clearCart(){ cart=[]; renderCart(); updateCheckoutModal(); }
+  const box = $('#cart-items'); const sum = $('#checkout-summary');
+  box.innerHTML=''; sum.innerHTML='';
+  if(cart.length===0){
+    box.textContent='Cart is empty';
+    sum.innerHTML = '<tr><td style="padding:10px;border:1px solid #eee" colspan="3" class="small muted">Your cart is empty</td></tr>';
+    $('#cart-subtotal').textContent='0 EGP'; $('#cart-discount').textContent='0 EGP'; $('#cart-total').textContent='0 EGP';
+    $('#checkout-sub').textContent='0 EGP'; $('#checkout-disc').textContent='0 EGP'; $('#checkout-total').textContent='0 EGP';
+    document.getElementById('checkout-bar').style.display='none';
+    return;
+  }
+  cart.forEach((c,i)=>{
+    const row = document.createElement('div'); row.className='cart-item';
+    row.innerHTML = `<div><strong>${c.name}</strong><div class="small">${c.qty} × ${c.price} EGP</div></div>
+      <div style="text-align:right">
+        <div style="font-weight:700">${c.price*c.qty} EGP</div>
+        <div style="margin-top:6px">
+          <button class="qty-btn" onclick="changeQty(${i},-1)">-</button>
+          <button class="qty-btn" onclick="changeQty(${i},1)">+</button>
+          <button style="background:transparent;border:none;color:${'#d62828'};margin-left:8px;cursor:pointer" onclick="removeItem(${i})">Remove</button>
+        </div>
+      </div>`;
+    box.appendChild(row);
 
-/* ========= Checkout modal functions ========= */
-function openCheckoutModal(){
-  updateCheckoutModal();
-  const modal = document.getElementById('checkout-modal');
-  modal.classList.add('show');
-  modal.classList.add('visible');
-  modal.classList.add('open');
-  modal.style.display = 'flex';
-  modal.setAttribute('aria-hidden','false');
-  document.body.style.overflow = 'hidden';
-}
-function closeCheckoutModal(){
-  const modal = document.getElementById('checkout-modal');
-  modal.style.display = 'none';
-  modal.setAttribute('aria-hidden','true');
-  document.body.style.overflow = '';
-}
-
-/* update checkout modal contents (items, totals, counts) */
-function updateCheckoutModal(){
-  const ci = document.getElementById('checkout-items');
-  const cb = document.getElementById('checkout-branch');
-  const count = document.getElementById('checkout-count');
-  const subEl = document.getElementById('checkout-sub');
-  const discountEl = document.getElementById('checkout-discount');
-  const totalEl = document.getElementById('checkout-total');
-  if(cb){ cb.innerHTML = ''; BRANCHES.forEach(b=>{ const o=document.createElement('option'); o.value=b; o.textContent=b; cb.appendChild(o); }); }
-  if(!ci) return;
-  ci.innerHTML = '';
-  if(cart.length===0){ ci.innerHTML = '<div class="muted">Your cart is empty.</div>'; if(count) count.innerText = '0 items'; if(subEl) subEl.innerText='0 EGP'; if(discountEl) discountEl.innerText='0 EGP'; if(totalEl) totalEl.innerText='0 EGP'; return; }
-  let sub=0;
-  cart.forEach((it,i)=>{
-    sub += it.price * it.qty;
-    const row = document.createElement('div');
-    row.style.display='flex';
-    row.style.justifyContent='space-between';
-    row.style.alignItems='center';
-    row.style.padding='8px 0';
-    row.innerHTML = `<div><strong>${it.name}</strong><div class="muted">${it.qty} × ${it.price} EGP</div></div>
-                     <div style="text-align:right">
-                       <div style="font-weight:700">${it.price * it.qty} EGP</div>
-                       <div style="margin-top:6px">
-                         <button style="padding:6px;border-radius:6px;border:1px solid #eee;margin-right:6px" onclick="decrease(${i}); updateCheckoutModal()">-</button>
-                         <button style="padding:6px;border-radius:6px;border:0;background:var(--red);color:#fff" onclick="increase(${i}); updateCheckoutModal()">+</button>
-                       </div>
-                     </div>`;
-    ci.appendChild(row);
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td style="padding:10px;border:1px solid #eee">${c.name}</td>
+                    <td style="padding:10px;border:1px solid #eee">${c.qty}</td>
+                    <td style="padding:10px;border:1px solid #eee">${c.price*c.qty} EGP</td>`;
+    sum.appendChild(tr);
   });
-  const promoVal = (document.getElementById('checkout-promo')||{}).value || '';
-  let discount = 0;
-  if(promoVal.trim().toUpperCase()==='SAVE10'){ discount = Math.round(sub * 0.10); }
-  const total = sub - discount;
-  if(count) count.innerText = cart.reduce((s,i)=>s+i.qty,0) + ' items';
-  if(subEl) subEl.innerText = sub + ' EGP';
-  if(discountEl) discountEl.innerText = discount + ' EGP';
-  if(totalEl) totalEl.innerText = total + ' EGP';
+  const t = totals();
+  $('#cart-subtotal').textContent = money(t.sub);
+  $('#cart-discount').textContent = money(t.disc);
+  $('#cart-total').textContent = money(t.total);
+  $('#checkout-sub').textContent = money(t.sub);
+  $('#checkout-disc').textContent = money(t.disc);
+  $('#checkout-total').textContent = money(t.total);
+
+  // Sticky checkout bar
+  document.getElementById('checkout-bar').style.display='block';
+  document.getElementById('bar-count').textContent = cart.reduce((s,i)=>s+i.qty,0);
+  document.getElementById('bar-total').textContent = money(t.total);
 }
 
-/* apply promo inside modal */
-function applyPromoModal(){
-  updateCheckoutModal();
-  alert('Promo (demo) applied if valid — check totals');
+/* ===== Promos ===== */
+function renderPromos(){
+  const p = $('#promo-grid'); p.innerHTML='';
+  Object.entries(PROMOS).forEach(([code,info])=>{
+    const d = document.createElement('div'); d.className='promo-card';
+    d.innerHTML = `<strong>${code}</strong><div class="small" style="margin-top:6px">${info.note}</div>`;
+    p.appendChild(d);
+  });
+}
+function applyCheckoutPromo(){ const code = ($('#checkout-promo').value||'').trim().toUpperCase(); applyPromo(code,'#promo-feedback'); }
+function applyPromoAtCheckout(){ const code = ($('#chk-promo').value||'').trim().toUpperCase(); applyPromo(code,'#chk-promo-msg'); }
+function applyPromo(code, sel){
+  const fb = document.querySelector(sel);
+  if(!code){ fb.textContent='Enter a promo code.'; fb.style.color='#e63946'; return; }
+  const p = PROMOS[code]; if(!p){ fb.textContent='Invalid promo code.'; fb.style.color='#e63946'; return; }
+  const sub = cart.reduce((s,i)=>s+i.price*i.qty,0);
+  if(p.type==='percent' && sub < p.min){ fb.textContent=`Minimum ${p.min} EGP required.`; fb.style.color='#e63946'; return; }
+  if(p.type==='freeitem' && !cart.some(i=>/kufta|hawawshi|sandwich/i.test(i.name))){ fb.textContent='Requires at least one sandwich in cart.'; fb.style.color='#e63946'; return; }
+  appliedPromo = code; fb.textContent = `Applied: ${p.note}`; fb.style.color = '#0b7a4d';
+  if(code==='FREEFRIES'){ const have = cart.find(i=>/Potato Chips/i.test(i.name)); if(!have) cart.push({name:'Potato Chips', price:0, qty:1}); }
+  renderCart();
 }
 
-/* place order from modal (demo) */
-function placeOrderFromModal(){
-  if(cart.length===0){ alert('Cart is empty — add items first.'); return; }
+/* ===== Checkout / Contact / Survey ===== */
+function submitCheckout(e){
+  e.preventDefault();
+  if(cart.length===0){ alert('Cart is empty'); to('menu'); return false; }
   const payload = {
-    branch: document.getElementById('checkout-branch').value,
-    name: document.getElementById('checkout-name').value,
-    phone: document.getElementById('checkout-phone').value,
-    address: document.getElementById('checkout-address').value,
-    items: cart.slice(),
-    promo: document.getElementById('checkout-promo').value || null
+    branch: $('#branch-select').value,
+    name: $('#chk-name').value,
+    phone: $('#chk-phone').value,
+    address: $('#chk-address').value,
+    promo: ($('#chk-promo').value||null),
+    items: cart
   };
-  alert('Demo order placed — check console for details.');
-  console.log('ORDER DEMO', payload);
-  clearCart();
-  closeCheckoutModal();
-  // reset checkout fields
-  const nameEl = document.getElementById('checkout-name'); if(nameEl) nameEl.value = '';
-  const phoneEl = document.getElementById('checkout-phone'); if(phoneEl) phoneEl.value = '';
-  const addrEl = document.getElementById('checkout-address'); if(addrEl) addrEl.value = '';
-  const promo = document.getElementById('checkout-promo'); if(promo) promo.value = '';
-  updateCheckoutModal();
+  alert('Order submitted (demo). Check console for payload.');
+  console.log('ORDER', payload);
+  cart=[]; appliedPromo=null; renderCart(); e.target.reset();
+  return false;
 }
-
-/* ========= Promo code generic (for quick apply elsewhere) ========= */
-function applyPromo(){
-  const code = (document.getElementById('promo-code')||{}).value || '';
-  if(!code) return alert('Enter a promo code');
-  let sub = cart.reduce((s,i)=>s+i.price*i.qty,0);
-  if(!sub) return alert('Cart is empty');
-  if(code.trim().toUpperCase()==='SAVE10'){ const newTotal = Math.round(sub*0.9); alert('Promo applied: SAVE10 (10% off) — demo'); }
-  else alert('Promo not recognized (demo)');
+function submitContactForm(e){
+  e.preventDefault();
+  const data={ type:$('#contact-type').value, name:$('#contact-name').value, phone:$('#contact-phone').value, email:$('#contact-email').value, message:$('#contact-message').value };
+  alert('Message sent (demo).'); console.log('CONTACT', data); e.target.reset(); return false;
 }
-
-/* ========= Tabs (desktop) ========= */
-const tabs = document.querySelectorAll('.tab');
-const panels = document.querySelectorAll('[data-tabpanel]');
-function openTab(tabId){
-  tabs.forEach(t=>{ t.classList.toggle('active', t.dataset.tab===tabId); t.setAttribute('aria-selected', t.dataset.tab===tabId); });
-  panels.forEach(p=>{ if(p.id===tabId){ p.hidden=false; p.style.display='block'; } else { p.hidden=true; p.style.display='none'; } });
-  // scroll to forms area
-  setTimeout(()=> scrollTo('#forms'), 50);
-}
-tabs.forEach(t=> t.addEventListener('click', ()=> openTab(t.dataset.tab)) );
-openTab('tab-survey'); // default
-
-/* ========= Survey forms ========= */
+function setRating(v){ rating=v; $$('#rating-stars .star').forEach(s=>s.classList.toggle('sel', Number(s.dataset.v)<=v)); }
 function submitSurvey(e){
   e.preventDefault();
-  const payload = {
-    branch: document.getElementById('sv-visit').value,
-    rating: (document.querySelector('input[name="exp"]:checked')||{}).value || null,
-    speed: document.getElementById('sv-speed').value,
-    comments: document.getElementById('sv-comments').value
-  };
-  alert('Survey submitted — thank you!');
-  console.log('SURVEY DEMO', payload);
-  document.getElementById('survey-form').reset();
-  return false;
-}
-function submitSurveyMobile(e){
-  e.preventDefault();
-  const payload = {
-    branch: document.getElementById('sv-visit-mobile').value,
-    rating: (document.querySelector('input[name="exp-mobile"]:checked')||{}).value || null,
-    speed: document.getElementById('sv-speed-mobile').value,
-    comments: document.getElementById('sv-comments-mobile').value
-  };
-  alert('Survey submitted (mobile) — thank you!');
-  console.log('SURVEY DEMO mobile', payload);
-  document.getElementById('survey-form-mobile').reset();
-  return false;
+  const payload={ receipt:$('#survey-receipt').value, branch:$('#survey-branch').value, name:$('#survey-name').value||null, rating, comments:$('#survey-comments').value };
+  if(!rating){ alert('Please select a rating'); return false; }
+  alert('Survey submitted (demo).'); console.log('SURVEY', payload);
+  rating=0; setRating(0); e.target.reset(); return false;
 }
 
-/* ========= Franchise / Jobs / Contact handlers (demo) ========= */
-function submitFranchise(e){ e.preventDefault(); alert('Franchise request sent (demo).'); console.log('FRANCHISE', { name: document.getElementById('fr-name').value, email: document.getElementById('fr-email').value }); document.getElementById('franchise-form').reset(); return false; }
-function submitFranchiseMobile(e){ e.preventDefault(); alert('Franchise request (mobile) sent (demo).'); document.getElementById('franchise-form-mobile').reset(); return false; }
-function submitJobs(e){ e.preventDefault(); alert('Job application received (demo).'); console.log('JOB', { name: document.getElementById('job-name').value, role: document.getElementById('job-role').value }); document.getElementById('jobs-form').reset(); return false; }
-function submitJobsMobile(e){ e.preventDefault(); alert('Job application received (mobile demo).'); document.getElementById('jobs-form-mobile').reset(); return false; }
-function submitContact(e){ e.preventDefault(); alert('Message sent (demo).'); console.log('CONTACT', { name: document.getElementById('contact-name').value, reason: document.getElementById('contact-reason').value }); document.getElementById('contact-form').reset(); return false; }
-function submitContactMobile(e){ e.preventDefault(); alert('Message sent (mobile demo).'); document.getElementById('contact-form-mobile').reset(); return false; }
-
-/* ========= Mobile accordions functionality ========= */
-document.querySelectorAll('.accordion-btn').forEach(btn=>{
-  btn.addEventListener('click', ()=>{
-    const id = btn.dataset.acc;
-    const content = document.getElementById(id);
-    if(!content) return;
-    const open = content.classList.toggle('open');
-    btn.textContent = btn.textContent.includes('▾') ? btn.textContent.replace('▾','▸') : btn.textContent.replace('▸','▾');
-  });
-});
-
-/* ========= Branches "show more" ========= */
-function toggleBranches(){
-  const full = document.getElementById('branch-full');
-  const map = document.getElementById('branch-map');
-  const btn = document.getElementById('show-more-branches');
-  const showing = full.style.display !== 'none';
-  if(showing){
-    full.style.display = 'none';
-    map.style.display = 'none';
-    btn.textContent = 'Show More';
-  } else {
-    full.style.display = 'grid';
-    map.style.display = 'block';
-    btn.textContent = 'Show Less';
-  }
+/* ===== Accordions ===== */
+function acc(btn){
+  const panel = btn.nextElementSibling;
+  const open = panel.style.display==='block';
+  document.querySelectorAll('.acc .acc-panel').forEach(p=>p.style.display='none');
+  if(!open) panel.style.display='block';
 }
 
-/* ========= Item modal helpers ========= */
-function closeItemModal(){ document.getElementById('item-modal').style.display='none'; }
-
-/* ========= misc init ========= */
-renderCart();
-updateCheckoutModal();
-populateBranchSelects();
-
-/* Close modals on escape */
-document.addEventListener('keydown', e=>{ if(e.key==='Escape'){ closeCheckoutModal(); closeItemModal(); } });
-
+/* ===== Init ===== */
+function init(){
+  renderTabs(); renderMenu(); renderPromos(); renderBranches(); renderCart();
+  // rating stars click
+  $$('#rating-stars .star').forEach(s=> s.onclick = ()=> setRating(Number(s.dataset.v)));
+  // default open map accordion on desktop
+  if(window.innerWidth>980){ document.querySelectorAll('.acc .acc-panel')[0]?.style && (document.querySelectorAll('.acc .acc-panel')[0].style.display='block'); }
+}
+init();
 </script>
 </body>
 </html>
