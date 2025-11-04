@@ -25,28 +25,31 @@
   body{
     margin:0;
     font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,Arial;
-    background:linear-gradient(180deg,#0f0f10 0%, #efefef 180%);
-    color:var(--black);
+    /* dark top -> light bottom gradient (kept contrast same) */
+    background: linear-gradient(180deg,#0f0f10 0%, #efefef 180%);
+    color:var(--char);
     -webkit-font-smoothing:antialiased;
     -moz-osx-font-smoothing:grayscale;
     line-height:1.4;
+    min-height:100vh;
+    position:relative;
   }
   img{max-width:100%;display:block;border-radius:8px}
   .container{max-width:var(--container);margin:0 auto;padding:0 18px}
 
-  /* subtle smoke texture used in hero/headers */
-  .smoke {
-    background-image:
-      radial-gradient(circle at 10% 10%, rgba(230,57,70,0.03), transparent 12%),
-      url("https://images.unsplash.com/photo-1526318472351-c75fcf0700a5?auto=format&fit=crop&w=1200&q=80");
-    background-size: cover;
-    background-repeat:no-repeat;
-    background-position:center;
-    opacity:0.12;
+  /* Inline SVG smoke texture (slightly more noticeable) - self contained */
+  /* Data URI SVG created for subtle grill/smoke across full page */
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:0;
     pointer-events:none;
-    position:absolute; inset:0; z-index:0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='800'><filter id='f'><feTurbulence baseFrequency='0.65' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/><feGaussianBlur stdDeviation='40' result='b'/></filter><rect width='100%' height='100%' filter='url(%23f)' fill='%23ffffff' opacity='0.08'/></svg>");
+    background-size:cover;
+    background-repeat:repeat;
     mix-blend-mode:overlay;
-    filter: blur(2px) saturate(.9);
+    opacity:0.12; /* slightly more noticeable but subtle */
   }
 
   /* header */
@@ -61,19 +64,18 @@
   nav.nav a:hover{color:var(--accent)}
 
   /* hero */
-  .hero{position:relative;overflow:hidden;padding:40px 0;display:grid;grid-template-columns:1fr 380px;gap:24px;align-items:center}
-  .hero .smoke{opacity:0.08}
-  .kicker{display:inline-block;padding:6px 10px;border-radius:999px;background:linear-gradient(90deg,#fff,#fff);color:var(--accent-dark);font-weight:800;font-size:13px;z-index:2;position:relative}
+  .hero{position:relative;overflow:hidden;padding:40px 0;display:grid;grid-template-columns:1fr 380px;gap:24px;align-items:center;z-index:1}
+  .kicker{display:inline-block;padding:6px 10px;border-radius:999px;background:linear-gradient(90deg,#fff,#fff);color:var(--accent-dark);font-weight:800;font-size:13px}
   .hero-title{
     margin:10px 0 12px;font-size:clamp(28px,5vw,48px);line-height:1;color:transparent;
     background:linear-gradient(90deg,var(--accent),#2b2b2b);
-    -webkit-background-clip:text;background-clip:text;font-weight:800;letter-spacing:-0.6px;z-index:2;position:relative;
+    -webkit-background-clip:text;background-clip:text;font-weight:800;letter-spacing:-0.6px;
     text-shadow: 0 2px 10px rgba(0,0,0,0.12);
   }
-  .lead{margin:0 0 16px;color:var(--muted);z-index:2;position:relative}
-  .cta{display:flex;gap:12px;flex-wrap:wrap;z-index:2;position:relative}
+  .lead{margin:0 0 16px;color:var(--muted)}
+  .cta{display:flex;gap:12px;flex-wrap:wrap}
 
-  /* unified rounded button */
+  /* buttons */
   .btn{
     border:0;padding:12px 18px;border-radius:999px;font-weight:800;color:#fff;background:linear-gradient(90deg,var(--accent),var(--accent-dark));
     box-shadow:0 12px 36px rgba(178,42,52,0.12);cursor:pointer;transition:transform var(--transition),box-shadow var(--transition);
@@ -83,8 +85,8 @@
   .round-icon{width:44px;height:44px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;background:linear-gradient(90deg,var(--accent),var(--accent-dark));color:#fff;border:0;cursor:pointer;box-shadow:0 12px 30px rgba(178,42,52,0.12)}
 
   /* cards & layout */
-  .card{background:var(--offwhite);border:1px solid #eee;border-radius:12px;padding:12px;box-shadow:var(--shadow)}
-  section{padding:28px 0;position:relative}
+  .card{background:var(--offwhite);border:1px solid #eee;border-radius:12px;padding:12px;box-shadow:var(--shadow);position:relative;z-index:1}
+  section{padding:28px 0;position:relative;z-index:1}
   h2.section-title{
     font-size:20px;margin:0 0 12px; color:transparent;
     background:linear-gradient(90deg,var(--accent),#262626); -webkit-background-clip:text;background-clip:text;font-weight:800;
@@ -95,18 +97,25 @@
   .pills{display:flex;gap:8px;flex-wrap:wrap}
   .pill{padding:8px 12px;border-radius:999px;background:var(--white);border:1px solid #eee;cursor:pointer;font-weight:700;color:var(--char)}
   .pill.active{background:linear-gradient(90deg,var(--accent),var(--accent-dark));color:#fff;box-shadow:0 10px 30px rgba(178,42,52,0.12);transform:translateY(-3px)}
-  .menu-wrap{display:grid;grid-template-columns:1fr 360px;gap:20px;align-items:start}
-  .menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+  /* fixed layout bug: ensure menu area min width so cart does not overlap on mid-desktop sizes */
+  .menu-wrap{
+    display:grid;
+    grid-template-columns: minmax(360px, 1fr) 360px; /* left area min 360, right cart fixed 360 */
+    gap:20px;
+    align-items:start;
+  }
+  .menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;min-width:0}
   .item{overflow:hidden;border-radius:12px;border:1px solid #eee;background:var(--white);box-shadow:0 10px 30px rgba(0,0,0,0.04);transition:transform var(--transition)}
   .item:hover{transform:translateY(-6px)}
   .item-img{height:160px;overflow:hidden}
+  .item-img img{width:100%;height:100%;object-fit:cover;display:block}
   .item-body{padding:12px}
   .item h3{margin:0 0 6px;color:var(--char)}
   .item p{margin:0;color:var(--muted)}
   .item-foot{display:flex;justify-content:space-between;align-items:center;margin-top:12px}
 
   /* cart aside */
-  aside.cart{position:sticky;top:90px}
+  aside.cart{position:sticky;top:90px;align-self:start;min-width:0}
   .cart-panel{background:linear-gradient(180deg,#fff,#fbfbfb);border-radius:12px;padding:12px;border:1px solid #eee;box-shadow:0 14px 40px rgba(0,0,0,0.04)}
   .cart-item{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px dashed #f0f0f0}
   .qty-btn{background:#fff;border:1px solid #eee;padding:6px;border-radius:8px;cursor:pointer;margin-left:6px}
@@ -160,6 +169,9 @@
   textarea{min-height:90px}
   .muted{color:var(--muted)}
   .map-btn{width:44px;height:44px;border-radius:999px;border:0;background:linear-gradient(90deg,var(--accent),var(--accent-dark));color:#fff;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
+
+  /* small safety: ensure anchors and buttons above the smoke overlay are visible */
+  header.top, .card, section, .btn, nav.nav a, .cart-panel {position:relative;z-index:2}
 </style>
 </head>
 <body>
@@ -168,7 +180,8 @@
 <header class="top" role="banner">
   <div class="top-inner">
     <div class="brand">
-      <img src="logo.jpg" alt="Kufta logo">
+      <!-- placeholder: replace logo.png later -->
+      <img src="logo.png" alt="Kufta logo">
       <div>
         <div style="font-size:13px;color:var(--muted)">Kufta</div>
         <div class="hotline">Hotline: <strong>15544</strong></div>
@@ -190,7 +203,7 @@
 
   <!-- HERO -->
   <section id="home" class="hero" aria-label="Hero">
-    <div style="position:relative;z-index:2">
+    <div>
       <div class="kicker">Clean Street Food • Cairo</div>
       <h1 class="hero-title">Kufta — Clean Street Food</h1>
       <p class="lead">Bold, smoky, and unforgettable — grilled kofta & hawawshi crafted for the streets of Cairo. Order online or visit our branches.</p>
@@ -200,7 +213,7 @@
       </div>
       <div style="margin-top:12px" class="muted">Promos: <strong>3ALADEEMO</strong>, <strong>WELCOME10</strong>, <strong>FREEFRIES</strong></div>
     </div>
-    <aside style="position:relative;z-index:2">
+    <aside>
       <div class="card quick-card">
         <h3 style="margin:0 0 8px">Quick Order</h3>
         <p class="small">Pick item & quantity — added directly to cart.</p>
@@ -216,9 +229,6 @@
         </div>
       </div>
     </aside>
-
-    <!-- atmospheric smoke -->
-    <div class="smoke" aria-hidden="true"></div>
   </section>
 
   <!-- MENU -->
@@ -703,7 +713,7 @@ function placeOrderModal(){
 }
 
 /* ===== item detail simple ===== */
-function openDetail(name,price,desc,img){ const ok = confirm(name + ' — ' + price + ' EGP\\n\\n' + desc + '\\n\\nAdd to cart?'); if(ok) addToCart(name,price); }
+function openDetail(name,price,desc,img){ const ok = confirm(name + ' — ' + price + ' EGP\n\n' + desc + '\n\nAdd to cart?'); if(ok) addToCart(name,price); }
 
 /* ===== forms ===== */
 function setRating(v){ rating = v; $$('#rating-stars .star').forEach(s => s.style.color = Number(s.dataset.v) <= v ? '#e63946' : '#ccc'); }
