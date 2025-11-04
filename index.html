@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Kufta — Clean Street Food (Offline-ready)</title>
+<title>Kufta — Clean Street Food (Final)</title>
 <style>
   :root{
     --black:#0b0b0b; --char:#171717; --muted:#7a7a7a; --white:#ffffff; --offwhite:#fbfbfb;
@@ -34,6 +34,11 @@
   nav.nav a{padding:8px 10px;border-radius:10px;font-weight:700;color:var(--char);text-decoration:none}
   nav.nav a:hover{color:var(--accent)}
 
+  /* small header cart icon (desktop) */
+  .header-actions{display:flex;gap:10px;align-items:center}
+  .header-cart{display:none;align-items:center;gap:8px;cursor:pointer;border-radius:999px;padding:6px 10px;border:1px solid #eee;background:#fff}
+  .header-cart .count{background:var(--accent);color:#fff;padding:4px 8px;border-radius:999px;font-weight:800;font-size:12px}
+
   /* hero */
   .hero{position:relative;overflow:hidden;padding:40px 0;display:grid;grid-template-columns:1fr 380px;gap:24px;align-items:center;z-index:1}
   .kicker{display:inline-block;padding:6px 10px;border-radius:999px;background:linear-gradient(90deg,#fff,#fff);color:var(--accent-dark);font-weight:800;font-size:13px}
@@ -41,11 +46,6 @@
     background:linear-gradient(90deg,var(--accent),#2b2b2b);-webkit-background-clip:text;background-clip:text;font-weight:800}
   .lead{margin:0 0 16px;color:var(--muted)}
   .cta{display:flex;gap:12px;flex-wrap:wrap}
-
-  /* buttons */
-  .btn{border:0;padding:12px 18px;border-radius:999px;font-weight:800;color:#fff;background:linear-gradient(90deg,var(--accent),var(--accent-dark));box-shadow:0 12px 36px rgba(178,42,52,0.12);cursor:pointer;transition:transform var(--transition),box-shadow var(--transition)}
-  .btn:hover{transform:translateY(-3px)}
-  .btn.ghost{background:transparent;border:1px solid rgba(0,0,0,0.06);color:var(--char);box-shadow:none}
 
   .card{background:var(--offwhite);border:1px solid #eee;border-radius:12px;padding:12px;box-shadow:var(--shadow);position:relative;z-index:1}
   section{padding:28px 0;position:relative;z-index:1}
@@ -92,22 +92,27 @@
   .modal-backdrop{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.45);z-index:1900;padding:12px}
   .modal-card{background:var(--offwhite);border-radius:12px;padding:16px;max-width:980px;width:100%;box-shadow:var(--shadow);max-height:92vh;overflow:auto}
 
-  /* FABs styling but controlled via media queries */
-  .wa-fab,.cart-fab{position:fixed;right:18px;bottom:96px;width:56px;height:56px;border-radius:999px;background:#25d366;color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 40px rgba(0,0,0,0.12);z-index:2000}
-  .cart-fab{bottom:18px;width:64px;height:64px;background:linear-gradient(90deg,var(--accent),var(--accent-dark));font-weight:800}
+  /* floating action buttons (FABs) */
+  .wa-fab, .cart-fab {
+    position:fixed; z-index:2200; display:none; align-items:center; justify-content:center; border-radius:999px;
+    width:56px; height:56px; box-shadow:0 12px 40px rgba(0,0,0,0.12); cursor:pointer;
+  }
+  .wa-fab { left:16px; bottom:84px; background:#25d366; color:#fff; font-size:22px; }
+  .cart-fab { right:16px; bottom:16px; background:linear-gradient(90deg,var(--accent),var(--accent-dark)); color:#fff; font-size:20px; width:64px; height:64px; font-weight:800; }
 
-  /* default: desktop-first behavior */
+  /* social icons */
+  .socials {display:flex;gap:10px;justify-content:center;align-items:center}
+  .socials a{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;background:#fff;border:1px solid #eee;text-decoration:none;color:var(--char)}
+
+  /* responsive rules */
   @media (min-width:981px){
-    /* hide mobile-only accordion and FABs on desktop */
     .accordion{display:none !important}
     .wa-fab{display:none !important}
     .cart-fab{display:none !important}
     .menu-accordion{display:none}
     .menu-grid{display:grid}
-    .modal-card{max-height:80vh}
+    .header-cart{display:flex}
   }
-
-  /* mobile rules */
   @media (max-width:980px){
     .hero{grid-template-columns:1fr;gap:8px;padding:24px 0}
     .menu-wrap{grid-template-columns:1fr}
@@ -116,16 +121,12 @@
     .menu-accordion{display:block}
     .tabs{display:none}
     .accordion{display:block}
+    .wa-fab{display:flex}
+    .cart-fab{display:flex}
+    .header-cart{display:none}
     .modal-card{width:100%;height:100%;max-height:100vh;border-radius:12px 12px 0 0;padding:12px;overflow:auto}
     .modal-backdrop{align-items:flex-end}
     .acc-content{max-height:0;opacity:0}
-    /* show FABs on mobile only */
-    .wa-fab{display:flex}
-    .cart-fab{display:flex}
-  }
-  @media (max-width:560px){
-    .cart-fab{right:12px;bottom:12px;width:60px;height:60px}
-    .wa-fab{right:12px;bottom:84px;width:52px;height:52px}
   }
 
   input,select,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #eee;background:#fff;color:var(--char)}
@@ -133,13 +134,12 @@
   .muted{color:var(--muted)}
   .map-btn{width:44px;height:44px;border-radius:999px;border:0;background:linear-gradient(90deg,var(--accent),var(--accent-dark));color:#fff;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
 
-  header.top, .card, section, .btn, nav.nav a, .cart-panel {position:relative;z-index:2}
+  header.top, .card, section, .btn, nav.nav a, .cart-panel, .header-cart {position:relative;z-index:2}
 </style>
 </head>
 <body>
 
 <div class="container">
-
   <!-- HEADER -->
   <header class="top" role="banner">
     <div class="top-inner">
@@ -167,11 +167,19 @@
         <a href="#forms" onclick="scrollToId('forms')">Forms</a>
         <a href="#contact" onclick="scrollToId('contact')">Contact</a>
       </nav>
+
+      <div class="header-actions">
+        <!-- desktop header cart (always visible on desktop) -->
+        <div class="header-cart" onclick="openCheckout()" title="Open cart">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 3h2l.4 2M7 13h10l3-8H6.4" stroke="#111" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div class="count" id="header-count">0</div>
+        </div>
+      </div>
+
     </div>
   </header>
 
   <main id="page">
-
     <!-- HERO -->
     <section id="home" class="hero" aria-label="Hero">
       <div>
@@ -356,6 +364,14 @@
         </div>
         <div class="small muted">© 2025 Kufta</div>
       </div>
+      <!-- socials -->
+      <div style="margin-top:12px;text-align:center">
+        <div class="socials" aria-hidden="false">
+          <a href="https://facebook.com" target="_blank" rel="noopener" title="Facebook">f</a>
+          <a href="https://instagram.com" target="_blank" rel="noopener" title="Instagram">ig</a>
+          <a href="https://tiktok.com" target="_blank" rel="noopener" title="TikTok">tt</a>
+        </div>
+      </div>
     </section>
 
   </main>
@@ -363,9 +379,9 @@
   <footer style="padding:18px 0;text-align:center;background:transparent"></footer>
 </div>
 
-<!-- FABs -->
-<a class="wa-fab" href="#" title="WhatsApp (placeholder)" aria-label="WhatsApp" style="display:none">💬</a>
-<button id="cart-fab" class="cart-fab" onclick="openCheckout()" style="display:none">🛒 <span id="fab-count" style="margin-left:8px"></span></button>
+<!-- FABs (mobile-only) -->
+<button class="wa-fab" id="waFab" aria-label="WhatsApp" title="Open WhatsApp" onclick="openWhatsApp()" style="display:none">💬</button>
+<button class="cart-fab" id="cartFab" aria-label="Open cart" title="Open cart" onclick="openCheckout()" style="display:none">🛒 <span id="fab-count" style="margin-left:8px"></span></button>
 
 <!-- Checkout modal / bottom sheet -->
 <div id="checkout-modal" class="modal-backdrop" style="display:none;align-items:center;justify-content:center">
@@ -429,30 +445,23 @@
 </div>
 
 <script>
-/* ===== Data (menu, branches, promos) ===== */
-/* Images are produced as embedded SVG data-URIs (offline-friendly). */
-function makePhoto(label, tone){
-  const a = tone === 'dark' ? '#f6d365' : '#a8edea';
-  const b = tone === 'dark' ? '#fda085' : '#fed6e3';
-  const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='800' viewBox='0 0 1200 800'><defs><linearGradient id='g' x1='0' x2='1'><stop offset='0' stop-color='${a}'/><stop offset='1' stop-color='${b}'/></linearGradient></defs><rect width='100%' height='100%' fill='url(#g)'/><g font-family='Poppins, Arial' font-weight='800' fill='#5b2a2a' font-size='48'><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle'>${label}</text></g></svg>`;
-  return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
-}
-
+/* ===== Data ===== */
+/* Local images referenced. Put your real photos in the images/ folder (same directory as this HTML). */
 const MENU = [
-  {cat:'Sandwiches', name:'Kufta Sandwich', price:45, desc:'Grilled kofta, tahini, pickles, salad', img: makePhoto('Kufta Sandwich','dark')},
-  {cat:'Sandwiches', name:'Hawawshi', price:60, desc:'Traditional Egyptian spiced meat bread', img: makePhoto('Hawawshi','dark')},
-  {cat:'Sandwiches', name:'Kufta Double', price:105, desc:'Double portion of kofta', img: makePhoto('Kufta Double','dark')},
-  {cat:'Combos', name:'Kufta Combo', price:85, desc:'Sandwich + fries + drink', img: makePhoto('Kufta Combo','dark')},
-  {cat:'Sides', name:'Potato Chips', price:15, desc:'Freshly fried chips', img: makePhoto('Fries','light')},
-  {cat:'Sides', name:'Tahini', price:15, desc:'Classic dip', img: makePhoto('Tahini','light')},
-  {cat:'Drinks', name:'Rayeb Lemon & Blueberry', price:25, desc:'Refreshing cultured drink', img: makePhoto('Drink','light')},
-  {cat:'Drinks', name:'Mineral Water', price:15, desc:'Still water', img: makePhoto('Water','light')}
+  {cat:'Sandwiches', name:'Kufta Sandwich', price:45, desc:'Grilled kofta, tahini, pickles, salad', img:'images/kofta.jpg'},
+  {cat:'Sandwiches', name:'Hawawshi', price:60, desc:'Traditional Egyptian spiced meat bread', img:'images/hawawshi.jpg'},
+  {cat:'Sandwiches', name:'Kufta Double', price:105, desc:'Double portion of kofta', img:'images/kufta-double.jpg'},
+  {cat:'Combos', name:'Kufta Combo', price:85, desc:'Sandwich + fries + drink', img:'images/combo.jpg'},
+  {cat:'Sides', name:'Potato Chips', price:15, desc:'Freshly fried chips', img:'images/fries.jpg'},
+  {cat:'Sides', name:'Tahini', price:15, desc:'Classic dip', img:'images/tahini.jpg'},
+  {cat:'Drinks', name:'Rayeb Lemon & Blueberry', price:25, desc:'Refreshing cultured drink', img:'images/drink.jpg'},
+  {cat:'Drinks', name:'Mineral Water', price:15, desc:'Still water', img:'images/water.jpg'}
 ];
 
 const BRANCHES = [
-  {name:'Downtown (Talaat Harb)', addr:'Talaat Harb St, Downtown Cairo', hours:'10:00 - 02:00', phone:'15544', img: makePhoto('Downtown','light')},
-  {name:'Zamalek', addr:'Street 123, Zamalek, Cairo', hours:'10:00 - 02:00', phone:'15544', img: makePhoto('Zamalek','light')},
-  {name:'North Coast (Marina)', addr:'Marina Gate 5, North Coast', hours:'Seasonal hours', phone:'15544', img: makePhoto('Marina','light')}
+  {name:'Downtown (Talaat Harb)', addr:'Talaat Harb St, Downtown Cairo', hours:'10:00 - 02:00', phone:'15544', img:'images/downtown.jpg'},
+  {name:'Zamalek', addr:'Street 123, Zamalek, Cairo', hours:'10:00 - 02:00', phone:'15544', img:'images/zamalek.jpg'},
+  {name:'North Coast (Marina)', addr:'Marina Gate 5, North Coast', hours:'Seasonal hours', phone:'15544', img:'images/marina.jpg'}
 ];
 
 const PROMOS = {
@@ -589,7 +598,7 @@ function totals(){
 function renderCart(){
   const box = $('#cart-items'); box.innerHTML = '';
   const list = $('#checkout-items'); if(list) list.innerHTML = '';
-  if(cart.length===0){ box.textContent = 'Your cart is empty.'; $('#mini-count').textContent = '0'; $('#fab-count').textContent = ''; updateTotalsUI(0,0,0); return; }
+  if(cart.length===0){ box.textContent = 'Your cart is empty.'; $('#mini-count').textContent = '0'; $('#fab-count').textContent = ''; $('#header-count').textContent = '0'; updateTotalsUI(0,0,0); return; }
   cart.forEach((c,i) => {
     const row = document.createElement('div'); row.className='cart-item';
     row.innerHTML = `<div><strong>${c.name}</strong><div class="muted">${c.qty} × ${c.price} EGP</div></div>
@@ -608,8 +617,10 @@ function renderCart(){
   });
   const t = totals();
   updateTotalsUI(t.sub,t.disc,t.total);
-  $('#mini-count').textContent = cart.reduce((s,i)=>s+i.qty,0);
-  $('#fab-count').textContent = cart.reduce((s,i)=>s+i.qty,0) ? cart.reduce((s,i)=>s+i.qty,0) : '';
+  const count = cart.reduce((s,i)=>s+i.qty,0);
+  $('#mini-count').textContent = count;
+  $('#fab-count').textContent = count ? count : '';
+  $('#header-count').textContent = count;
 }
 function updateTotalsUI(sub,disc,total){
   $('#cart-sub').textContent = money(sub);
@@ -689,7 +700,6 @@ function submitContact(e){ e.preventDefault(); const payload={type:$('#contact-t
 function initTabsAndMobile(){
   $$('.tab').forEach(t => t.addEventListener('click', ()=>{ $$('.tab').forEach(x=>x.classList.remove('active')); t.classList.add('active'); const target = t.dataset.target; $('#panel-survey').hidden = true; $('#panel-franchise').hidden = true; $('#panel-jobs').hidden = true; $('#panel-contact').hidden = true; if(target==='survey') $('#panel-survey').hidden=false; if(target==='franchise') $('#panel-franchise').hidden=false; if(target==='jobs') $('#panel-jobs').hidden=false; if(target==='contact') $('#panel-contact').hidden=false; scrollToId('forms'); }));
   $$('#rating-stars .star').forEach(s => s.addEventListener('click', ()=> setRating(Number(s.dataset.v))));
-  // copy desktop panels to mobile accordion containers
   const mapping = {'acc-survey':'panel-survey','acc-franchise':'panel-franchise','acc-jobs':'panel-jobs','acc-contact':'panel-contact'};
   for(const k in mapping){
     const dest = document.getElementById(k); const src = document.getElementById(mapping[k]);
@@ -711,6 +721,14 @@ function tryGeolocation(){
   }, {timeout:10000});
 }
 
+/* ===== WhatsApp handler (opens web.whatsapp or whatsapp://) ===== */
+function openWhatsApp(){
+  const number = '201234567890'; // replace with your WhatsApp number (include country code) if you want direct open
+  const text = encodeURIComponent('Hello Kufta! I would like to order...');
+  const url = navigator.userAgent.match(/Android|iPhone|iPad/i) ? `https://wa.me/${number}?text=${text}` : `https://wa.me/${number}?text=${text}`;
+  window.open(url, '_blank');
+}
+
 /* ===== search & misc ===== */
 function filterMenu(){
   const q = ($('#menu-search').value||'').trim().toLowerCase();
@@ -729,10 +747,10 @@ function renderPromos(){ const root = $('#promo-grid'); root.innerHTML=''; Objec
 function init(){ renderPills(); renderMenuGrid(); renderMenuAccordion(); renderBranches(); renderPromos(); populateBranchSelects(); renderCart(); initTabsAndMobile(); tuneFABVisibility(); }
 init();
 
-/* show/hide FABs depending on viewport (fixes mobile/desktop overlap) */
+/* show/hide FABs depending on viewport (defensive; CSS also controls visibility) */
 function tuneFABVisibility(){
   const showMobile = window.matchMedia('(max-width:980px)').matches;
-  const wa = document.querySelector('.wa-fab'); const cf = document.getElementById('cart-fab');
+  const wa = document.getElementById('waFab'); const cf = document.getElementById('cartFab');
   if(wa) wa.style.display = showMobile ? 'flex' : 'none';
   if(cf) cf.style.display = showMobile ? 'flex' : 'none';
 }
