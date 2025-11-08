@@ -4,13 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Kufta — Clean Street Food (Final)</title>
-
-<!-- Favicon (place assets/images/favicon.ico) -->
 <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
-
-<!-- Optional external overrides (safe): assets/css/style.css -->
-<link rel="stylesheet" href="assets/css/style.css">
-
 <style>
   :root{
     --black:#0b0b0b; --char:#171717; --muted:#7a7a7a; --white:#ffffff; --offwhite:#fbfbfb;
@@ -41,18 +35,26 @@
   nav.nav a{padding:8px 10px;border-radius:10px;font-weight:700;color:var(--char);text-decoration:none}
   nav.nav a:hover{color:var(--accent)}
 
-  /* small header cart icon (desktop) */
+  /* header cart icon (desktop) */
   .header-actions{display:flex;gap:10px;align-items:center}
   .header-cart{display:none;align-items:center;gap:8px;cursor:pointer;border-radius:999px;padding:6px 10px;border:1px solid #eee;background:#fff}
   .header-cart .count{background:var(--accent);color:#fff;padding:4px 8px;border-radius:999px;font-weight:800;font-size:12px}
 
-  /* hero */
-  .hero{position:relative;overflow:hidden;padding:40px 0;display:grid;grid-template-columns:1fr 380px;gap:24px;align-items:center;z-index:1}
-  .kicker{display:inline-block;padding:6px 10px;border-radius:999px;background:linear-gradient(90deg,#fff,#fff);color:var(--accent-dark);font-weight:800;font-size:13px}
-  .hero-title{margin:10px 0 12px;font-size:clamp(28px,5vw,48px);line-height:1;color:transparent;
-    background:linear-gradient(90deg,var(--accent),#2b2b2b);-webkit-background-clip:text;background-clip:text;font-weight:800}
-  .lead{margin:0 0 16px;color:var(--muted)}
-  .cta{display:flex;gap:12px;flex-wrap:wrap}
+  /* hero with banner */
+  .hero{position:relative;overflow:hidden;padding:40px 0;display:grid;grid-template-columns:1fr 380px;gap:24px;align-items:center;z-index:1;
+    background-image: url('assets/images/banner.jpg'); background-size:cover; background-position:center;}
+  .hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.38),rgba(0,0,0,0.18));z-index:0}
+  .kicker{display:inline-block;padding:6px 10px;border-radius:999px;background:linear-gradient(90deg,#fff,#fff);color:var(--accent-dark);font-weight:800;font-size:13px;position:relative;z-index:1}
+  .hero-title{margin:10px 0 12px;font-size:clamp(28px,5vw,48px);line-height:1;color:#fff;font-weight:800;position:relative;z-index:1}
+  .lead{margin:0 0 16px;color:rgba(255,255,255,0.9);position:relative;z-index:1}
+  .cta{display:flex;gap:12px;flex-wrap:wrap;position:relative;z-index:1}
+
+  /* modern buttons */
+  .btn, button {appearance:none;border:0;padding:10px 16px;border-radius:999px;font-weight:800;cursor:pointer;
+    background:linear-gradient(90deg,var(--accent),var(--accent-dark));color:#fff;box-shadow:0 10px 30px rgba(178,42,52,0.12);transition:transform var(--transition),box-shadow var(--transition)}
+  .btn:hover, button:hover{transform:translateY(-3px);box-shadow:0 20px 40px rgba(178,42,52,0.18)}
+  .btn.ghost, button.ghost{background:transparent;color:var(--accent);border:2px solid var(--accent);box-shadow:none;padding:8px 14px}
+  .btn.ghost:hover, button.ghost:hover{background:linear-gradient(90deg,var(--accent),var(--accent-dark));color:#fff}
 
   .card{background:var(--offwhite);border:1px solid #eee;border-radius:12px;padding:12px;box-shadow:var(--shadow);position:relative;z-index:1}
   section{padding:28px 0;position:relative;z-index:1}
@@ -142,34 +144,16 @@
   .map-btn{width:44px;height:44px;border-radius:999px;border:0;background:linear-gradient(90deg,var(--accent),var(--accent-dark));color:#fff;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
 
   header.top, .card, section, .btn, nav.nav a, .cart-panel, .header-cart {position:relative;z-index:2}
-
-  /* LOADER (presentation) */
-  #loader {
-    position:fixed; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;
-    background:linear-gradient(180deg,#000000,#1a0000); color:#fff; z-index:9999;
-    font-family:'Poppins',sans-serif; font-weight:800; font-size:22px; letter-spacing:1px;
-    animation:fadeOut 1.4s ease 1.4s forwards;
-  }
-  #loader img { width:140px; height:auto; margin-bottom:10px; }
-  @keyframes fadeOut { to { opacity:0; visibility:hidden; } }
-
 </style>
 </head>
 <body>
-
-<!-- LOADING OVERLAY -->
-<div id="loader" aria-hidden="false">
-  <!-- Use assets/images/logo.png for the logo image you will upload -->
-  <img src="assets/images/logo.png" alt="Kufta logo">
-  <div>Clean Street Food</div>
-</div>
 
 <div class="container">
   <!-- HEADER -->
   <header class="top" role="banner">
     <div class="top-inner">
       <div class="brand" style="align-items:center">
-        <!-- inline SVG Kufta logo (kept) -->
+        <!-- inline SVG Kufta logo -->
         <div style="width:140px;height:48px;display:flex;align-items:center;gap:8px" aria-hidden="true">
           <svg width="140" height="48" viewBox="0 0 280 96" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Kufta logo">
             <defs><linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#e63946"/><stop offset="1" stop-color="#b22a34"/></linearGradient></defs>
@@ -177,9 +161,6 @@
             <text x="70" y="60" font-family="Poppins, Arial" font-weight="800" font-size="28" fill="#111">Kufta</text>
           </svg>
         </div>
-
-        <!-- Optional image logo fallback (non-destructive) -->
-        <img src="assets/images/logo.png" alt="Kufta logo" style="height:48px;width:auto;display:none" onerror="this.style.display='none'">
 
         <div style="margin-left:6px">
           <div style="font-size:13px;color:var(--muted)">Kufta</div>
@@ -478,7 +459,7 @@
 const MENU = [
   {cat:'Sandwiches', name:'Kufta Sandwich', price:45, desc:'Grilled kofta, tahini, pickles, salad', img:'assets/images/kofta.jpg'},
   {cat:'Sandwiches', name:'Hawawshi', price:60, desc:'Traditional Egyptian spiced meat bread', img:'assets/images/hawawshi.jpg'},
-  {cat:'Sandwiches', name:'Kufta Double', price:105, desc:'Double portion of kofta', img:'assets/images/kufta-double.jpg'},
+  {cat:'Sandwiches', name:'Kufta Double', price:105, desc:'Double portion of kufta', img:'assets/images/kufta-double.jpg'},
   {cat:'Combos', name:'Kufta Combo', price:85, desc:'Sandwich + fries + drink', img:'assets/images/combo.jpg'},
   {cat:'Sides', name:'Potato Chips', price:15, desc:'Freshly fried chips', img:'assets/images/fries.jpg'},
   {cat:'Sides', name:'Tahini', price:15, desc:'Classic dip', img:'assets/images/tahini.jpg'},
@@ -787,19 +768,6 @@ window.addEventListener('orientationchange', tuneFABVisibility);
 
 /* close modal on escape */
 document.addEventListener('keydown', e=>{ if(e.key==='Escape'){ closeCheckout(); }});
-
-/* HIDE LOADER AFTER LOAD (presentation) */
-window.addEventListener('load', function(){
-  setTimeout(function(){
-    const ld = document.getElementById('loader');
-    if(ld){
-      ld.style.opacity = '0';
-      ld.style.visibility = 'hidden';
-      ld.setAttribute('aria-hidden','true');
-      // allow pointer events on body
-    }
-  }, 1400);
-});
 </script>
 </body>
 </html>
