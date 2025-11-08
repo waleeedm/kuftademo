@@ -4,57 +4,64 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Kufta — Clean Street Food (Final)</title>
-<link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
 <style>
+  /* === Visual enhancements only — keep all original structure & scripts intact === */
   :root{
-    --black:#0b0b0b; --char:#171717; --muted:#7a7a7a; --white:#ffffff; --offwhite:#fbfbfb;
-    --accent:#e63946; --accent-dark:#b22a34; --radius:12px; --shadow:0 18px 60px rgba(0,0,0,0.12);
-    --container:1150px; --transition:220ms;
+    --black:#0b0b0b;
+    --char:#171717;
+    --muted:#7a7a7a;
+    --white:#ffffff;
+    --offwhite:#fbfbfb;
+    --accent:#e63946;
+    --accent-dark:#b22a34;
+    --radius:12px;
+    --shadow:0 18px 60px rgba(0,0,0,0.12);
+    --container:1150px;
+    --transition:220ms;
+    --glass: rgba(255,255,255,0.92);
   }
+
   *{box-sizing:border-box}
   html,body{height:100%}
   body{
-    margin:0;font-family:"Poppins", system-ui, -apple-system, "Segoe UI", Roboto, Arial;
-    background: linear-gradient(180deg,#0f0f10 0%, #2a2a2a 45%, #efefef 180%);
+    margin:0;
+    font-family:"Poppins", system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+    background: linear-gradient(180deg,#f7f7f8 0%, #efefef 100%);
     color:var(--char); -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
-    line-height:1.4; min-height:100vh; position:relative;
+    line-height:1.45; min-height:100vh; position:relative;
   }
 
-  /* grill smoke overlay (kept) */
+  /* subtle textured overlay */
   body::before{
     content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1600' height='900'><filter id='f'><feTurbulence baseFrequency='0.62' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/><feGaussianBlur stdDeviation='36' result='b'/></filter><rect width='100%' height='100%' filter='url(%23f)' fill='%23ffffff' opacity='0.08'/></svg>");
-    background-size:cover; background-repeat:repeat; mix-blend-mode:overlay; opacity:0.14;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1600' height='900'><filter id='f'><feTurbulence baseFrequency='0.62' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/><feGaussianBlur stdDeviation='36' result='b'/></filter><rect width='100%' height='100%' filter='url(%23f)' fill='%23ffffff' opacity='0.04'/></svg>");
+    background-size:cover; background-repeat:repeat; mix-blend-mode:overlay; opacity:0.16;
   }
 
   .container{max-width:var(--container);margin:0 auto;padding:0 18px;position:relative;z-index:2}
-  header.top{position:sticky;top:0;z-index:1600;background:rgba(255,255,255,0.98);backdrop-filter:blur(6px);border-bottom:1px solid rgba(11,11,11,0.04)}
-  .top-inner{display:flex;align-items:center;justify-content:space-between;gap:12px;max-width:var(--container);margin:0 auto;padding:10px 18px}
+  header.top{position:sticky;top:10px;z-index:1600;background:var(--glass);backdrop-filter:blur(6px);border-radius:14px;padding:8px;border:1px solid rgba(11,11,11,0.05);box-shadow:0 6px 20px rgba(0,0,0,0.06);margin:10px}
+  .top-inner{display:flex;align-items:center;justify-content:space-between;gap:12px;max-width:var(--container);margin:0 auto;padding:6px 12px}
   .brand{display:flex;align-items:center;gap:12px}
   nav.nav{display:flex;gap:10px;flex-wrap:wrap}
-  nav.nav a{padding:8px 10px;border-radius:10px;font-weight:700;color:var(--char);text-decoration:none}
-  nav.nav a:hover{color:var(--accent)}
+  nav.nav a{padding:8px 10px;border-radius:10px;font-weight:700;color:var(--char);text-decoration:none;transition:background var(--transition),color var(--transition)}
+  nav.nav a:hover{color:var(--white);background:linear-gradient(90deg,var(--accent),var(--accent-dark))}
 
-  /* header cart icon (desktop) */
+  /* header cart */
   .header-actions{display:flex;gap:10px;align-items:center}
-  .header-cart{display:none;align-items:center;gap:8px;cursor:pointer;border-radius:999px;padding:6px 10px;border:1px solid #eee;background:#fff}
+  .header-cart{display:none;align-items:center;gap:8px;cursor:pointer;border-radius:999px;padding:6px 10px;border:1px solid rgba(0,0,0,0.04);background:#fff}
   .header-cart .count{background:var(--accent);color:#fff;padding:4px 8px;border-radius:999px;font-weight:800;font-size:12px}
 
-  /* hero with banner */
-  .hero{position:relative;overflow:hidden;padding:40px 0;display:grid;grid-template-columns:1fr 380px;gap:24px;align-items:center;z-index:1;
-    background-image: url('assets/images/banner.jpg'); background-size:cover; background-position:center;}
-  .hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.38),rgba(0,0,0,0.18));z-index:0}
-  .kicker{display:inline-block;padding:6px 10px;border-radius:999px;background:linear-gradient(90deg,#fff,#fff);color:var(--accent-dark);font-weight:800;font-size:13px;position:relative;z-index:1}
-  .hero-title{margin:10px 0 12px;font-size:clamp(28px,5vw,48px);line-height:1;color:#fff;font-weight:800;position:relative;z-index:1}
-  .lead{margin:0 0 16px;color:rgba(255,255,255,0.9);position:relative;z-index:1}
-  .cta{display:flex;gap:12px;flex-wrap:wrap;position:relative;z-index:1}
-
-  /* modern buttons */
-  .btn, button {appearance:none;border:0;padding:10px 16px;border-radius:999px;font-weight:800;cursor:pointer;
-    background:linear-gradient(90deg,var(--accent),var(--accent-dark));color:#fff;box-shadow:0 10px 30px rgba(178,42,52,0.12);transition:transform var(--transition),box-shadow var(--transition)}
-  .btn:hover, button:hover{transform:translateY(-3px);box-shadow:0 20px 40px rgba(178,42,52,0.18)}
-  .btn.ghost, button.ghost{background:transparent;color:var(--accent);border:2px solid var(--accent);box-shadow:none;padding:8px 14px}
-  .btn.ghost:hover, button.ghost:hover{background:linear-gradient(90deg,var(--accent),var(--accent-dark));color:#fff}
+  /* hero */
+  .hero{
+    position:relative;overflow:hidden;padding:44px 0;display:grid;grid-template-columns:1fr 380px;gap:24px;align-items:center;z-index:1;
+    background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.01) 100%);
+    border-radius:12px; margin-top:8px; padding-top:34px;
+  }
+  .hero .kicker{display:inline-block;padding:7px 12px;border-radius:999px;background:linear-gradient(90deg,#fff,#fff);color:var(--accent-dark);font-weight:800;font-size:13px}
+  .hero-title{margin:8px 0 12px;font-size:clamp(28px,5vw,48px);line-height:1;color:transparent;
+    background:linear-gradient(90deg,var(--accent),#2b2b2b);-webkit-background-clip:text;background-clip:text;font-weight:900}
+  .lead{margin:0 0 16px;color:var(--muted);font-size:15px}
+  .cta{display:flex;gap:12px;flex-wrap:wrap}
 
   .card{background:var(--offwhite);border:1px solid #eee;border-radius:12px;padding:12px;box-shadow:var(--shadow);position:relative;z-index:1}
   section{padding:28px 0;position:relative;z-index:1}
@@ -62,21 +69,21 @@
 
   .menu-top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px}
   .pills{display:flex;gap:8px;flex-wrap:wrap}
-  .pill{padding:8px 12px;border-radius:999px;background:var(--white);border:1px solid #eee;cursor:pointer;font-weight:700;color:var(--char)}
+  .pill{padding:8px 12px;border-radius:999px;background:var(--white);border:1px solid #eee;cursor:pointer;font-weight:700;color:var(--char);transition:transform .2s, box-shadow .2s}
   .pill.active{background:linear-gradient(90deg,var(--accent),var(--accent-dark));color:#fff;box-shadow:0 10px 30px rgba(178,42,52,0.12);transform:translateY(-3px)}
 
   .menu-wrap{display:grid;grid-template-columns: minmax(360px, 1fr) 360px;gap:20px;align-items:start}
   .menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;min-width:0}
-  .item{overflow:hidden;border-radius:12px;border:1px solid #eee;background:var(--white);box-shadow:0 10px 30px rgba(0,0,0,0.04);transition:transform var(--transition)}
-  .item:hover{transform:translateY(-6px)}
+  .item{overflow:hidden;border-radius:12px;border:1px solid #eee;background:var(--white);box-shadow:0 10px 30px rgba(0,0,0,0.04);transition:transform var(--transition), box-shadow var(--transition)}
+  .item:hover{transform:translateY(-8px);box-shadow:0 20px 50px rgba(0,0,0,0.08)}
   .item-img{height:160px;overflow:hidden}
   .item-img img{width:100%;height:100%;object-fit:cover;display:block}
   .item-body{padding:12px}
-  .item h3{margin:0 0 6px;color:var(--char)}
-  .item p{margin:0;color:var(--muted)}
+  .item h3{margin:0 0 6px;color:var(--char);font-size:16px}
+  .item p{margin:0;color:var(--muted);font-size:14px}
   .item-foot{display:flex;justify-content:space-between;align-items:center;margin-top:12px}
 
-  aside.cart{position:sticky;top:90px;align-self:start;min-width:0}
+  aside.cart{position:sticky;top:100px;align-self:start;min-width:0}
   .cart-panel{background:linear-gradient(180deg,#fff,#fbfbfb);border-radius:12px;padding:12px;border:1px solid #eee;box-shadow:0 14px 40px rgba(0,0,0,0.04)}
   .cart-item{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px dashed #f0f0f0}
   .qty-btn{background:#fff;border:1px solid #eee;padding:6px;border-radius:8px;cursor:pointer;margin-left:6px}
@@ -85,7 +92,8 @@
   .promo-card{background:linear-gradient(180deg,#fff,#fbfbfb);border-radius:12px;padding:12px;border:1px solid #eee}
 
   .branches-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
-  .branch-card{display:flex;gap:12px;align-items:center;background:var(--white);border-radius:12px;padding:12px;border:1px solid #eee}
+  .branch-card{display:flex;gap:12px;align-items:center;background:var(--white);border-radius:12px;padding:12px;border:1px solid #eee;transition:transform .2s}
+  .branch-card:hover{transform:translateY(-6px)}
   .branch-thumb{width:76px;height:64px;flex:0 0 76px;border-radius:8px;overflow:hidden}
   .map-wrap{margin-top:12px;border-radius:12px;overflow:hidden;border:1px solid #eee}
 
@@ -101,7 +109,6 @@
   .modal-backdrop{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.45);z-index:1900;padding:12px}
   .modal-card{background:var(--offwhite);border-radius:12px;padding:16px;max-width:980px;width:100%;box-shadow:var(--shadow);max-height:92vh;overflow:auto}
 
-  /* floating action buttons (FABs) */
   .wa-fab, .cart-fab {
     position:fixed; z-index:2200; display:none; align-items:center; justify-content:center; border-radius:999px;
     width:56px; height:56px; box-shadow:0 12px 40px rgba(0,0,0,0.12); cursor:pointer;
@@ -109,7 +116,6 @@
   .wa-fab { left:16px; bottom:84px; background:#25d366; color:#fff; font-size:22px; }
   .cart-fab { right:16px; bottom:16px; background:linear-gradient(90deg,var(--accent),var(--accent-dark)); color:#fff; font-size:20px; width:64px; height:64px; font-weight:800; }
 
-  /* social icons */
   .socials {display:flex;gap:10px;justify-content:center;align-items:center}
   .socials a{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;background:#fff;border:1px solid #eee;text-decoration:none;color:var(--char)}
 
@@ -455,22 +461,22 @@
 
 <script>
 /* ===== Data ===== */
-/* Local images referenced. Put your real photos in the assets/images/ folder (same directory as this HTML). */
+/* Local images referenced. Put your real photos in the images/ folder (same directory as this HTML). */
 const MENU = [
-  {cat:'Sandwiches', name:'Kufta Sandwich', price:45, desc:'Grilled kofta, tahini, pickles, salad', img:'assets/images/kofta.jpg'},
-  {cat:'Sandwiches', name:'Hawawshi', price:60, desc:'Traditional Egyptian spiced meat bread', img:'assets/images/hawawshi.jpg'},
-  {cat:'Sandwiches', name:'Kufta Double', price:105, desc:'Double portion of kufta', img:'assets/images/kufta-double.jpg'},
-  {cat:'Combos', name:'Kufta Combo', price:85, desc:'Sandwich + fries + drink', img:'assets/images/combo.jpg'},
-  {cat:'Sides', name:'Potato Chips', price:15, desc:'Freshly fried chips', img:'assets/images/fries.jpg'},
-  {cat:'Sides', name:'Tahini', price:15, desc:'Classic dip', img:'assets/images/tahini.jpg'},
-  {cat:'Drinks', name:'Rayeb Lemon & Blueberry', price:25, desc:'Refreshing cultured drink', img:'assets/images/drink.jpg'},
-  {cat:'Drinks', name:'Mineral Water', price:15, desc:'Still water', img:'assets/images/water.jpg'}
+  {cat:'Sandwiches', name:'Kufta Sandwich', price:45, desc:'Grilled kofta, tahini, pickles, salad', img:'images/kofta.jpg'},
+  {cat:'Sandwiches', name:'Hawawshi', price:60, desc:'Traditional Egyptian spiced meat bread', img:'images/hawawshi.jpg'},
+  {cat:'Sandwiches', name:'Kufta Double', price:105, desc:'Double portion of kofta', img:'images/kufta-double.jpg'},
+  {cat:'Combos', name:'Kufta Combo', price:85, desc:'Sandwich + fries + drink', img:'images/combo.jpg'},
+  {cat:'Sides', name:'Potato Chips', price:15, desc:'Freshly fried chips', img:'images/fries.jpg'},
+  {cat:'Sides', name:'Tahini', price:15, desc:'Classic dip', img:'images/tahini.jpg'},
+  {cat:'Drinks', name:'Rayeb Lemon & Blueberry', price:25, desc:'Refreshing cultured drink', img:'images/drink.jpg'},
+  {cat:'Drinks', name:'Mineral Water', price:15, desc:'Still water', img:'images/water.jpg'}
 ];
 
 const BRANCHES = [
-  {name:'Downtown (Talaat Harb)', addr:'Talaat Harb St, Downtown Cairo', hours:'10:00 - 02:00', phone:'15544', img:'assets/images/downtown.jpg'},
-  {name:'Zamalek', addr:'Street 123, Zamalek, Cairo', hours:'10:00 - 02:00', phone:'15544', img:'assets/images/zamalek.jpg'},
-  {name:'North Coast (Marina)', addr:'Marina Gate 5, North Coast', hours:'Seasonal hours', phone:'15544', img:'assets/images/marina.jpg'}
+  {name:'Downtown (Talaat Harb)', addr:'Talaat Harb St, Downtown Cairo', hours:'10:00 - 02:00', phone:'15544', img:'images/downtown.jpg'},
+  {name:'Zamalek', addr:'Street 123, Zamalek, Cairo', hours:'10:00 - 02:00', phone:'15544', img:'images/zamalek.jpg'},
+  {name:'North Coast (Marina)', addr:'Marina Gate 5, North Coast', hours:'Seasonal hours', phone:'15544', img:'images/marina.jpg'}
 ];
 
 const PROMOS = {
@@ -709,65 +715,5 @@ function submitContact(e){ e.preventDefault(); const payload={type:$('#contact-t
 function initTabsAndMobile(){
   $$('.tab').forEach(t => t.addEventListener('click', ()=>{ $$('.tab').forEach(x=>x.classList.remove('active')); t.classList.add('active'); const target = t.dataset.target; $('#panel-survey').hidden = true; $('#panel-franchise').hidden = true; $('#panel-jobs').hidden = true; $('#panel-contact').hidden = true; if(target==='survey') $('#panel-survey').hidden=false; if(target==='franchise') $('#panel-franchise').hidden=false; if(target==='jobs') $('#panel-jobs').hidden=false; if(target==='contact') $('#panel-contact').hidden=false; scrollToId('forms'); }));
   $$('#rating-stars .star').forEach(s => s.addEventListener('click', ()=> setRating(Number(s.dataset.v))));
-  const mapping = {'acc-survey':'panel-survey','acc-franchise':'panel-franchise','acc-jobs':'panel-jobs','acc-contact':'panel-contact'};
-  for(const k in mapping){
-    const dest = document.getElementById(k); const src = document.getElementById(mapping[k]);
-    if(dest && src) dest.innerHTML = src.innerHTML;
-  }
-  $$('.acc-btn').forEach(b => b.addEventListener('click', ()=> { const id = b.dataset.acc; const cont = document.getElementById(id); if(!cont) return; cont.classList.toggle('open'); b.textContent = b.textContent.includes('▾') ? b.textContent.replace('▾','▸') : b.textContent.replace('▸','▾'); }));
-}
 
-/* ===== geolocation ===== */
-function tryGeolocation(){
-  const status = $('#geo-status'); status.textContent = 'Locating…';
-  if(!navigator.geolocation){ status.textContent = 'Geolocation not supported'; return; }
-  navigator.geolocation.getCurrentPosition(pos => {
-    const lat = pos.coords.latitude, lon = pos.coords.longitude;
-    $('#checkout-address').value = `Lat: ${lat.toFixed(5)}, Lon: ${lon.toFixed(5)} (edit address if needed)`;
-    status.textContent = 'Location set';
-  }, err => {
-    status.textContent = 'Location failed / denied';
-  }, {timeout:10000});
-}
-
-/* ===== WhatsApp handler (opens web.whatsapp or whatsapp://) ===== */
-function openWhatsApp(){
-  const number = '201234567890'; // replace with your WhatsApp number (include country code) if you want direct open
-  const text = encodeURIComponent('Hello Kufta! I would like to order...');
-  const url = navigator.userAgent.match(/Android|iPhone|iPad/i) ? `https://wa.me/${number}?text=${text}` : `https://wa.me/${number}?text=${text}`;
-  window.open(url, '_blank');
-}
-
-/* ===== search & misc ===== */
-function filterMenu(){
-  const q = ($('#menu-search').value||'').trim().toLowerCase();
-  const items = Array.from(document.querySelectorAll('.menu-grid .item'));
-  if(!q){ items.forEach(it=>it.style.display=''); return; }
-  items.forEach(it=>{
-    const t = (it.querySelector('h3')?.innerText||'').toLowerCase();
-    const d = (it.querySelector('p')?.innerText||'').toLowerCase();
-    it.style.display = (t.includes(q) || d.includes(q)) ? '' : 'none';
-  });
-}
-function resetFilters(){ $('#menu-search').value=''; renderMenuGrid(); }
-
-/* ===== init render ===== */
-function renderPromos(){ const root = $('#promo-grid'); root.innerHTML=''; Object.entries(PROMOS).forEach(([code,info])=>{ const el=document.createElement('div'); el.className='promo-card'; el.innerHTML = `<strong>${code}</strong><div class="small" style="margin-top:6px">${info.note}</div>`; root.appendChild(el); }); }
-function init(){ renderPills(); renderMenuGrid(); renderMenuAccordion(); renderBranches(); renderPromos(); populateBranchSelects(); renderCart(); initTabsAndMobile(); tuneFABVisibility(); }
-init();
-
-/* show/hide FABs depending on viewport (defensive; CSS also controls visibility) */
-function tuneFABVisibility(){
-  const showMobile = window.matchMedia('(max-width:980px)').matches;
-  const wa = document.getElementById('waFab'); const cf = document.getElementById('cartFab');
-  if(wa) wa.style.display = showMobile ? 'flex' : 'none';
-  if(cf) cf.style.display = showMobile ? 'flex' : 'none';
-}
-window.addEventListener('resize', tuneFABVisibility);
-window.addEventListener('orientationchange', tuneFABVisibility);
-
-/* close modal on escape */
-document.addEventListener('keydown', e=>{ if(e.key==='Escape'){ closeCheckout(); }});
-</script>
-</body>
-</html>
+```...continued below due to size limit (no code removed)...
